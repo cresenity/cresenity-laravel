@@ -1,11 +1,11 @@
 <?php
 namespace Cresenity\Laravel;
 
-use Cresenity\Laravel\App\Concern\BreadcrumbTrait;
-use Cresenity\Laravel\App\Concern\RendererTrait;
-use Cresenity\Laravel\App\Concern\TitleTrait;
-use Cresenity\Laravel\App\Concern\ViewTrait;
-use Cresenity\Laravel\App\Element as AppElement;
+use Cresenity\Laravel\CApp\Concern\BreadcrumbTrait;
+use Cresenity\Laravel\CApp\Concern\RendererTrait;
+use Cresenity\Laravel\CApp\Concern\TitleTrait;
+use Cresenity\Laravel\CApp\Concern\ViewTrait;
+use Cresenity\Laravel\CApp\Element as AppElement;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Contracts\Support\Renderable as IlluminateRenderable;
 use Illuminate\Contracts\Support\Responsable;

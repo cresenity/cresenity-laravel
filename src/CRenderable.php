@@ -6,7 +6,7 @@ use Cresenity\Laravel\Contract\Renderable as RenderableContract;
 use Illuminate\Contracts\Support\Renderable as IlluminateRenderable;
 use Illuminate\Support\Collection;
 
-class Renderable extends CObject implements RenderableContract
+class CRenderable extends CObject implements RenderableContract
 {
     /**
      * Renderable Child Array.
@@ -92,7 +92,7 @@ class Renderable extends CObject implements RenderableContract
 
     public function add($renderable)
     {
-        if ($renderable instanceof Renderable) {
+        if ($renderable instanceof CRenderable) {
             $renderable->setParent($this);
         }
 
@@ -113,7 +113,7 @@ class Renderable extends CObject implements RenderableContract
     public function clear()
     {
         foreach ($this->renderable as $r) {
-            if ($r instanceof Renderable) {
+            if ($r instanceof CRenderable) {
                 $r->clear();
             }
             if ($r instanceof CObject) {
@@ -146,7 +146,7 @@ class Renderable extends CObject implements RenderableContract
         foreach ($this->renderable as $r) {
             $child = null;
 
-            if ($r instanceof Renderable) {
+            if ($r instanceof CRenderable) {
                 if (!$r->visibility) {
                     continue;
                 }
@@ -184,7 +184,7 @@ class Renderable extends CObject implements RenderableContract
         $js = new StringBuilder();
         $js->setIndent($indent);
         foreach ($this->renderable as $r) {
-            if ($r instanceof Renderable) {
+            if ($r instanceof CRenderable) {
                 $js->append($r->js($js->getIndent()));
             }
         }
@@ -221,7 +221,7 @@ class Renderable extends CObject implements RenderableContract
         $data = parent::toArray();
         $data['visibility'] = $this->visibility;
         foreach ($this->renderable as $r) {
-            if ($r instanceof Renderable) {
+            if ($r instanceof CRenderable) {
                 $arrays[] = $r->toArray();
             } else {
                 $arrays[] = $r;

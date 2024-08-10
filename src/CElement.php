@@ -1,7 +1,8 @@
 <?php
 namespace Cresenity\Laravel;
 
-abstract class Element extends Observable {
+abstract class CElement extends CObservable
+{
 
     /**
      * Class css for this element.
@@ -22,7 +23,8 @@ abstract class Element extends Observable {
 
     protected $after;
 
-    public function __construct($id = null, $tag = 'div') {
+    public function __construct($id = null, $tag = 'div')
+    {
         parent::__construct($id);
 
         $this->classes = [];
@@ -40,13 +42,15 @@ abstract class Element extends Observable {
      *
      * @return $this
      */
-    public function customCss($key, $val) {
+    public function customCss($key, $val)
+    {
         $this->custom_css[$key] = $val;
 
         return $this;
     }
 
-    public function setTag($tag) {
+    public function setTag($tag)
+    {
         $this->tag = $tag;
     }
 
@@ -57,7 +61,8 @@ abstract class Element extends Observable {
      *
      * @return $this
      */
-    public function addClass($classes) {
+    public function addClass($classes)
+    {
         if (is_array($classes)) {
             foreach ($classes as $class) {
                 $this->addClass($class);
@@ -79,7 +84,8 @@ abstract class Element extends Observable {
      *
      * @return $this
      */
-    public function removeClass($classes) {
+    public function removeClass($classes)
+    {
         if (is_array($classes)) {
             foreach ($classes as $class) {
                 $this->removeClass($class);
@@ -102,7 +108,8 @@ abstract class Element extends Observable {
      *
      * @return array
      */
-    public function getClasses() {
+    public function getClasses()
+    {
         return $this->classes;
     }
 
@@ -113,7 +120,8 @@ abstract class Element extends Observable {
      *
      * @return $this
      */
-    public function removeAttr($k) {
+    public function removeAttr($k)
+    {
         if (isset($this->attr[$k])) {
             unset($this->attr[$k]);
         }
@@ -128,7 +136,8 @@ abstract class Element extends Observable {
      *
      * @return $this
      */
-    public function deleteAttr($k) {
+    public function deleteAttr($k)
+    {
         return $this->removeAttr($k);
     }
 
@@ -140,7 +149,8 @@ abstract class Element extends Observable {
      *
      * @return $this
      */
-    public function setAttr($k, $v = null) {
+    public function setAttr($k, $v = null)
+    {
         if (is_array($k)) {
             return $this->setAttrFromArray($k);
         }
@@ -171,7 +181,8 @@ abstract class Element extends Observable {
      *
      * @return $this
      */
-    public function setAttrFromArray($arr) {
+    public function setAttrFromArray($arr)
+    {
         foreach ($arr as $k => $v) {
             $this->setAttr($k, $v);
         }
@@ -187,11 +198,13 @@ abstract class Element extends Observable {
      *
      * @return $this
      */
-    public function addAttr($k, $v) {
+    public function addAttr($k, $v)
+    {
         return $this->setAttr($k, $v);
     }
 
-    public function getAttr($k) {
+    public function getAttr($k)
+    {
         if (isset($this->attr[$k])) {
             return $this->attr[$k];
         }
@@ -199,15 +212,18 @@ abstract class Element extends Observable {
         return null;
     }
 
-    public function pretag() {
+    public function pretag()
+    {
         return '<' . $this->tag . '>';
     }
 
-    public function posttag() {
+    public function posttag()
+    {
         return '</' . $this->tag . '>';
     }
 
-    public function toArray() {
+    public function toArray()
+    {
         $data = parent::toArray();
         if (!empty($this->classes)) {
             $data['attr']['class'] = implode(' ', $this->classes);
@@ -219,15 +235,18 @@ abstract class Element extends Observable {
         return $data;
     }
 
-    protected function htmlChild($indent = 0) {
+    protected function htmlChild($indent = 0)
+    {
         return parent::html($indent);
     }
 
-    protected function jsChild($indent = 0) {
+    protected function jsChild($indent = 0)
+    {
         return parent::js($indent);
     }
 
-    public function __toString() {
+    public function __toString()
+    {
         $return = '<h3> HTML </h3>'
                 . '<pre>'
                 . '<code>'
@@ -247,7 +266,8 @@ abstract class Element extends Observable {
     /**
      * @return CElement_PseudoElement
      */
-    public function before() {
+    public function before()
+    {
         if ($this->before == null) {
             $this->before = CElement_PseudoElement::factory();
         }
@@ -258,7 +278,8 @@ abstract class Element extends Observable {
     /**
      * @return CElement_PseudoElement
      */
-    public function after() {
+    public function after()
+    {
         if ($this->after == null) {
             $this->after = CElement_PseudoElement::factory();
         }

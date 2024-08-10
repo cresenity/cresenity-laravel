@@ -1,5 +1,5 @@
 <?php
-namespace Cresenity\Laravel\App\Concern;
+namespace Cresenity\Laravel\CApp\Concern;
 
 use Cresenity\Laravel\App;
 use Cresenity\Laravel\CF;

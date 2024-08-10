@@ -1,7 +1,7 @@
 <?php
 namespace Cresenity\Laravel;
 
-class Config
+class CConfig
 {
     /**
      * @return \Illuminate\Config\Repository

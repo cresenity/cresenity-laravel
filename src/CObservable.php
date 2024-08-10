@@ -9,7 +9,7 @@ use Cresenity\Laravel\Observable\Traits\ListenerTrait;
 use Cresenity\Laravel\Observable\Traits\ListTrait;
 use Cresenity\Laravel\Observable\Javascript;
 
-abstract class Observable extends Renderable
+abstract class CObservable extends CRenderable
 {
     use ElementTrait,
         ComponentTrait,

@@ -12,7 +12,7 @@ use Symfony\Component\Debug\Exception\FatalThrowableError;
 use Symfony\Component\PropertyAccess\Exception\NoSuchIndexException;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Cresenity\Laravel\App;
-use Cresenity\Laravel\Config;
+use Cresenity\Laravel\CConfig;
 use Cresenity\Laravel\Http;
 use Cresenity\Laravel\Translation;
 use Illuminate\Container\Container;
@@ -1100,10 +1100,10 @@ class c
     public static function config($key = null, $default = null)
     {
         if ($key == null) {
-            return Config::repository();
+            return CConfig::repository();
         }
 
-        return Config::repository()->get($key, $default);
+        return CConfig::repository()->get($key, $default);
     }
 
     /**
