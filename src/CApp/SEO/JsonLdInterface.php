@@ -1,6 +1,8 @@
 <?php
+namespace Cresenity\Laravel\CApp\SEO;
 
-interface CApp_SEO_JsonLdInterface {
+interface JsonLdInterface
+{
     /**
      * Generates linked data script tag.
      *

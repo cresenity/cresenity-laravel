@@ -1,6 +1,11 @@
 <?php
 
-class CElement_Factory {
+namespace Cresenity\Laravel\CElement;
+
+use Cresenity\Laravel\CManager;
+
+class Factory
+{
     /**
      * @param string $tag
      * @param string $id  optional
@@ -9,7 +14,8 @@ class CElement_Factory {
      *
      * @return \CElement_Element|bool
      */
-    public static function createElement($tag = 'div', $id = '') {
+    public static function createElement($tag = 'div', $id = '')
+    {
         $class_name = 'CElement_Element_';
         switch (strtolower($tag)) {
             case 'div':
@@ -45,7 +51,7 @@ class CElement_Factory {
 
                 break;
             default:
-                throw new CApp_Exception(c::__('element [:tag] not found', ['tag' => $tag]));
+                throw new Exception(\c::__('element [:tag] not found', ['tag' => $tag]));
 
                 break;
         }
@@ -53,33 +59,27 @@ class CElement_Factory {
         return false;
     }
 
-    /**
-     * @param string $id optional
-     *
-     * @return \CElement_Template|bool
-     */
-    public static function createTemplate($id = '') {
-        return new CElement_Template($id);
-    }
 
     /**
      * @param string                 $id   optional
      * @param null|CView_View|string $view optional
      * @param null|array             $data optional
      *
-     * @return \CElement_View
+     * @return \Cresenity\Laravel\CElement\View
      */
-    public static function createView($id = '', $view = null, $data = null) {
-        return new CElement_View($id, $view, $data);
+    public static function createView($id = '', $view = null, $data = null)
+    {
+        return new View($id, $view, $data);
     }
 
     /**
      * @param string $class
      * @param string $id
      *
-     * @return \CElement_FormInput
+     * @return \Cresenity\Laravel\CElement\FormInput
      */
-    public static function createFormInput($class, $id = '') {
+    public static function createFormInput($class, $id = '')
+    {
         return new $class($id);
     }
 
@@ -91,9 +91,10 @@ class CElement_Factory {
      *
      * @return \CElement
      */
-    public static function create($className, $id = '') {
+    public static function create($className, $id = '')
+    {
         if (!class_exists($className)) {
-            throw new CElement_Exception(c::__('Element [:name] not found', ['name' => $className]));
+            throw new Exception(\c::__('Element [:name] not found', ['name' => $className]));
         }
 
         return new $className($id);
@@ -107,13 +108,14 @@ class CElement_Factory {
      *
      * @return \CElement_Component
      */
-    public static function createComponent($name, $id = '') {
+    public static function createComponent($name, $id = '')
+    {
         $className = $name;
         if (!class_exists($className)) {
             $className = 'CElement_Component_' . $name;
         }
         if (!class_exists($className)) {
-            throw new CElement_Exception(c::__('component [:name] not found', ['name' => $name]));
+            throw new Exception(\c::__('component [:name] not found', ['name' => $name]));
         }
 
         return new $className($id);
@@ -127,10 +129,11 @@ class CElement_Factory {
      *
      * @return \CElement_Composite
      */
-    public static function createComposite($name, $id = '') {
+    public static function createComposite($name, $id = '')
+    {
         $className = 'CElement_Composite_' . $name;
         if (!class_exists($className)) {
-            throw new CElement_Exception(c::__('composite element [:name] not found', ['name' => $name]));
+            throw new Exception(\c::__('composite element [:name] not found', ['name' => $name]));
         }
 
         return new $className($id);
@@ -144,19 +147,21 @@ class CElement_Factory {
      *
      * @return \CElement_List
      */
-    public static function createList($name, $id = '') {
-        $name = c::classBasename($name);
+    public static function createList($name, $id = '')
+    {
+        $name = \c::classBasename($name);
 
         $className = 'CElement_List_' . $name;
         if (!class_exists($className)) {
-            throw new CElement_Exception(c::__('list element [:name] not found', ['name' => $name]));
+            throw new Exception(\c::__('list element [:name] not found', ['name' => $name]));
         }
 
         return new $className($id);
     }
 
-    public static function createViewComponent($componentName, $id) {
-        return new CElement_ViewComponent($id, $componentName);
+    public static function createViewComponent($componentName, $id)
+    {
+        return new ViewComponent($id, $componentName);
     }
 
     /**
@@ -165,13 +170,15 @@ class CElement_Factory {
      *
      * @throws Exception
      *
-     * @return CElement_FormInput
+     * @return \Cresenity\Laravel\CElement\FormInput
      */
-    public static function createControl($id, $type) {
+    public static function createControl($id, $type)
+    {
         return CManager::instance()->createControl($id, $type);
     }
 
-    public static function createPseudoElement($id = null) {
-        return new CElement_PseudoElement();
+    public static function createPseudoElement($id = null)
+    {
+        return new PseudoElement();
     }
 }

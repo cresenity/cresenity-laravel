@@ -1,8 +1,15 @@
 <?php
 
-trait CElement_Trait_UseViewTrait {
+namespace Cresenity\Laravel\CElement\Traits;
+
+use Cresenity\Laravel\CView;
+use Illuminate\Support\Arr;
+use Illuminate\View\View;
+
+trait UseViewTrait
+{
     /**
-     * @var CView_View|string
+     * @var \Illuminate\View\View|string
      */
     protected $view;
 
@@ -12,11 +19,12 @@ trait CElement_Trait_UseViewTrait {
 
     protected $onBeforeParse;
 
-    protected function resolveView() {
+    protected function resolveView()
+    {
         $view = $this->view;
         if ($view != null) {
             $viewData = $this->viewData;
-            if (!($view instanceof CView_View)) {
+            if (!($view instanceof View)) {
                 if ($viewData == null) {
                     $viewData = [];
                 }
@@ -31,7 +39,8 @@ trait CElement_Trait_UseViewTrait {
         return $view;
     }
 
-    protected function setView($view, $viewData = null) {
+    protected function setView($view, $viewData = null)
+    {
         $this->view = $view;
         $this->viewData = $viewData;
     }
@@ -43,23 +52,27 @@ trait CElement_Trait_UseViewTrait {
      *
      * @return $this
      */
-    public function setData(array $viewData) {
+    public function setData(array $viewData)
+    {
         $this->viewData = $viewData;
 
         return $this;
     }
 
-    public function getVar($key) {
-        return carr::get($this->viewData, $key);
+    public function getVar($key)
+    {
+        return Arr::get($this->viewData, $key);
     }
 
-    public function setVar($key, $val) {
+    public function setVar($key, $val)
+    {
         $this->viewData[$key] = $val;
 
         return $this;
     }
 
-    private function collectHtmlJsOnce() {
+    private function collectHtmlJsOnce()
+    {
         if ($this->htmlJs == null) {
             $view = $this->resolveView();
 
@@ -91,21 +104,25 @@ trait CElement_Trait_UseViewTrait {
         return $this->htmlJs;
     }
 
-    protected function onBeforeParse(callable $callable) {
+    protected function onBeforeParse(callable $callable)
+    {
         $this->onBeforeParse = $callable;
 
         return $this;
     }
 
-    public function getViewHtml($indent = 0) {
-        return carr::get($this->collectHtmlJsOnce(), 'html');
+    public function getViewHtml($indent = 0)
+    {
+        return Arr::get($this->collectHtmlJsOnce(), 'html');
     }
 
-    public function getViewJs($indent = 0) {
-        return carr::get($this->collectHtmlJsOnce(), 'js');
+    public function getViewJs($indent = 0)
+    {
+        return Arr::get($this->collectHtmlJsOnce(), 'js');
     }
 
-    public function html($indent = 0) {
+    public function html($indent = 0)
+    {
         if (method_exists($this, 'buildOnce')) {
             $this->buildOnce();
         }
@@ -113,7 +130,8 @@ trait CElement_Trait_UseViewTrait {
         return $this->getViewHtml();
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         if (method_exists($this, 'buildOnce')) {
             $this->buildOnce();
         }

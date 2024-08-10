@@ -1,13 +1,18 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CElement\Element;
 
-class CElement_Element_A extends CElement_Element {
+use Cresenity\Laravel\CElement\Element;
+use Cresenity\Laravel\CElement\Factory;
+
+class A extends Element
+{
     protected $href;
 
     protected $target;
 
-    public function __construct($id = '') {
+    public function __construct($id = '')
+    {
         parent::__construct($id);
         $this->tag = 'a';
         $this->href = '';
@@ -19,8 +24,9 @@ class CElement_Element_A extends CElement_Element {
      *
      * @return static
      */
-    public static function factory($id = null) {
-        return CElement_Factory::create(static::class, $id);
+    public static function factory($id = null)
+    {
+        return Factory::create(static::class, $id);
     }
 
     /**
@@ -30,7 +36,8 @@ class CElement_Element_A extends CElement_Element {
      *
      * @return $this
      */
-    public function setHref($href) {
+    public function setHref($href)
+    {
         $this->href = $href;
 
         return $this;
@@ -41,7 +48,8 @@ class CElement_Element_A extends CElement_Element {
      *
      * @return $this
      */
-    public function setTarget($target = '_blank') {
+    public function setTarget($target = '_blank')
+    {
         $this->target = $target;
 
         return $this;
@@ -50,11 +58,13 @@ class CElement_Element_A extends CElement_Element {
     /**
      * @return $this
      */
-    public function setTargetBlank() {
+    public function setTargetBlank()
+    {
         return $this->setTarget('_blank');
     }
 
-    protected function build() {
+    protected function build()
+    {
         parent::build();
         if (strlen($this->href) > 0) {
             $this->addAttr('href', $this->href);

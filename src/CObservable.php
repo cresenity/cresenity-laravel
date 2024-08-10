@@ -1,13 +1,13 @@
 <?php
 namespace Cresenity\Laravel;
 
-use Cresenity\Laravel\Observable\Traits\ComponentTrait;
-use Cresenity\Laravel\Observable\Traits\ControlTrait;
-use Cresenity\Laravel\Observable\Traits\ElementTrait;
-use Cresenity\Laravel\Observable\Traits\EventsTrait;
-use Cresenity\Laravel\Observable\Traits\ListenerTrait;
-use Cresenity\Laravel\Observable\Traits\ListTrait;
-use Cresenity\Laravel\Observable\Javascript;
+use Cresenity\Laravel\CObservable\Traits\ComponentTrait;
+use Cresenity\Laravel\CObservable\Traits\ControlTrait;
+use Cresenity\Laravel\CObservable\Traits\ElementTrait;
+use Cresenity\Laravel\CObservable\Traits\EventsTrait;
+use Cresenity\Laravel\CObservable\Traits\ListenerTrait;
+use Cresenity\Laravel\CObservable\Traits\ListTrait;
+use Cresenity\Laravel\CObservable\Javascript;
 
 abstract class CObservable extends CRenderable
 {

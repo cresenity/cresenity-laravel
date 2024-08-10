@@ -1,6 +1,12 @@
 <?php
 namespace Cresenity\Laravel\CApp;
 
+use Cresenity\Laravel\CApp\SEO\JsonLd;
+use Cresenity\Laravel\CApp\SEO\MetaTags;
+use Cresenity\Laravel\CApp\SEO\OpenGraph;
+use Cresenity\Laravel\CApp\SEO\Twitter;
+use Illuminate\Support\Arr;
+
 class SEO
 {
     private static $instance = null;
@@ -11,7 +17,7 @@ class SEO
     }
 
     /**
-     * @return Cresenity\Laravel\CApp\SEO
+     * @return \Cresenity\Laravel\CApp\SEO
      */
     public static function instance()
     {
@@ -23,35 +29,35 @@ class SEO
     }
 
     /**
-     * @return CApp_SEO_MetaTags
+     * @return \Cresenity\Laravel\CApp\SEO\MetaTags
      */
     public function metatags()
     {
-        return CApp_SEO_MetaTags::instance();
+        return MetaTags::instance();
     }
 
     /**
-     * @return CApp_SEO_OpenGraph
+     * @return \Cresenity\Laravel\CApp\SEO\OpenGraph
      */
     public function opengraph()
     {
-        return CApp_SEO_OpenGraph::instance();
+        return OpenGraph::instance();
     }
 
     /**
-     * @return CApp_SEO_Twitter
+     * @return \Cresenity\Laravel\CApp\SEO\Twitter
      */
     public function twitter()
     {
-        return CApp_SEO_Twitter::instance();
+        return Twitter::instance();
     }
 
     /**
-     * @return CApp_SEO_JsonLd
+     * @return \Cresenity\Laravel\CApp\SEO\JsonLd
      */
     public function jsonLd()
     {
-        return CApp_SEO_JsonLd::instance();
+        return JsonLd::instance();
     }
 
     /**
@@ -92,7 +98,7 @@ class SEO
 
     public function setImages($urls)
     {
-        $this->opengraph()->setImages(carr::wrap($urls));
+        $this->opengraph()->setImages(Arr::wrap($urls));
         $this->twitter()->setImage($urls);
         $this->jsonLd()->setImages($urls);
 

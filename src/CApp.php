@@ -182,4 +182,17 @@ final class CApp implements Responsable, IlluminateRenderable, Jsonable
     public function notification() {
         return Notification::instance();
     }
+
+
+    public function __call($method, $parameters) {
+        if (method_exists($this->element, $method)) {
+            return call_user_func_array([$this->element, $method], $parameters);
+        }
+        if ($this->element->hasMacro($method)) {
+            return call_user_func_array([$this->element, $method], $parameters);
+        }
+
+        throw new \Exception('undefined method on CApp: ' . $method);
+    }
+
 }

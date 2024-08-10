@@ -1,29 +1,37 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CElement;
 
-class CElement_View extends CElement {
-    use CElement_Trait_UseViewTrait;
+use Cresenity\Laravel\CElement;
+use Cresenity\Laravel\CElement\Traits\UseViewTrait;
+use Illuminate\View\View as IlluminateView;
+
+class View extends CElement
+{
+    use UseViewTrait;
 
     protected $viewElement;
 
-    public function __construct($id, $view = null, $data = []) {
+    public function __construct($id, $view = null, $data = [])
+    {
         parent::__construct($id);
         if ($view != null) {
             $this->setView($view, $data);
         }
         $this->viewElement = [];
         $this->htmlJs = null;
-        $this->onBeforeParse(function (CView_View $view) {
+        $this->onBeforeParse(function (IlluminateView $view) {
             $view->with('__CAppElementView', $this);
         });
     }
 
-    public function html($indent = 0) {
+    public function html($indent = 0)
+    {
         return $this->getViewHtml($indent);
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         return $this->getViewJs($indent);
     }
 
@@ -32,11 +40,12 @@ class CElement_View extends CElement {
      *
      * @param string $key
      *
-     * @return CElement_PseudoElement
+     * @return \Cresenity\Laravel\CElement\PseudoElement
      */
-    public function viewElement($key) {
+    public function viewElement($key)
+    {
         if (!isset($this->viewElement[$key])) {
-            $this->viewElement[$key] = new CElement_PseudoElement();
+            $this->viewElement[$key] = new PseudoElement();
         }
 
         return $this->viewElement[$key];

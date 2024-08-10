@@ -1,11 +1,16 @@
 <?php
 
+namespace Cresenity\Laravel\CElement;
+
+use Cresenity\Laravel\CElement\Component\Form\FieldValidation;
+
 /**
  * Description of CElement_FormInput.
  *
  * @author Hery
  */
-class CElement_FormInput extends CElement_Element {
+class FormInput extends Element
+{
     protected $name;
 
     protected $type;
@@ -32,7 +37,8 @@ class CElement_FormInput extends CElement_Element {
 
     protected $readonly;
 
-    public function __construct($id = null) {
+    public function __construct($id = null)
+    {
         parent::__construct($id);
 
         $this->type = 'text';
@@ -49,62 +55,72 @@ class CElement_FormInput extends CElement_Element {
         $this->value = '';
         $this->disabled = '';
         $this->list = [];
-        $this->validation = new CElement_Component_Form_FieldValidation();
+        $this->validation = new FieldValidation();
     }
 
-    public function setSubmitOnChange($bool = true) {
+    public function setSubmitOnChange($bool = true)
+    {
         $this->submit_onchange = $bool;
 
         return $this;
     }
 
-    public function setAjax($bool = true) {
+    public function setAjax($bool = true)
+    {
         $this->ajax = $bool;
 
         return $this;
     }
 
-    public function setDisabled($bool = true) {
+    public function setDisabled($bool = true)
+    {
         $this->disabled = $bool;
 
         return $this;
     }
 
-    public function setSize($size) {
+    public function setSize($size)
+    {
         $this->size = $size;
 
         return $this;
     }
 
-    public function setReadonly($bool = true) {
+    public function setReadonly($bool = true)
+    {
         $this->readonly = $bool;
 
         return $this;
     }
 
-    public function getFieldId() {
+    public function getFieldId()
+    {
         return $this->id;
     }
 
-    public function setValue($val) {
+    public function setValue($val)
+    {
         $this->value = $val;
 
         return $this;
     }
 
-    public function setList($list) {
+    public function setList($list)
+    {
         $this->list = $list;
 
         return $this;
     }
 
-    public function setName($val) {
+    public function setName($val)
+    {
         $this->name = $val;
 
         return $this;
     }
 
-    public function addValidation($name, $value = '') {
+    public function addValidation($name, $value = '')
+    {
         if (strlen($value) == 0) {
             $value = $name;
         }
@@ -113,13 +129,15 @@ class CElement_FormInput extends CElement_Element {
         return $this;
     }
 
-    public function setType($type) {
+    public function setType($type)
+    {
         $this->type = $type;
 
         return $this;
     }
 
-    public function toArray() {
+    public function toArray()
+    {
         $data = [];
         if ($this->disabled) {
             $data['attr']['disabled'] = 'disabled';
@@ -135,7 +153,8 @@ class CElement_FormInput extends CElement_Element {
         return $data;
     }
 
-    protected function build() {
+    protected function build()
+    {
         parent::build();
 
         if (!is_array($this->value)) {
@@ -149,7 +168,8 @@ class CElement_FormInput extends CElement_Element {
         }
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         $js = '';
         if ($this->submit_onchange) {
             if ($this->type == 'date') {
@@ -172,9 +192,10 @@ class CElement_FormInput extends CElement_Element {
         return $js;
     }
 
-    protected function htmlAttr() {
+    protected function htmlAttr()
+    {
         $htmlAttr = parent::htmlAttr();
-        $nameAttr = ' name="' . c::e($this->name) . '"';
+        $nameAttr = ' name="' . \c::e($this->name) . '"';
 
         return $htmlAttr . $nameAttr;
     }

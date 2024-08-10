@@ -1,63 +1,75 @@
 <?php
 
-class CElement_Component_Form_FieldValidation {
-    use CTrait_Compat_Element_Form_FieldValidation;
+namespace Cresenity\Laravel\CElement\Component\Form;
 
+class FieldValidation
+{
     private $validation = null;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->validation = [];
     }
 
-    public static function factory() {
+    public static function factory()
+    {
         return new static();
     }
 
-    public function addValidation($name, $param) {
+    public function addValidation($name, $param)
+    {
         $this->validation[$name] = $param;
     }
 
-    public function required() {
+    public function required()
+    {
         $this->validation['required'] = 'required';
 
         return $this;
     }
 
-    public function min($n) {
+    public function min($n)
+    {
         $this->validation['min'] = $n;
 
         return $this;
     }
 
-    public function max($n) {
+    public function max($n)
+    {
         $this->validation['max'] = $n;
 
         return $this;
     }
 
-    public function equals($n) {
+    public function equals($n)
+    {
         $this->validation['equals'] = $n;
 
         return $this;
     }
 
-    public function notequals($n) {
+    public function notequals($n)
+    {
         $this->validation['notequals'] = $n;
 
         return $this;
     }
 
-    public function custom($n) {
+    public function custom($n)
+    {
         $this->validation['custom'] = $n;
 
         return $this;
     }
 
-    public function validationClass() {
+    public function validationClass()
+    {
         return ' validate[' . $this->renderClass() . ']';
     }
 
-    protected function renderClass() {
+    protected function renderClass()
+    {
         $validation_class = '';
         foreach ($this->validation as $k => $v) {
             if ($v != false) {

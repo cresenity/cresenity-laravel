@@ -1,6 +1,8 @@
 <?php
+namespace Cresenity\Laravel\CApp\SEO;
 
-interface CApp_SEO_MetaTagsInterface {
+interface MetaTagsInterface
+{
     /**
      * Generates meta tags HTML.
      *

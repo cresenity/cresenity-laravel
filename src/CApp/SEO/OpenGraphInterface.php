@@ -1,6 +1,8 @@
 <?php
+namespace Cresenity\Laravel\CApp\SEO;
 
-interface CApp_SEO_OpenGraphInterface {
+interface OpenGraphInterface
+{
     /**
      * Generates open graph tags.
      *

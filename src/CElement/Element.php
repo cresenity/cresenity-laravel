@@ -1,36 +1,38 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CElement;
 
-/**
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Nov 12, 2017, 3:34:27 AM
- */
-abstract class CElement_Element extends CElement {
+use Cresenity\Laravel\CElement;
+use Cresenity\Laravel\CStringBuilder;
+
+abstract class Element extends CElement
+{
     protected $isBuilded = false;
 
     protected $isOneTag = false;
 
     protected $haveIndent = true;
 
-    public function __construct($id = null, $tag = 'div') {
+    public function __construct($id = null, $tag = 'div')
+    {
         parent::__construct($id, $tag);
 
         $this->isBuilded = false;
         $this->isOneTag = false;
     }
 
-    public function onetag() {
+    public function onetag()
+    {
         return '<' . $this->tag . ' ' . $this->htmlAttr() . ' />';
     }
 
-    public function pretag() {
+    public function pretag()
+    {
         return '<' . $this->tag . ' ' . $this->htmlAttr() . ' >';
     }
 
-    public function posttag() {
+    public function posttag()
+    {
         return '</' . $this->tag . '>';
     }
 
@@ -39,17 +41,19 @@ abstract class CElement_Element extends CElement {
      *
      * @return $this
      */
-    public function setHaveIndent($bool = true) {
+    public function setHaveIndent($bool = true)
+    {
         $this->haveIndent = $bool;
 
         return $this;
     }
 
-    protected function htmlAttr() {
+    protected function htmlAttr()
+    {
         $customCss = $this->custom_css;
         $customCss = static::renderStyle($customCss);
         if (strlen($customCss) > 0) {
-            $customCss = ' style="' . c::e($customCss) . '"';
+            $customCss = ' style="' . \c::e($customCss) . '"';
         }
         $additionAttribute = '';
         $haveClass = false;
@@ -57,7 +61,7 @@ abstract class CElement_Element extends CElement {
             if (is_array($v)) {
                 $v = implode(',', $v);
             }
-            $additionAttribute .= ' ' . $k . '="' . c::e($v) . '"';
+            $additionAttribute .= ' ' . $k . '="' . \c::e($v) . '"';
             if ($k == 'class') {
                 $haveClass = true;
             }
@@ -66,14 +70,15 @@ abstract class CElement_Element extends CElement {
         if (!$haveClass) {
             $classes = $this->classes;
             $classes = implode(' ', $classes);
-            $classAttr = ' class="' . c::e($classes) . '"';
+            $classAttr = ' class="' . \c::e($classes) . '"';
         }
         $htmlAttr = 'id="' . $this->id . '" ' . $classAttr . $customCss . $additionAttribute;
 
         return $htmlAttr;
     }
 
-    protected function buildOnce() {
+    protected function buildOnce()
+    {
         //just build once
         if (!$this->isBuilded) {
             $this->build();
@@ -81,26 +86,32 @@ abstract class CElement_Element extends CElement {
         }
     }
 
-    public function beforeHtml($indent = 0) {
+    public function beforeHtml($indent = 0)
+    {
         return $this->before()->html($indent);
     }
 
-    public function afterHtml($indent = 0) {
+    public function afterHtml($indent = 0)
+    {
         return $this->after()->html($indent);
     }
 
-    public function beforeJs($indent = 0) {
+    public function beforeJs($indent = 0)
+    {
         return $this->before()->js($indent);
     }
 
-    public function afterJs($indent = 0) {
+    public function afterJs($indent = 0)
+    {
         return $this->after()->js($indent);
     }
 
-    protected function build() {
+    protected function build()
+    {
     }
 
-    public function html($indent = 0) {
+    public function html($indent = 0)
+    {
         $html = new CStringBuilder();
 
         if (!$this->haveIndent) {
@@ -140,7 +151,8 @@ abstract class CElement_Element extends CElement {
         return $html->text();
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         $js = new CStringBuilder();
         $js->setIndent($indent);
         $this->buildOnce();

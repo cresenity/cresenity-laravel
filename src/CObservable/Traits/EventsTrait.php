@@ -1,6 +1,6 @@
 <?php
 
-namespace Cresenity\Laravel\Observable\Traits;
+namespace Cresenity\Laravel\CObservable\Traits;
 
 trait EventsTrait
 {

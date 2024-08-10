@@ -1,6 +1,11 @@
 <?php
+namespace Cresenity\Laravel\CApp\SEO;
 
-class CApp_SEO_Twitter implements CApp_SEO_TwitterInterface {
+use Cresenity\Laravel\CF;
+use Illuminate\Support\Arr;
+
+class Twitter implements TwitterInterface
+{
     /**
      * @var string
      */
@@ -29,20 +34,22 @@ class CApp_SEO_Twitter implements CApp_SEO_TwitterInterface {
     /**
      * Singleton instance of this class.
      *
-     * @var CApp_SEO_Twitter
+     * @var Twitter
      */
     private static $instance = null;
 
-    private function __construct() {
-        $this->config = CF::config('seo.twitter');
+    private function __construct()
+    {
+        $this->config = CF::config('cresenity.seo.twitter');
 
-        $this->values = carr::get($this->config, 'defaults', []);
+        $this->values = Arr::get($this->config, 'defaults', []);
     }
 
     /**
-     * @return CApp_SEO_MetaTags
+     * @return \Cresenity\Laravel\CApp\SEO\MetaTags
      */
-    public static function instance() {
+    public static function instance()
+    {
         if (self::$instance == null) {
             self::$instance = new static();
         }
@@ -58,7 +65,8 @@ class CApp_SEO_Twitter implements CApp_SEO_TwitterInterface {
     /**
      * @inheritdoc
      */
-    public function generate($minify = false) {
+    public function generate($minify = false)
+    {
         $this->eachValue($this->values);
         $this->eachValue($this->images, 'images');
 
@@ -73,7 +81,8 @@ class CApp_SEO_Twitter implements CApp_SEO_TwitterInterface {
      *
      * @internal param array $properties
      */
-    protected function eachValue(array $values, $prefix = null) {
+    protected function eachValue(array $values, $prefix = null)
+    {
         foreach ($values as $key => $value) {
             if (is_array($value)) {
                 $this->eachValue($value, $key);
@@ -97,14 +106,16 @@ class CApp_SEO_Twitter implements CApp_SEO_TwitterInterface {
      *
      * @internal param string $values
      */
-    private function makeTag($key, $value) {
+    private function makeTag($key, $value)
+    {
         return '<meta name="' . $this->prefix . strip_tags($key) . '" content="' . strip_tags($value) . '" />';
     }
 
     /**
      * @inheritdoc
      */
-    public function addValue($key, $value) {
+    public function addValue($key, $value)
+    {
         $this->values[$key] = $value;
 
         return $this;
@@ -113,42 +124,48 @@ class CApp_SEO_Twitter implements CApp_SEO_TwitterInterface {
     /**
      * @inheritdoc
      */
-    public function setTitle($title) {
+    public function setTitle($title)
+    {
         return $this->addValue('title', $title);
     }
 
     /**
      * @inheritdoc
      */
-    public function setType($type) {
+    public function setType($type)
+    {
         return $this->addValue('card', $type);
     }
 
     /**
      * @inheritdoc
      */
-    public function setSite($site) {
+    public function setSite($site)
+    {
         return $this->addValue('site', $site);
     }
 
     /**
      * @inheritdoc
      */
-    public function setDescription($description) {
+    public function setDescription($description)
+    {
         return $this->addValue('description', htmlspecialchars($description, ENT_QUOTES, 'UTF-8', false));
     }
 
     /**
      * @inheritdoc
      */
-    public function setUrl($url) {
+    public function setUrl($url)
+    {
         return $this->addValue('url', $url);
     }
 
     /**
      * @inheritdoc
      */
-    public function addImage($image) {
+    public function addImage($image)
+    {
         foreach ((array) $image as $url) {
             $this->images[] = $url;
         }
@@ -159,7 +176,8 @@ class CApp_SEO_Twitter implements CApp_SEO_TwitterInterface {
     /**
      * @inheritdoc
      */
-    public function setImages($images) {
+    public function setImages($images)
+    {
         $this->images = [];
 
         return $this->addImage($images);
@@ -170,7 +188,8 @@ class CApp_SEO_Twitter implements CApp_SEO_TwitterInterface {
      *
      * @return CApp_SEO_TwitterInterface
      */
-    public function setImage($image) {
+    public function setImage($image)
+    {
         return $this->addValue('image', $image);
     }
 }

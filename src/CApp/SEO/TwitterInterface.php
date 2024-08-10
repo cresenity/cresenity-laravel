@@ -1,6 +1,8 @@
 <?php
+namespace Cresenity\Laravel\CApp\SEO;
 
-interface CApp_SEO_TwitterInterface {
+interface TwitterInterface
+{
     /**
      * @param bool $minify
      *

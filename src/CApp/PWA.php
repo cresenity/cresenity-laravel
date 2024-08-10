@@ -1,9 +1,13 @@
 <?php
 namespace Cresenity\Laravel\CApp;
 
+use CApp_PWA_ServiceWorkerService;
+use Cresenity\Laravel\CApp\PWA\ManifestService;
+use Cresenity\Laravel\CApp\PWA\ServiceWorkerService;
 use Cresenity\Laravel\CApp\PWA\Traits\GroupConfigTrait;
 
-class PWA {
+class PWA
+{
     use GroupConfigTrait;
 
     protected $group;
@@ -14,7 +18,8 @@ class PWA {
 
     protected $debug = true;
 
-    public function __construct($group = 'default') {
+    public function __construct($group = 'default')
+    {
         $this->group = $group;
         $startUrl = $this->getGroupConfig('start_url', '/');
         $startUrl = '/' . trim($startUrl, '/') . '/';
@@ -22,12 +27,13 @@ class PWA {
         $this->debug = $this->getGroupConfig('debug', true);
     }
 
-    public function enable() {
+    public function enable()
+    {
         $startUrl = $this->startUrl;
         $theme = $this->getGroupConfig('theme');
         if (!$this->enabled) {
             \c::router()->get($this->manifestUrl(), function () {
-                $output = (new CApp_PWA_ManifestService($this->group))->generate();
+                $output = (new ManifestService($this->group))->generate();
 
                 return \c::response()->json($output);
             });
@@ -35,9 +41,9 @@ class PWA {
                 return \c::view('cresenity.pwa.offline');
             });
             \c::router()->get($this->serviceWorkerUrl(), function () use ($theme) {
-                $output = (new CApp_PWA_ServiceWorkerService())->generate($theme);
+                $output = (new ServiceWorkerService())->generate($theme);
 
-                return c::response($output, 200, [
+                return \c::response($output, 200, [
                     'Content-Type' => 'text/javascript',
                 ]);
             });
@@ -48,32 +54,37 @@ class PWA {
     /**
      * @return string
      */
-    public function manifestUrl() {
+    public function manifestUrl()
+    {
         return $this->startUrl . 'manifest.json';
     }
 
     /**
      * @return string
      */
-    public function offlineUrl() {
+    public function offlineUrl()
+    {
         return $this->startUrl . 'offline';
     }
 
     /**
      * @return string
      */
-    public function serviceWorkerUrl() {
+    public function serviceWorkerUrl()
+    {
         return $this->startUrl . 'serviceworker.js';
     }
 
     /**
      * @return bool
      */
-    public function isEnabled() {
+    public function isEnabled()
+    {
         return $this->enabled;
     }
 
-    public function isDebug() {
+    public function isDebug()
+    {
         return $this->debug;
     }
 }

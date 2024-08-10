@@ -1,9 +1,15 @@
 <?php
+namespace Cresenity\Laravel\CApp\SEO;
+
+use Cresenity\Laravel\CF;
+use Illuminate\Support\Arr;
+
 /**
  * @see CApp
  * @see CApp_SEO
  */
-class CApp_SEO_JsonLd implements CApp_SEO_JsonLdInterface {
+class JsonLd implements JsonLdInterface
+{
     /**
      * @var array
      */
@@ -46,27 +52,28 @@ class CApp_SEO_JsonLd implements CApp_SEO_JsonLdInterface {
      */
     private static $instance = null;
 
-    private function __construct() {
-        $this->config = CF::config('seo.twitter');
+    private function __construct()
+    {
+        $this->config = CF::config('cresenity.seo.twitter');
 
-        $this->values = carr::get($this->config, 'defaults', []);
+        $this->values = Arr::get($this->config, 'defaults', []);
 
-        $defaults = carr::get($this->config, 'defaults', []);
+        $defaults = Arr::get($this->config, 'defaults', []);
 
-        $this->setTitle(carr::get($defaults, 'title'));
-        carr::forget($defaults, 'title');
+        $this->setTitle(Arr::get($defaults, 'title'));
+        Arr::forget($defaults, 'title');
 
-        $this->setDescription(carr::get($defaults, 'description'));
-        carr::forget($defaults, 'description');
+        $this->setDescription(Arr::get($defaults, 'description'));
+        Arr::forget($defaults, 'description');
 
-        $this->setType(carr::get($defaults, 'type'));
-        carr::forget($defaults, 'type');
+        $this->setType(Arr::get($defaults, 'type'));
+        Arr::forget($defaults, 'type');
 
-        $this->setUrl(carr::get($defaults, 'url'));
-        carr::forget($defaults, 'url');
+        $this->setUrl(Arr::get($defaults, 'url'));
+        Arr::forget($defaults, 'url');
 
-        $this->setImages(carr::get($defaults, 'images'));
-        carr::forget($defaults, 'images');
+        $this->setImages(Arr::get($defaults, 'images'));
+        Arr::forget($defaults, 'images');
 
         $this->values = $defaults;
     }
@@ -74,7 +81,8 @@ class CApp_SEO_JsonLd implements CApp_SEO_JsonLdInterface {
     /**
      * @return CApp_SEO_JsonLd
      */
-    public static function instance() {
+    public static function instance()
+    {
         if (self::$instance == null) {
             self::$instance = new static();
         }
@@ -85,7 +93,8 @@ class CApp_SEO_JsonLd implements CApp_SEO_JsonLdInterface {
     /**
      * @inheritdoc
      */
-    public function generate($minify = false) {
+    public function generate($minify = false)
+    {
         $generated = [
             '@context' => 'https://schema.org',
         ];
@@ -103,7 +112,7 @@ class CApp_SEO_JsonLd implements CApp_SEO_JsonLdInterface {
         }
 
         if ($this->url !== false) {
-            $generated['url'] = $this->url ? $this->url : curl::urlFull();
+            $generated['url'] = $this->url ? $this->url : \c::url()->full();
         }
 
         if (!empty($this->images)) {
@@ -118,7 +127,8 @@ class CApp_SEO_JsonLd implements CApp_SEO_JsonLdInterface {
     /**
      * @inheritdoc
      */
-    public function addValue($key, $value) {
+    public function addValue($key, $value)
+    {
         $this->values[$key] = $value;
 
         return $this;
@@ -127,7 +137,8 @@ class CApp_SEO_JsonLd implements CApp_SEO_JsonLdInterface {
     /**
      * @inheritdoc
      */
-    public function addValues(array $values) {
+    public function addValues(array $values)
+    {
         foreach ($values as $key => $value) {
             $this->addValue($key, $value);
         }
@@ -138,7 +149,8 @@ class CApp_SEO_JsonLd implements CApp_SEO_JsonLdInterface {
     /**
      * @inheritdoc
      */
-    public function setType($type) {
+    public function setType($type)
+    {
         $this->type = $type;
 
         return $this;
@@ -147,7 +159,8 @@ class CApp_SEO_JsonLd implements CApp_SEO_JsonLdInterface {
     /**
      * @inheritdoc
      */
-    public function setTitle($title) {
+    public function setTitle($title)
+    {
         $this->title = $title;
 
         return $this;
@@ -156,7 +169,8 @@ class CApp_SEO_JsonLd implements CApp_SEO_JsonLdInterface {
     /**
      * @inheritdoc
      */
-    public function setSite($site) {
+    public function setSite($site)
+    {
         $this->url = $site;
 
         return $this;
@@ -165,7 +179,8 @@ class CApp_SEO_JsonLd implements CApp_SEO_JsonLdInterface {
     /**
      * @inheritdoc
      */
-    public function setDescription($description) {
+    public function setDescription($description)
+    {
         $this->description = $description;
 
         return $this;
@@ -174,7 +189,8 @@ class CApp_SEO_JsonLd implements CApp_SEO_JsonLdInterface {
     /**
      * @inheritdoc
      */
-    public function setUrl($url) {
+    public function setUrl($url)
+    {
         $this->url = $url;
 
         return $this;
@@ -183,7 +199,8 @@ class CApp_SEO_JsonLd implements CApp_SEO_JsonLdInterface {
     /**
      * @inheritdoc
      */
-    public function setImages($images) {
+    public function setImages($images)
+    {
         $this->images = [];
 
         return $this->addImage($images);
@@ -192,7 +209,8 @@ class CApp_SEO_JsonLd implements CApp_SEO_JsonLdInterface {
     /**
      * @inheritdoc
      */
-    public function addImage($image) {
+    public function addImage($image)
+    {
         if (is_array($image)) {
             $this->images = array_merge($this->images, $image);
         } elseif (is_string($image)) {
@@ -205,7 +223,8 @@ class CApp_SEO_JsonLd implements CApp_SEO_JsonLdInterface {
     /**
      * @inheritdoc
      */
-    public function setImage($image) {
+    public function setImage($image)
+    {
         $this->images = [$image];
 
         return $this;

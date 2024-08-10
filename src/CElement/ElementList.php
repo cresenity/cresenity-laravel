@@ -2,6 +2,6 @@
 
 namespace Cresenity\Laravel\CElement;
 
-class Exception extends Exception
+class ElementList extends Element
 {
 }
