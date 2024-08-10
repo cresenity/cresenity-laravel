@@ -1,5 +1,7 @@
 <?php
-namespace Cresenity\Laravel\Manager;
+namespace Cresenity\Laravel\CManager;
+
+use Cresenity\Laravel\CF;
 
 class Theme
 {

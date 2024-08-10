@@ -21,16 +21,25 @@ final class CF
     }
 
     /**
-    * Get a config item or group.
-    *
-    * @param mixed      $key
-    * @param null|mixed $default
-    * @param mixed      $required
-    *
-    * @return mixed
-    */
+     * Get a config item or group.
+     *
+     * @param mixed      $key
+     * @param null|mixed $default
+     *
+     * @return mixed
+     */
     public static function config($key, $default = null)
     {
         return \c::config($key, $default);
+    }
+
+    /**
+     * Get the current application locale.
+     *
+     * @return string
+     */
+    public static function getLocale()
+    {
+        return app()->getLocale();
     }
 }

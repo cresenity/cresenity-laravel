@@ -13,9 +13,11 @@ use Symfony\Component\PropertyAccess\Exception\NoSuchIndexException;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Cresenity\Laravel\App;
 use Cresenity\Laravel\CConfig;
-use Cresenity\Laravel\Http;
-use Cresenity\Laravel\Translation;
+use Cresenity\Laravel\CHTTP;
+use Cresenity\Laravel\CRouting;
+use Cresenity\Laravel\CTranslation;
 use Illuminate\Container\Container;
+use Illuminate\Routing\UrlGenerator;
 use Illuminate\Translation\Translator;
 
 //@codingStandardsIgnoreStart
@@ -545,13 +547,13 @@ class c
     public static function trans($key = null, $replace = [], $locale = null)
     {
         if ($key === null) {
-            return Translation::translator();
+            return CTranslation::translator();
         }
         if ($replace === null) {
             $replace = [];
         }
 
-        return Translation::translator()->get($key, $replace, $locale);
+        return CTranslation::translator()->get($key, $replace, $locale);
     }
 
     //@codingStandardsIgnoreStart
@@ -601,7 +603,7 @@ class c
      * @param mixed       $parameters
      * @param null|bool   $secure
      *
-     * @return CRouting_UrlGenerator|string
+     * @return UrlGenerator|string
      */
     public static function url($path = null, $parameters = [], $secure = null)
     {
@@ -746,7 +748,7 @@ class c
     public static function request($key = null, $default = null)
     {
         if (is_null($key)) {
-            return Http::request();
+            return CHTTP::request();
         }
 
         if (is_array($key)) {
@@ -1011,7 +1013,7 @@ class c
      */
     public static function media($path = '', $secure = null)
     {
-        return c::url()->media($path, $secure);
+        return c::url()->asset($path, $secure);
     }
 
     /**
@@ -1474,7 +1476,8 @@ class c
      */
     public static function locale()
     {
-        return str_replace('_', '-', CF::getLocale());
+        return str_replace('_', '-', app()->getLocale());
+        // return str_replace('_', '-', CF::getLocale());
     }
 
     /**

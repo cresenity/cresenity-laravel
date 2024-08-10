@@ -4,7 +4,7 @@ namespace Cresenity\Laravel;
 use \Illuminate\Http\Response;
 use \Illuminate\Http\Request;
 
-class Http
+class CHTTP
 {
 
 

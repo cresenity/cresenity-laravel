@@ -15,7 +15,7 @@ class CObject
 
     protected function __construct($id = null)
     {
-        $observer = Observer::instance();
+        $observer = CObserver::instance();
         if ($id == null) {
             $id = 'c' . spl_object_hash($this);
         }
@@ -26,7 +26,7 @@ class CObject
 
     public function regenerateId()
     {
-        $this->id = Observer::instance()->newId();
+        $this->id = CObserver::instance()->newId();
     }
 
     public function id()

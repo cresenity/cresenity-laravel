@@ -3,7 +3,7 @@ namespace Cresenity\Laravel;
 
 use Illuminate\Events\Dispatcher;
 
-class Event
+class CEvent
 {
     protected static $dispatcher;
 

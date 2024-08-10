@@ -222,7 +222,7 @@ abstract class CObservable extends CRenderable
 
     public function js($indent = 0)
     {
-        $js = new StringBuilder();
+        $js = new CStringBuilder();
         $js->setIndent($indent);
         foreach ($this->listeners as $listener) {
             $js->appendln($listener->js($js->getIndent()));

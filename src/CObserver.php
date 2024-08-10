@@ -1,7 +1,7 @@
 <?php
 namespace Cresenity\Laravel;
 
-final class Observer
+final class CObserver
 {
     private static $instance;
 

@@ -1,7 +1,7 @@
 <?php
 namespace Cresenity\Laravel;
 
-class StringBuilder
+class CStringBuilder
 {
     private $text = '';
 
@@ -14,7 +14,7 @@ class StringBuilder
 
     public static function factory()
     {
-        return new StringBuilder();
+        return new CStringBuilder();
     }
 
     /**

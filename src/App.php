@@ -54,8 +54,8 @@ final class App implements Responsable, IlluminateRenderable, Jsonable
     public function registerCoreModules($force = false)
     {
         if ($force || !$this->coreModuleIsRegistered) {
-            $manager = Manager::instance();
-            $theme = Manager::theme()->getCurrentTheme();
+            $manager = CManager::instance();
+            $theme = CManager::theme()->getCurrentTheme();
             $themeFile = CF::getFile('themes', $theme);
             if (file_exists($themeFile)) {
                 $themeData = include $themeFile;
@@ -91,7 +91,7 @@ final class App implements Responsable, IlluminateRenderable, Jsonable
      */
     public function toResponse($request)
     {
-        return Http::createResponse($this->render());
+        return CHTTP::createResponse($this->render());
     }
 
     public function toArray()

@@ -3,7 +3,7 @@ namespace Cresenity\Laravel;
 
 use Illuminate\Translation\Translator;
 
-class Translation
+class CTranslation
 {
     protected static $translator;
 

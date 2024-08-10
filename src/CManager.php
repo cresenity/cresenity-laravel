@@ -1,16 +1,16 @@
 <?php
 namespace Cresenity\Laravel;
 
-use Cresenity\Laravel\Manager\Theme;
+use Cresenity\Laravel\CManager\Theme;
 
-final class Manager
+final class CManager
 {
     private static $instance;
 
     protected static $theme;
 
     /**
-    * @return \Cresenity\Laravel\Manager
+    * @return \Cresenity\Laravel\CManager
     */
     public static function instance()
     {

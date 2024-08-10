@@ -117,7 +117,7 @@ class CRenderable extends CObject implements RenderableContract
                 $r->clear();
             }
             if ($r instanceof CObject) {
-                Observer::instance()->remove($r);
+                CObserver::instance()->remove($r);
             }
         }
         $this->renderable = [];
@@ -140,7 +140,7 @@ class CRenderable extends CObject implements RenderableContract
         if (!$this->visibility) {
             return '';
         }
-        $html = new StringBuilder();
+        $html = new CStringBuilder();
         $html->setIndent($indent);
         $html->incIndent();
         foreach ($this->renderable as $r) {
@@ -181,7 +181,7 @@ class CRenderable extends CObject implements RenderableContract
         if (!$this->visibility) {
             return '';
         }
-        $js = new StringBuilder();
+        $js = new CStringBuilder();
         $js->setIndent($indent);
         foreach ($this->renderable as $r) {
             if ($r instanceof CRenderable) {
@@ -252,7 +252,7 @@ class CRenderable extends CObject implements RenderableContract
      */
     public function getEvent()
     {
-        return Event::dispatcher();
+        return CEvent::dispatcher();
     }
 
     /**
