@@ -36,4 +36,21 @@ class CView
     {
         return self::factory()->exists($name);
     }
+
+
+    /**
+     * @return \Illuminate\View\Compilers\BladeCompiler
+     */
+    public static function blade()
+    {
+        return \c::container('blade.compiler');
+    }
+
+    /**
+     * @return \Illuminate\View\FileViewFinder
+     */
+    public static function finder()
+    {
+        return \c::container('view.finder');
+    }
 }

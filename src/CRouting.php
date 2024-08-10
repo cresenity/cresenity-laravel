@@ -18,7 +18,7 @@ class CRouting
      */
     public static function router()
     {
-        return CRouting_Router::instance();
+        return \c::container('router');
     }
 
     /**
@@ -32,7 +32,7 @@ class CRouting
     public static function findUri()
     {
         if (CF::isTesting()) {
-            return ltrim(c::url()->getRequest()->path(), '/');
+            return ltrim(\c::url()->getRequest()->path(), '/');
         }
         $currentUri = '';
         if (PHP_SAPI === 'cli') {

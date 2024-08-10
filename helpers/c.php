@@ -11,13 +11,17 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
 use Symfony\Component\PropertyAccess\Exception\NoSuchIndexException;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
-use Cresenity\Laravel\App;
+use Cresenity\Laravel\CApp;
 use Cresenity\Laravel\CConfig;
+use Cresenity\Laravel\CEvent;
+use Cresenity\Laravel\CF;
 use Cresenity\Laravel\CHTTP;
 use Cresenity\Laravel\CRouting;
 use Cresenity\Laravel\CTranslation;
 use Illuminate\Container\Container;
 use Illuminate\Routing\UrlGenerator;
+use Illuminate\Support\Collection;
+use Illuminate\Support\HigherOrderTapProxy;
 use Illuminate\Translation\Translator;
 
 //@codingStandardsIgnoreStart
@@ -165,11 +169,11 @@ class c
      *
      * @param mixed $value
      *
-     * @return CCollection
+     * @return \Illuminate\Support\Collection
      */
     public static function collect($value = null)
     {
-        return new CCollection($value);
+        return new Collection($value);
     }
 
     /**
@@ -183,7 +187,7 @@ class c
     public static function tap($value, $callback = null)
     {
         if (is_null($callback)) {
-            return new CBase_HigherOrderTapProxy($value);
+            return new HigherOrderTapProxy($value);
         }
 
         $callback($value);
@@ -203,7 +207,7 @@ class c
         $class = is_object($class) ? get_class($class) : $class;
 
         $basename = basename(str_replace('\\', '/', $class));
-        $basename = carr::last(explode('_', $basename));
+        $basename = Arr::last(explode('_', $basename));
 
         return $basename;
     }
@@ -532,7 +536,7 @@ class c
      */
     public static function env($key, $default = null)
     {
-        return CEnv::get($key, $default);
+        return env($key, $default);
     }
 
     /**
@@ -862,11 +866,11 @@ class c
     /**
      * Get router instance.
      *
-     * @return CRouting_Router
+     * @return \Illuminate\Routing\Router
      */
     public static function router()
     {
-        return CRouting_Router::instance();
+        return CRouting::router();
     }
 
     /**
@@ -1111,11 +1115,11 @@ class c
     /**
      * Get the CApp instance.
      *
-     * @return \Cresenity\Laravel\App
+     * @return \Cresenity\Laravel\CApp
      */
     public static function app()
     {
-        return App::instance();
+        return CApp::instance();
     }
 
     /**
@@ -1476,7 +1480,7 @@ class c
      */
     public static function locale()
     {
-        return str_replace('_', '-', app()->getLocale());
+        return str_replace('_', '-', CF::getLocale());
         // return str_replace('_', '-', CF::getLocale());
     }
 

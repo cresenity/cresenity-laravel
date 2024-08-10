@@ -3,7 +3,12 @@ namespace Cresenity\Laravel;
 
 final class CF
 {
-
+    /**
+     * Chartset used for this application.
+     *
+     * @var string
+     */
+    public static $charset = 'utf-8';
     /**
      * Check if CF is run under testing.
      *
@@ -41,5 +46,18 @@ final class CF
     public static function getLocale()
     {
         return app()->getLocale();
+    }
+
+    public static function version() {
+        return '1.0';
+    }
+
+    /**
+     * Get the current application charset.
+     *
+     * @return string
+     */
+    public static function getCharset() {
+        return static::$charset;
     }
 }

@@ -1,18 +1,28 @@
 <?php
 namespace Cresenity\Laravel;
 
+use Cresenity\Laravel\CApp\Concern\BootstrapTrait;
 use Cresenity\Laravel\CApp\Concern\BreadcrumbTrait;
+use Cresenity\Laravel\CApp\Concern\ManageStackTrait;
 use Cresenity\Laravel\CApp\Concern\RendererTrait;
 use Cresenity\Laravel\CApp\Concern\TitleTrait;
 use Cresenity\Laravel\CApp\Concern\ViewTrait;
 use Cresenity\Laravel\CApp\Element as AppElement;
+use Cresenity\Laravel\CApp\Notification;
+use Cresenity\Laravel\CApp\SEO;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Contracts\Support\Renderable as IlluminateRenderable;
 use Illuminate\Contracts\Support\Responsable;
+use Illuminate\Support\Arr;
 
-final class App implements Responsable, IlluminateRenderable, Jsonable
+final class CApp implements Responsable, IlluminateRenderable, Jsonable
 {
-    use RendererTrait, BreadcrumbTrait, TitleTrait, ViewTrait;
+    use RendererTrait
+        ,BreadcrumbTrait
+        ,TitleTrait
+        ,ViewTrait
+        ,BootstrapTrait
+        ,ManageStackTrait;
 
 
     private static $instance;
@@ -59,9 +69,9 @@ final class App implements Responsable, IlluminateRenderable, Jsonable
             $themeFile = CF::getFile('themes', $theme);
             if (file_exists($themeFile)) {
                 $themeData = include $themeFile;
-                $moduleArray = carr::get($themeData, 'client_modules');
-                $cssArray = carr::get($themeData, 'css');
-                $jsArray = carr::get($themeData, 'js');
+                $moduleArray = Arr::get($themeData, 'client_modules');
+                $cssArray = Arr::get($themeData, 'css');
+                $jsArray = Arr::get($themeData, 'js');
 
                 if ($moduleArray != null) {
                     foreach ($moduleArray as $module) {
@@ -157,5 +167,19 @@ final class App implements Responsable, IlluminateRenderable, Jsonable
         $data = $this->toArray();
 
         return json_encode($data, $options);
+    }
+
+      /**
+     * @return \Cresenity\Laravel\CApp\SEO
+     */
+    public static function seo() {
+        return SEO::instance();
+    }
+
+    /**
+     * @return \Cresenity\Laravel\CApp\Notification
+     */
+    public function notification() {
+        return Notification::instance();
     }
 }

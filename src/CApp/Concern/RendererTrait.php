@@ -1,8 +1,10 @@
 <?php
 namespace Cresenity\Laravel\CApp\Concern;
 
-use Cresenity\Laravel\App;
+use Cresenity\Laravel\CFile;
+use Cresenity\Laravel\CApp;
 use Cresenity\Laravel\CF;
+use Cresenity\Laravel\CLaravel;
 use Illuminate\Support\Arr;
 use Illuminate\View\Factory as ViewFactory;
 
@@ -17,7 +19,7 @@ trait RendererTrait
 
     public function renderContent($options = [])
     {
-        /** @var \Cresenity\Laravel\App $this */
+        /** @var \Cresenity\Laravel\CApp $this */
         $viewData = $this->getViewData();
 
         return Arr::get($viewData, 'content');
@@ -49,13 +51,13 @@ trait RendererTrait
     {
         /** @var CApp $this */
         $viewData = $this->getViewData();
-        $cresCss = curl::base() . 'media/js/cres/dist/cres.css?v=' . md5(CFile::lastModified(DOCROOT . 'media/js/cres/dist/cres.css'));
+        $cresCss = asset('vendor/cresenity/css/cres.css?v=' . md5(CFile::lastModified(CLaravel::publicCssPath('cres.css'))));
 
-        $alpineJs = curl::base() . 'media/js/libs/alpine.js?v=' . md5(CFile::lastModified(DOCROOT . 'media/js/libs/alpine.js'));
-        $alpineScript = '<script src="' . $alpineJs . '" defer></script>';
+        // $alpineJs = curl::base() . 'media/js/libs/alpine.js?v=' . md5(CFile::lastModified(DOCROOT . 'media/js/libs/alpine.js'));
+        // $alpineScript = '<script src="' . $alpineJs . '" defer></script>';
         $cresStyle = '<link href="' . $cresCss . '" rel="stylesheet" />' . PHP_EOL;
 
-        $allStyles = carr::get($viewData, 'head_client_script');
+        $allStyles = Arr::get($viewData, 'head_client_script');
 
         return <<<HTML
 <style>
@@ -83,19 +85,19 @@ HTML;
     public function renderScripts($options = [])
     {
         $viewData = $this->getViewData();
-        $endClientScript = carr::get($viewData, 'end_client_script', '');
-        $readyClientScript = carr::get($viewData, 'ready_client_script', '');
-        $loadClientScript = carr::get($viewData, 'load_client_script', '');
-        $js = carr::get($viewData, 'js', '');
-        $customJs = carr::get($viewData, 'custom_js', '');
+        $endClientScript = Arr::get($viewData, 'end_client_script', '');
+        $readyClientScript = Arr::get($viewData, 'ready_client_script', '');
+        $loadClientScript = Arr::get($viewData, 'load_client_script', '');
+        $js = Arr::get($viewData, 'js', '');
+        $customJs = Arr::get($viewData, 'custom_js', '');
 
-        $alpineJs = curl::base() . 'media/js/libs/alpine.js?v=' . md5(CFile::lastModified(DOCROOT . 'media/js/libs/alpine.js'));
-        $alpineScript = '<script src="' . $alpineJs . '"></script>';
+        // $alpineJs = curl::base() . 'media/js/libs/alpine.js?v=' . md5(CFile::lastModified(DOCROOT . 'media/js/libs/alpine.js'));
+        // $alpineScript = '<script src="' . $alpineJs . '"></script>';
 
         $pushesScript = $this->yieldPushContent('capp-script');
 
         $cresJsFile = 'cres.js';
-        $cresJs = curl::base() . 'media/js/cres/dist/' . $cresJsFile . '?v=' . md5(CFile::lastModified(DOCROOT . 'media/js/cres/dist/' . $cresJsFile . ''));
+        $cresJs = asset('vendor/cresenity/js/'.$cresJsFile . '?v=' . md5(CFile::lastModified(CLaravel::publicJsPath($cresJsFile))));
 
         $notificationScript = '';
         if ($this->notification()->isEnabled()) {
@@ -132,7 +134,7 @@ HTML;
     {
         $viewData = $this->getViewData();
 
-        return carr::get($viewData, 'pageTitle');
+        return Arr::get($viewData, 'pageTitle');
     }
 
     public function renderMessages($options = [])
@@ -258,7 +260,7 @@ HTML;
      */
     public function render()
     {
-        /** @var App $this */
+        /** @var CApp $this */
         if (!CF::isTesting()) {
             if ($this->rendered) {
                 throw new \Exception('CApp already Rendered');

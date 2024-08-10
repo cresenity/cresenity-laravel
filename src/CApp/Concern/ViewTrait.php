@@ -1,7 +1,7 @@
 <?php
 namespace Cresenity\Laravel\CApp\Concern;
 
-use Cresenity\Laravel\App;
+use Cresenity\Laravel\CApp;
 use Cresenity\Laravel\CView;
 use Illuminate\View\Engines\CompilerEngine;
 use Illuminate\View\View as View;
@@ -37,11 +37,11 @@ trait ViewTrait
     }
 
     /**
-     * @return View
+     * @return \Illuminate\View\View
      */
     public function getView()
     {
-        /** @var App $this */
+        /** @var \Cresensity\Laravel\CApp $this */
         // if (!$this->isUserLogin() && $this->isAuthEnabled()) {
         //     $view = $this->viewLoginName;
 
@@ -94,7 +94,7 @@ trait ViewTrait
 
     public function isUsingBlade()
     {
-        /** @var App $this */
+        /** @var CApp $this */
         // if (!$this->isUserLogin() && $this->config('have_user_login') && $this->isAuthEnabled()) {
         //     return false;
         // }
