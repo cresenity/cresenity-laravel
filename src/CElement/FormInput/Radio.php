@@ -1,14 +1,11 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CElement\Element\FormInput;
 
-/**
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Mar 24, 2019, 1:54:36 AM
- */
-class CElement_FormInput_Radio extends CElement_FormInput {
+use Cresenity\Laravel\CElement\FormInput;
+
+class CElement_FormInput_Radio extends CElement_FormInput
+{
     use CTrait_Compat_Element_FormInput_Radio,
         CTrait_Element_Property_Label;
 
@@ -21,7 +18,8 @@ class CElement_FormInput_Radio extends CElement_FormInput {
 
     protected $inline;
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         parent::__construct($id);
 
         $this->type = 'radio';
@@ -36,34 +34,40 @@ class CElement_FormInput_Radio extends CElement_FormInput {
         }
     }
 
-    public static function factory($id = null) {
+    public static function factory($id = null)
+    {
         /** @phpstan-ignore-next-line */
         return new static($id);
     }
 
-    public function setChecked($bool = true) {
+    public function setChecked($bool = true)
+    {
         $this->checked = $bool;
 
         return $this;
     }
 
-    public function setLabelWrap($bool) {
+    public function setLabelWrap($bool)
+    {
         $this->label_wrap = $bool;
 
         return $this;
     }
 
-    public function getInline() {
+    public function getInline()
+    {
         return $this->inline;
     }
 
-    public function setInline($inline) {
+    public function setInline($inline)
+    {
         $this->inline = $inline;
 
         return $this;
     }
 
-    public function html($indent = 0) {
+    public function html($indent = 0)
+    {
         $html = new CStringBuilder();
         $html->setIndent($indent);
         $disabled = '';
@@ -112,7 +116,8 @@ class CElement_FormInput_Radio extends CElement_FormInput {
         return $html->text();
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         $js = new CStringBuilder();
         $js->setIndent($indent);
         $js->append(parent::js($indent))->br();

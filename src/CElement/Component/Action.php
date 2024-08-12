@@ -1,17 +1,15 @@
 <?php
+namespace Cresenity\Laravel\CElement\Component;
 
-defined('SYSPATH') or die('No direct access allowed.');
+use Cresenity\Laravel\CElement\Component;
+use Cresenity\Laravel\CElement\Traits\Property\IconPropertyTrait;
+use Cresenity\Laravel\CElement\Traits\Property\LabelPropertyTrait;
+use Cresenity\Laravel\CStringBuilder;
 
-/**
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since May 12, 2018, 9:08:07 PM
- */
-class CElement_Component_Action extends CElement_Component {
-    use CTrait_Compat_Element_Action,
-        CTrait_Element_Property_Label,
-        CTrait_Element_Property_Icon;
+class Action extends Component
+{
+    use LabelPropertyTrait,
+        IconPropertyTrait;
 
     protected $jsfunc;
 
@@ -66,7 +64,8 @@ class CElement_Component_Action extends CElement_Component {
      */
     protected $name;
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         parent::__construct($id);
         $this->name = $this->id;
         $this->tag = 'a';
@@ -91,7 +90,8 @@ class CElement_Component_Action extends CElement_Component {
         $this->isActive = false;
     }
 
-    public static function factory($id = null) {
+    public static function factory($id = null)
+    {
         // @phpstan-ignore-next-line
         return new static($id);
     }
@@ -101,7 +101,8 @@ class CElement_Component_Action extends CElement_Component {
      *
      * @return $this
      */
-    public function setConfirm($bool = true) {
+    public function setConfirm($bool = true)
+    {
         if (is_string($bool)) {
             $this->setConfirmMessage($bool);
             $this->confirm = true;
@@ -118,19 +119,22 @@ class CElement_Component_Action extends CElement_Component {
      *
      * @return $this
      */
-    public function setConfirmMessage($message) {
+    public function setConfirmMessage($message)
+    {
         $this->confirmMessage = $message;
 
         return $this;
     }
 
-    public function setJsParam($jsparam) {
+    public function setJsParam($jsparam)
+    {
         $this->jsparam = $jsparam;
 
         return $this;
     }
 
-    public function setLink($link) {
+    public function setLink($link)
+    {
         $this->type = 'link';
         $this->link = $link;
 
@@ -142,19 +146,22 @@ class CElement_Component_Action extends CElement_Component {
      *
      * @return $this
      */
-    public function setActive($bool = true) {
+    public function setActive($bool = true)
+    {
         $this->isActive = true;
 
         return $this;
     }
 
-    public function setLinkTarget($linkTarget) {
+    public function setLinkTarget($linkTarget)
+    {
         $this->linkTarget = $linkTarget;
 
         return $this;
     }
 
-    public function setSubmit($bool = true) {
+    public function setSubmit($bool = true)
+    {
         $this->submit = $bool;
 
         return $this;
@@ -165,7 +172,8 @@ class CElement_Component_Action extends CElement_Component {
      *
      * @return $this
      */
-    public function setSubmitValue($value) {
+    public function setSubmitValue($value)
+    {
         $this->submitValue = $value;
 
         return $this;
@@ -176,7 +184,8 @@ class CElement_Component_Action extends CElement_Component {
      *
      * @return $this
      */
-    public function setName($name) {
+    public function setName($name)
+    {
         $this->name = $name;
 
         return $this;
@@ -188,7 +197,8 @@ class CElement_Component_Action extends CElement_Component {
      *
      * @return $this
      */
-    public function setSubmitTo($url, $target = '') {
+    public function setSubmitTo($url, $target = '')
+    {
         $this->submitTo = $url;
 
         if (strlen($target) > 0) {
@@ -203,13 +213,15 @@ class CElement_Component_Action extends CElement_Component {
      *
      * @return $this
      */
-    public function setDisabled($bool = true) {
+    public function setDisabled($bool = true)
+    {
         $this->disabled = $bool;
 
         return $this;
     }
 
-    protected function renderAsInput() {
+    protected function renderAsInput()
+    {
         $renderAsInput = false;
         if ($this->submit) {
             $renderAsInput = true;
@@ -218,7 +230,8 @@ class CElement_Component_Action extends CElement_Component {
         return $renderAsInput;
     }
 
-    public function reassignConfirm() {
+    public function reassignConfirm()
+    {
         if ($this->confirm) {
             //we check the listener
             if (count($this->listeners) > 0) {
@@ -230,7 +243,8 @@ class CElement_Component_Action extends CElement_Component {
         }
     }
 
-    public function toArray() {
+    public function toArray()
+    {
         $data = [];
 
         $data = array_merge_recursive($data, parent::toArray());
@@ -248,7 +262,8 @@ class CElement_Component_Action extends CElement_Component {
         return $data;
     }
 
-    protected function buildLink($link) {
+    protected function buildLink($link)
+    {
         $jsparam = $this->jsparam;
         $param = '';
         $i = 0;
@@ -275,7 +290,8 @@ class CElement_Component_Action extends CElement_Component {
         return $link;
     }
 
-    public function getSubmitValue() {
+    public function getSubmitValue()
+    {
         return $this->submitValue ?: $this->label;
     }
 
@@ -311,7 +327,8 @@ class CElement_Component_Action extends CElement_Component {
      *
      * @return string
      */
-    public function html($indent = 0) {
+    public function html($indent = 0)
+    {
         $html = new CStringBuilder();
         $html->setIndent($indent);
 
@@ -351,10 +368,10 @@ class CElement_Component_Action extends CElement_Component {
 
         if ($this->style == 'btn-icon-group' && strlen($this->label) > 0) {
             $add_class .= ' tip-top';
-            $add_attr .= ' data-original-title="' . c::e($this->label) . '"';
+            $add_attr .= ' data-original-title="' . \c::e($this->label) . '"';
         }
         if (strlen($this->confirmMessage) > 0) {
-            $add_attr .= ' data-confirm-message="' . c::e($this->confirmMessage) . '"';
+            $add_attr .= ' data-confirm-message="' . \c::e($this->confirmMessage) . '"';
         }
 
         if ($this->renderAsInput()) {
@@ -426,7 +443,8 @@ class CElement_Component_Action extends CElement_Component {
      *
      * @return string
      */
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         $js = new CStringBuilder();
         $js->setIndent($indent);
 

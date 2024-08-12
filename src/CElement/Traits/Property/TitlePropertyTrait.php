@@ -18,7 +18,7 @@ trait TitlePropertyTrait
     {
         $this->rawTitle = $title;
         if ($lang !== false) {
-            $title = c::__($title, is_array($lang) ? $lang : []);
+            $title = \c::__($title, is_array($lang) ? $lang : []);
         }
         $this->title = $title;
 

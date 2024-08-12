@@ -1,10 +1,10 @@
 <?php
+namespace Cresenity\Laravel\CElement\Component\Blockly;
 
-use CElement_Component_Blockly_BlockHelper as BlockHelper;
-use CElement_Component_Blockly_CategoryHelper as CategoryHelper;
-
-class CElement_Component_Blockly_ToolboxHelper {
-    public static function getAllCategoryData() {
+class ToolboxHelper
+{
+    public static function getAllCategoryData()
+    {
         $cats = [];
         //LOGIC
         $cats[CategoryHelper::CATEGORY_LOGIC] = [];

@@ -1,10 +1,15 @@
 <?php
+namespace Cresenity\Laravel\CElement\Component;
 
-class CElement_Component_Alert extends CElement_Component {
-    use CTrait_Element_Property_Title;
+use Cresenity\Laravel\CElement\Component;
+use Cresenity\Laravel\CElement\Traits\Property\TitlePropertyTrait;
+
+class Alert extends Component
+{
+    use TitlePropertyTrait;
 
     /**
-     * @var CElement_Element_H4
+     * @var \Cresenity\Laravel\CElement\Element\H4
      */
     protected $header;
 
@@ -19,7 +24,8 @@ class CElement_Component_Alert extends CElement_Component {
      */
     protected $dismissableButton;
 
-    public function __construct($id = '', $tag = 'div') {
+    public function __construct($id = '', $tag = 'div')
+    {
         parent::__construct($id, $tag);
         $this->dismissableButton = $this->addButton()->addClass('btn-close close')->setAttr([
             'data-dismiss' => 'alert',
@@ -39,7 +45,8 @@ class CElement_Component_Alert extends CElement_Component {
      *
      * @return $this
      */
-    public function setType($type) {
+    public function setType($type)
+    {
         $this->type = $type;
 
         return $this;
@@ -48,35 +55,40 @@ class CElement_Component_Alert extends CElement_Component {
     /**
      * @return $this
      */
-    public function setTypeDanger() {
+    public function setTypeDanger()
+    {
         return $this->setType('error');
     }
 
     /**
      * @return $this
      */
-    public function setTypeError() {
+    public function setTypeError()
+    {
         return $this->setType('error');
     }
 
     /**
      * @return $this
      */
-    public function setTypeSuccess() {
+    public function setTypeSuccess()
+    {
         return $this->setType('success');
     }
 
     /**
      * @return $this
      */
-    public function setTypeWarning() {
+    public function setTypeWarning()
+    {
         return $this->setType('warning');
     }
 
     /**
      * @return $this
      */
-    public function setTypeInfo() {
+    public function setTypeInfo()
+    {
         return $this->setType('info');
     }
 
@@ -85,13 +97,15 @@ class CElement_Component_Alert extends CElement_Component {
      *
      * @return $this
      */
-    public function setDismissable($bool = true) {
+    public function setDismissable($bool = true)
+    {
         $this->isDismissable = $bool;
 
         return $this;
     }
 
-    public function build() {
+    public function build()
+    {
         if (strlen($this->title) == 0) {
             $this->header->setVisibility(false);
         }

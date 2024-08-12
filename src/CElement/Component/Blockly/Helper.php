@@ -1,9 +1,14 @@
 <?php
+namespace Cresenity\Laravel\CElement\Component\Blockly;
 
-class CElement_Component_Blockly_Helper {
-    public static function buildDefaultXmlForFunction($functionName, $arguments = [], $options = []) {
-        $x = carr::get($options, 'x', 70);
-        $y = carr::get($options, 'y', 70);
+use Illuminate\Support\Arr;
+
+class Helper
+{
+    public static function buildDefaultXmlForFunction($functionName, $arguments = [], $options = [])
+    {
+        $x = Arr::get($options, 'x', 70);
+        $y = Arr::get($options, 'y', 70);
 
         $openXml = '<xml xmlns="https://developers.google.com/blockly/xml">';
         $closeXml = '</xml>';

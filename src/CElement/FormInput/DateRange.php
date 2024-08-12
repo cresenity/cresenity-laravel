@@ -1,14 +1,13 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CElement\Element\FormInput;
 
-/**
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Nov 30, 2018, 4:32:01 PM
- */
-class CElement_FormInput_DateRange extends CElement_FormInput {
+use Cresenity\Laravel\CElement\FormInput;
+use Cresenity\Laravel\CManager;
+use Cresenity\Laravel\CStringBuilder;
+
+class DateRange extends FormInput
+{
     protected $dateFormat;
 
     protected $dateStart;
@@ -17,7 +16,8 @@ class CElement_FormInput_DateRange extends CElement_FormInput {
 
     protected $haveButton;
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         parent::__construct($id);
 
         if (CManager::isRegisteredModule('bootstrap-4-material')) {
@@ -30,7 +30,7 @@ class CElement_FormInput_DateRange extends CElement_FormInput {
 
         $this->type = 'date';
         $this->dateFormat = 'yyyy-mm-dd';
-        $dateFormat = c::formatter()->getDateFormat();
+        $dateFormat = \c::formatter()->getDateFormat();
         if ($dateFormat != null) {
             $dateFormat = str_replace('Y', 'yyyy', $dateFormat);
             $dateFormat = str_replace('m', 'mm', $dateFormat);
@@ -41,25 +41,29 @@ class CElement_FormInput_DateRange extends CElement_FormInput {
         $this->addClass('form-control');
     }
 
-    public function setHaveButton($boolean) {
+    public function setHaveButton($boolean)
+    {
         $this->haveButton = $boolean;
 
         return $this;
     }
 
-    public function setValueStart($dateStart) {
+    public function setValueStart($dateStart)
+    {
         $this->dateStart = $dateStart;
 
         return $this;
     }
 
-    public function setValueEnd($dateEnd) {
+    public function setValueEnd($dateEnd)
+    {
         $this->dateEnd = $dateEnd;
 
         return $this;
     }
 
-    public function html($indent = 0) {
+    public function html($indent = 0)
+    {
         $html = new CStringBuilder();
         $html->setIndent($indent);
         $disabled = '';
@@ -92,7 +96,8 @@ class CElement_FormInput_DateRange extends CElement_FormInput {
         return $html->text();
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         $option = '';
 
         $autoclose = 'true';

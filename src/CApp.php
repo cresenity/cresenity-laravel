@@ -8,6 +8,7 @@ use Cresenity\Laravel\CApp\Concern\RendererTrait;
 use Cresenity\Laravel\CApp\Concern\TitleTrait;
 use Cresenity\Laravel\CApp\Concern\ViewTrait;
 use Cresenity\Laravel\CApp\Element as AppElement;
+use Cresenity\Laravel\CApp\Message;
 use Cresenity\Laravel\CApp\Notification;
 use Cresenity\Laravel\CApp\SEO;
 use Illuminate\Contracts\Support\Jsonable;
@@ -111,7 +112,7 @@ final class CApp implements Responsable, IlluminateRenderable, Jsonable
         $message = '';
         $messageOrig = '';
         if (!$this->keepMessage) {
-            $messageOrig = CApp_Message::flashAll();
+            $messageOrig = Message::flashAll();
             if ($this->renderMessage) {
                 $message = $messageOrig;
             }

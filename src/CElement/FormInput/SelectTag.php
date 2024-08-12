@@ -1,24 +1,23 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CElement\Element\FormInput;
 
-/**
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Sep 14, 2018, 3:50:56 PM
- */
-class CElement_FormInput_SelectTag extends CElement_FormInput {
+use Cresenity\Laravel\CElement\FormInput;
+
+class CElement_FormInput_SelectTag extends CElement_FormInput
+{
     use CTrait_Compat_Element_FormInput_SelectTag;
 
     protected $multiple;
 
-    public function __construct($id = null) {
+    public function __construct($id = null)
+    {
         parent::__construct($id);
         $this->multiple = true;
     }
 
-    public function html($indent = 0) {
+    public function html($indent = 0)
+    {
         if (CManager::instance()->isRegisteredModule('bootstrap-4-material') || CManager::instance()->isRegisteredModule('bootstrap-4')) {
             $html = new CStringBuilder();
             $html->setIndent($indent);
@@ -111,7 +110,8 @@ class CElement_FormInput_SelectTag extends CElement_FormInput {
         return $html->text();
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         if (CManager::instance()->isRegisteredModule('bootstrap-4-material') || CManager::instance()->isRegisteredModule('bootstrap-4')) {
             $js = "
                 $('#" . $this->id . "').select2({

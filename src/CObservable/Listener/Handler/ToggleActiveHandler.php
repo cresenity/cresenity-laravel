@@ -1,16 +1,15 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CObservable\Listener\Handler;
 
-/**
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Apr 20, 2019, 3:44:27 PM
- */
-class CObservable_Listener_Handler_ToggleActiveHandler extends CObservable_Listener_Handler {
-    use CObservable_Listener_Handler_Trait_TargetHandlerTrait;
-    use CObservable_Listener_Handler_Trait_SelectorHandlerTrait;
+use Cresenity\Laravel\CObservable\Listener\Handler;
+use Cresenity\Laravel\CObservable\Listener\Handler\Traits\SelectorHandlerTrait;
+use Cresenity\Laravel\CObservable\Listener\Handler\Traits\TargetHandlerTrait;
+
+class ToggleActiveHandler extends Handler
+{
+    use TargetHandlerTrait;
+    use SelectorHandlerTrait;
 
     /**
      * @var string
@@ -22,7 +21,8 @@ class CObservable_Listener_Handler_ToggleActiveHandler extends CObservable_Liste
      */
     protected $toggleClass;
 
-    public function __construct($listener) {
+    public function __construct($listener)
+    {
         parent::__construct($listener);
         $this->target = $this->owner;
         $this->name = 'ToggleActive';
@@ -30,19 +30,22 @@ class CObservable_Listener_Handler_ToggleActiveHandler extends CObservable_Liste
         $this->toggleClass = 'active';
     }
 
-    public function setItemsSelector($selector) {
+    public function setItemsSelector($selector)
+    {
         $this->itemsSelector = $selector;
 
         return $this;
     }
 
-    public function setToggleClass($class) {
+    public function setToggleClass($class)
+    {
         $this->toggleClass = $class;
 
         return $this;
     }
 
-    public function js() {
+    public function js()
+    {
         $js = '';
 
         if ($this->itemsSelector) {

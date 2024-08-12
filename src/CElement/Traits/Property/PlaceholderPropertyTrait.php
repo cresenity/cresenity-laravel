@@ -2,7 +2,7 @@
 
 namespace Cresenity\Laravel\CElement\Traits\Property;
 
-trait Placeholder
+trait PlaceholderPropertyTrait
 {
     /**
      * @var string

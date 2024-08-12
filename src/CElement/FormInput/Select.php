@@ -1,14 +1,11 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CElement\Element\FormInput;
 
-/**
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Jun 3, 2018, 2:52:36 PM
- */
-class CElement_FormInput_Select extends CElement_FormInput {
+use Cresenity\Laravel\CElement\FormInput;
+
+class CElement_FormInput_Select extends CElement_FormInput
+{
     use CTrait_Compat_Element_FormInput_Select;
     use CTrait_Element_Property_ApplyJs;
     use CTrait_Element_Property_DependsOn;
@@ -28,7 +25,8 @@ class CElement_FormInput_Select extends CElement_FormInput {
 
     protected $isOptionHtml;
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         parent::__construct($id);
 
         $this->dropdown_classes = [];
@@ -44,30 +42,35 @@ class CElement_FormInput_Select extends CElement_FormInput {
         $this->addClass('form-control select');
     }
 
-    public static function factory($id = null) {
+    public static function factory($id = null)
+    {
         /** @phpstan-ignore-next-line */
         return new static($id);
     }
 
-    public function setMultiple($bool = true) {
+    public function setMultiple($bool = true)
+    {
         $this->multiple = $bool;
 
         return $this;
     }
 
-    public function setMaximumSelectionLength($length) {
+    public function setMaximumSelectionLength($length)
+    {
         $this->maximumSelectionLength = $length;
 
         return $this;
     }
 
-    public function setIsOptionHtml($bool = true) {
+    public function setIsOptionHtml($bool = true)
+    {
         $this->isOptionHtml = $bool;
 
         return $this;
     }
 
-    public function toArray() {
+    public function toArray()
+    {
         $data = [];
         $data = array_merge_recursive($data, parent::toArray());
         if ($this->multiple) {
@@ -101,12 +104,14 @@ class CElement_FormInput_Select extends CElement_FormInput {
         return $data;
     }
 
-    protected function build() {
+    protected function build()
+    {
         parent::build();
         $this->addClass('form-control');
     }
 
-    public function html($indent = 0) {
+    public function html($indent = 0)
+    {
         parent::html($indent);
         $html = new CStringBuilder();
         $html->setIndent($indent);
@@ -204,7 +209,8 @@ class CElement_FormInput_Select extends CElement_FormInput {
         return $html->text();
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         $js = new CStringBuilder();
         $js->setIndent($indent);
         $js->append(parent::js($indent))->br();
@@ -320,7 +326,8 @@ class CElement_FormInput_Select extends CElement_FormInput {
         return $js->text();
     }
 
-    public function setHideSearch($bool) {
+    public function setHideSearch($bool)
+    {
         $this->hide_search = $bool;
 
         return $this;

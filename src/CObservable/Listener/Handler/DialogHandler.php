@@ -2,6 +2,8 @@
 
 namespace Cresenity\Laravel\CObservable\Listener\Handler;
 
+use Cresenity\Laravel\CElement\ElementList\ActionList;
+use Cresenity\Laravel\CElement\Traits\Property\TitlePropertyTrait;
 use Cresenity\Laravel\CObservable\HandlerElement;
 use Cresenity\Laravel\CObservable\Listener\Handler;
 use Cresenity\Laravel\CObservable\Listener\Handler\Traits\AjaxHandlerTrait;
@@ -13,7 +15,7 @@ class DialogHandler extends Handler
     use AjaxHandlerTrait,
         TargetHandlerTrait,
         CloseHandlerTrait,
-        CTrait_Element_Property_Title;
+        TitlePropertyTrait;
 
     protected $content;
 
@@ -39,13 +41,13 @@ class DialogHandler extends Handler
         $this->name = 'Dialog';
         $this->method = 'get';
         $this->target = '';
-        $this->content = CHandlerElement::factory();
-        $this->actions = CElement_List_ActionList::factory();
+        $this->content = HandlerElement::factory();
+        $this->actions = ActionList::factory();
         $this->param_inputs = [];
         $this->param_request = [];
         $this->title = 'Detail';
-        $this->js_class = null;
-        $this->js_class_manual = null;
+        // $this->js_class = null;
+        // $this->js_class_manual = null;
     }
 
     public function setSidebar($bool = true)
@@ -163,14 +165,15 @@ class DialogHandler extends Handler
 
         $jsOptions .= '}';
 
-        $js_class = ccfg::get('js_class');
-        if (strlen($js_class) > 0) {
-            $this->js_class = $js_class;
-        }
-        if ($this->js_class_manual != null) {
-            $this->js_class = $this->js_class_manual;
-        }
-        if (strlen($this->js_class) > 0 && $this->js_class != 'cresenity') {
+        $js_class = '';
+        // $js_class = ccfg::get('js_class');
+        // if (strlen($js_class) > 0) {
+        //     $this->js_class = $js_class;
+        // }
+        // if ($this->js_class_manual != null) {
+        //     $this->js_class = $this->js_class_manual;
+        // }
+        if (strlen($js_class) > 0 && $js_class != 'cresenity') {
             if ($this->content instanceof HandlerElement) {
                 $content = $this->content->html();
             } else {
@@ -182,7 +185,7 @@ class DialogHandler extends Handler
                 $content = $this->generatedUrl();
             }
             $js .= '
-                $.' . $this->js_class . ".show_dialog('" . $this->target . "','" . $this->title . "','" . $content . "');
+                $.' . $js_class . ".show_dialog('" . $this->target . "','" . $this->title . "','" . $content . "');
             ";
         } else {
             $js .= 'cresenity.modal(' . $jsOptions . ');';

@@ -1,16 +1,14 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CElement\Element\FormInput;
 
-/**
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Jun 24, 2018, 6:55:42 PM
- */
-class CElement_FormInput_Image extends CElement_FormInput {
-    use CElement_Trait_UseViewTrait,
-        CTrait_Compat_Element_FormInput_Image;
+use Cresenity\Laravel\CElement\FormInput;
+use Cresenity\Laravel\CElement\Traits\UseViewTrait;
+
+class Image extends FormInput
+{
+    use UseViewTrait;
+
 
     protected $imgSrc;
 
@@ -24,7 +22,8 @@ class CElement_FormInput_Image extends CElement_FormInput {
 
     protected $labels = [];
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         parent::__construct($id);
         $this->type = 'image';
         $this->tag = 'div';
@@ -54,7 +53,8 @@ class CElement_FormInput_Image extends CElement_FormInput {
      *
      * @return $this
      */
-    public function setImgSrc($imgsrc) {
+    public function setImgSrc($imgsrc)
+    {
         $this->imgSrc = $imgsrc;
 
         return $this;
@@ -65,7 +65,8 @@ class CElement_FormInput_Image extends CElement_FormInput {
      *
      * @return $this
      */
-    public function setMaxWidth($maxwidth) {
+    public function setMaxWidth($maxwidth)
+    {
         $this->maxWidth = $maxwidth;
 
         return $this;
@@ -76,7 +77,8 @@ class CElement_FormInput_Image extends CElement_FormInput {
      *
      * @return $this
      */
-    public function setMaxHeight($maxheight) {
+    public function setMaxHeight($maxheight)
+    {
         $this->maxHeight = $maxheight;
 
         return $this;
@@ -87,7 +89,8 @@ class CElement_FormInput_Image extends CElement_FormInput {
      *
      * @return $this
      */
-    public function setAccept($accept) {
+    public function setAccept($accept)
+    {
         $this->accept = $accept;
 
         return $this;
@@ -98,20 +101,23 @@ class CElement_FormInput_Image extends CElement_FormInput {
      *
      * @return $this
      */
-    public function setDisabledUpload($bool) {
+    public function setDisabledUpload($bool)
+    {
         $this->disabledUpload = $bool;
 
         return $this;
     }
 
-    public function html($indent = 0) {
+    public function html($indent = 0)
+    {
         $templateHtml = $this->getViewHtml();
         $html = $templateHtml;
 
         return $html;
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         $templateJs = $this->getViewJs();
         $js = $templateJs;
 

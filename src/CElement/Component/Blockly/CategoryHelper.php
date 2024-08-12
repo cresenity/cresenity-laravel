@@ -1,8 +1,11 @@
 <?php
+namespace Cresenity\Laravel\CElement\Component\Blockly;
 
-use CElement_Component_Blockly_BlockHelper as BlockHelper;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
-class CElement_Component_Blockly_CategoryHelper {
+class CategoryHelper
+{
     const CATEGORY_MATH = 'math';
 
     const CATEGORY_LOOPS = 'loops';
@@ -33,16 +36,17 @@ class CElement_Component_Blockly_CategoryHelper {
         'variablesDynamic' => '310',
     ];
 
-    public static function renderCategory($category, $blocksArray) {
-        $blockXml = carr::reduce($blocksArray, function ($output, $block) {
+    public static function renderCategory($category, $blocksArray)
+    {
+        $blockXml = \c::collect($blocksArray)->reduce(function ($output, $block) {
             try {
                 return $output . BlockHelper::renderBlock($block);
-            } catch (Exception $ex) {
+            } catch (\Exception $ex) {
                 return $output;
             }
         }, '');
-        $categoryName = ucwords(str_replace('_', '_', cstr::snake($category)));
-        $categoryHue = carr::get(static::$categoryHue, strtolower($category), '230');
+        $categoryName = ucwords(str_replace('_', '_', Str::snake($category)));
+        $categoryHue = Arr::get(static::$categoryHue, strtolower($category), '230');
         $categoryOpen = '<category name="' . $categoryName . '" colour="' . $categoryHue . '">';
         $categoryClose = '</category>';
 

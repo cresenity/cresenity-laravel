@@ -2,6 +2,9 @@
 namespace Cresenity\Laravel\CApp\Concern;
 
 use Cresenity\Laravel\CApp\Blade\Directive;
+use Cresenity\Laravel\CElement\Element\FormInput\Number;
+use Cresenity\Laravel\CElement\Element\FormInput\Text;
+use Cresenity\Laravel\CElement\Element\FormInput\Textarea;
 use Cresenity\Laravel\CManager;
 use Cresenity\Laravel\CView;
 
@@ -44,9 +47,9 @@ trait BootstrapTrait
             // CFBenchmark::start('CApp.RegisterControl');
             $manager = CManager::instance();
             $manager->registerControls([
-                'text' => CElement_FormInput_Text::class,
-                'textarea' => CElement_FormInput_Textarea::class,
-                'number' => CElement_FormInput_Number::class,
+                'text' => Text::class,
+                'textarea' => Textarea::class,
+                'number' => Number::class,
                 'email' => CElement_FormInput_Email::class,
                 'datepicker' => CElement_FormInput_Date::class,
                 'date' => CElement_FormInput_Date::class,

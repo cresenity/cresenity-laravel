@@ -1,23 +1,23 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CObservable\Listener\Handler;
 
-/**
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Apr 20, 2019, 3:44:20 PM
- */
-class CObservable_Listener_Handler_EmptyHandler extends CObservable_Listener_Handler {
-    use CObservable_Listener_Handler_Trait_TargetHandlerTrait;
+use Cresenity\Laravel\CObservable\Listener\Handler;
+use Cresenity\Laravel\CObservable\Listener\Handler\Traits\TargetHandlerTrait;
 
-    public function __construct($listener) {
+class EmptyHandler extends Handler
+{
+    use TargetHandlerTrait;
+
+    public function __construct($listener)
+    {
         parent::__construct($listener);
 
         $this->name = 'Empty';
     }
 
-    public function js() {
+    public function js()
+    {
         $js = '';
 
         $js .= "

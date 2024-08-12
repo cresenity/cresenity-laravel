@@ -281,7 +281,7 @@ trait ComponentTrait
      */
     public function addProgressBar($id = null)
     {
-        return c::tap(new CElement_Component_ProgressBar($id), function (CElement_Component_ProgressBar $el) {
+        return \c::tap(new CElement_Component_ProgressBar($id), function (CElement_Component_ProgressBar $el) {
             $this->wrapper->add($el);
         });
     }
@@ -293,7 +293,7 @@ trait ComponentTrait
      */
     public function addImage($id = null)
     {
-        return c::tap(new CElement_Component_Image($id), function (CElement_Component_Image $el) {
+        return \c::tap(new CElement_Component_Image($id), function (CElement_Component_Image $el) {
             $this->wrapper->add($el);
         });
     }
@@ -305,7 +305,7 @@ trait ComponentTrait
      */
     public function addValueMetric($id = null)
     {
-        return c::tap(new CElement_Component_Metric_ValueMetric($id), function (CElement_Component_Metric_ValueMetric $el) {
+        return \c::tap(new CElement_Component_Metric_ValueMetric($id), function (CElement_Component_Metric_ValueMetric $el) {
             $this->wrapper->add($el);
         });
     }

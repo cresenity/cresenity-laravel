@@ -1,14 +1,11 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CElement\Element\FormInput;
 
-/**
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Jun 15, 2018, 12:00:39 AM
- */
-class CElement_FormInput_SelectSearch extends CElement_FormInput {
+use Cresenity\Laravel\CElement\FormInput;
+
+class CElement_FormInput_SelectSearch extends CElement_FormInput
+{
     use CTrait_Compat_Element_FormInput_SelectSearch;
     use CElement_FormInput_SelectSearch_Trait_Select2v23Trait;
     use CTrait_Element_Property_ApplyJs;
@@ -54,7 +51,8 @@ class CElement_FormInput_SelectSearch extends CElement_FormInput {
 
     protected $perPage;
 
-    public function __construct($id = null) {
+    public function __construct($id = null)
+    {
         parent::__construct($id);
         $this->dropdownClasses = [];
         $this->type = 'selectsearch';
@@ -82,16 +80,19 @@ class CElement_FormInput_SelectSearch extends CElement_FormInput {
         $this->language = $language;
     }
 
-    public static function factory($id = null) {
+    public static function factory($id = null)
+    {
         /** @phpstan-ignore-next-line */
         return new static($id);
     }
 
-    public function setQueryResolver(Closure $resolver) {
+    public function setQueryResolver(Closure $resolver)
+    {
         $this->queryResolver = CFunction::serializeClosure($resolver);
     }
 
-    public function query() {
+    public function query()
+    {
         if ($this->queryResolver != null) {
             return $this->queryResolver->__invoke($this->query);
         }
@@ -105,7 +106,8 @@ class CElement_FormInput_SelectSearch extends CElement_FormInput {
      *
      * @return $this
      */
-    public function setValueCallback(callable $callback, $require = '') {
+    public function setValueCallback(callable $callback, $require = '')
+    {
         $this->valueCallback = $callback;
         if (strlen($require) > 0) {
             $this->requires[] = $require;
@@ -119,7 +121,8 @@ class CElement_FormInput_SelectSearch extends CElement_FormInput {
      *
      * @return $this
      */
-    public function setMultiple($bool = true) {
+    public function setMultiple($bool = true)
+    {
         $this->multiple = $bool;
 
         return $this;
@@ -132,7 +135,8 @@ class CElement_FormInput_SelectSearch extends CElement_FormInput {
      *
      * @return $this
      */
-    public function setDelay($val) {
+    public function setDelay($val)
+    {
         $this->delay = $val;
 
         return $this;
@@ -145,7 +149,8 @@ class CElement_FormInput_SelectSearch extends CElement_FormInput {
      *
      * @return $this
      */
-    public function setPerPage($perPage) {
+    public function setPerPage($perPage)
+    {
         $this->perPage = $perPage;
 
         return $this;
@@ -156,7 +161,8 @@ class CElement_FormInput_SelectSearch extends CElement_FormInput {
      *
      * @return $this
      */
-    public function setAutoSelect($bool = true) {
+    public function setAutoSelect($bool = true)
+    {
         $this->autoSelect = $bool;
 
         return $this;
@@ -167,7 +173,8 @@ class CElement_FormInput_SelectSearch extends CElement_FormInput {
      *
      * @return $this
      */
-    public function setMinInputLength($minInputLength) {
+    public function setMinInputLength($minInputLength)
+    {
         $this->minInputLength = $minInputLength;
 
         return $this;
@@ -178,7 +185,8 @@ class CElement_FormInput_SelectSearch extends CElement_FormInput {
      *
      * @return $this
      */
-    public function setKeyField($keyField) {
+    public function setKeyField($keyField)
+    {
         $this->keyField = $keyField;
 
         return $this;
@@ -189,7 +197,8 @@ class CElement_FormInput_SelectSearch extends CElement_FormInput {
      *
      * @return $this
      */
-    public function setSearchField($searchField) {
+    public function setSearchField($searchField)
+    {
         $searchField = carr::wrap($searchField);
         $this->searchField = $searchField;
 
@@ -203,13 +212,15 @@ class CElement_FormInput_SelectSearch extends CElement_FormInput {
         return $this;
     }
 
-    public function setPrependData(array $data) {
+    public function setPrependData(array $data)
+    {
         $this->prependData = $data;
 
         return $this;
     }
 
-    public function prependRow(array $row) {
+    public function prependRow(array $row)
+    {
         $this->prependData[] = $row;
 
         return $this;
@@ -220,13 +231,15 @@ class CElement_FormInput_SelectSearch extends CElement_FormInput {
      *
      * @return $this
      */
-    public function setQuery($query) {
+    public function setQuery($query)
+    {
         $this->query = $query;
 
         return $this;
     }
 
-    public function setFormat($fmt) {
+    public function setFormat($fmt)
+    {
         $this->setFormatResult($fmt);
         $this->setFormatSelection($fmt);
 
@@ -238,7 +251,8 @@ class CElement_FormInput_SelectSearch extends CElement_FormInput {
      *
      * @return $this
      */
-    public function setFormatResult($fmt) {
+    public function setFormatResult($fmt)
+    {
         if ($fmt instanceof Closure) {
             $fmt = CFunction::serializeClosure($fmt);
         }
@@ -252,7 +266,8 @@ class CElement_FormInput_SelectSearch extends CElement_FormInput {
      *
      * @return $this
      */
-    public function setFormatSelection($fmt) {
+    public function setFormatSelection($fmt)
+    {
         if ($fmt instanceof Closure) {
             $fmt = CFunction::serializeClosure($fmt);
         }
@@ -261,7 +276,8 @@ class CElement_FormInput_SelectSearch extends CElement_FormInput {
         return $this;
     }
 
-    public function addDropdownClass($c) {
+    public function addDropdownClass($c)
+    {
         if (is_array($c)) {
             $this->dropdownClasses = array_merge($c, $this->dropdownClasses);
         } else {
@@ -277,7 +293,8 @@ class CElement_FormInput_SelectSearch extends CElement_FormInput {
      *
      * @return $this
      */
-    public function setDataFromModel($model, $queryCallback = null) {
+    public function setDataFromModel($model, $queryCallback = null)
+    {
         $this->dataProvider = CManager::createModelDataProvider($model, $queryCallback);
 
         return $this;
@@ -288,19 +305,22 @@ class CElement_FormInput_SelectSearch extends CElement_FormInput {
      *
      * @return $this
      */
-    public function setDataFromClosure($closure) {
+    public function setDataFromClosure($closure)
+    {
         $this->dataProvider = CManager::createClosureDataProvider($closure);
 
         return $this;
     }
 
-    public function setAllowClear($bool = true) {
+    public function setAllowClear($bool = true)
+    {
         $this->allowClear = $bool;
 
         return $this;
     }
 
-    public function createAjaxUrl() {
+    public function createAjaxUrl()
+    {
         $ajaxMethod = CAjax::createMethod();
         $ajaxMethod->setType(CAjax::TYPE_SELECT_SEARCH);
         $ajaxMethod->setData('query', $this->query);
@@ -321,7 +341,8 @@ class CElement_FormInput_SelectSearch extends CElement_FormInput {
         return $ajaxUrl;
     }
 
-    private function generateSelect2Template($template) {
+    private function generateSelect2Template($template)
+    {
         //escape the character
         $template = str_replace("'", "\'", $template);
         preg_match_all("/{([\w]*)}/", $template, $matches, PREG_SET_ORDER);
@@ -337,7 +358,8 @@ class CElement_FormInput_SelectSearch extends CElement_FormInput {
         return $template;
     }
 
-    protected function getSelectedRow() {
+    protected function getSelectedRow()
+    {
         if ($this->autoSelect || $this->value != null) {
             $value = null;
             if ($this->autoSelect && $this->value === null) {
@@ -400,14 +422,16 @@ class CElement_FormInput_SelectSearch extends CElement_FormInput {
         return null;
     }
 
-    public function modelToSelect2Array(CModel $model) {
+    public function modelToSelect2Array(CModel $model)
+    {
         $itemArray = $model->toArray();
         $itemArray['id'] = $model->getKey();
 
         return $itemArray;
     }
 
-    public function html($indent = 0) {
+    public function html($indent = 0)
+    {
         //call parent to trigger build
 
         parent::html($indent);
@@ -503,7 +527,8 @@ class CElement_FormInput_SelectSearch extends CElement_FormInput {
         return $html->text();
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         if ($this->applyJs == 'select2v2.3') {
             return $this->jsSelect2v23($indent);
         }

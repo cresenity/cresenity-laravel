@@ -2,6 +2,8 @@
 namespace Cresenity\Laravel\CManager;
 
 use Cresenity\Laravel\CF;
+use Cresenity\Laravel\CFile;
+use Illuminate\Support\Arr;
 
 class Theme
 {
@@ -78,9 +80,9 @@ class Theme
     public static function getData($key, $default = null)
     {
         $themeAllData = self::getThemeData();
-        $themeData = carr::get($themeAllData, 'data', $default);
+        $themeData = Arr::get($themeAllData, 'data', $default);
 
-        return carr::get($themeData, $key, $default);
+        return Arr::get($themeData, $key, $default);
     }
 
     /**
@@ -97,7 +99,7 @@ class Theme
         $themeFile = CF::getFile('themes', $theme);
         if (file_exists($themeFile)) {
             $themeData = include $themeFile;
-            $themePath = carr::get($themeData, 'theme_path');
+            $themePath = Arr::get($themeData, 'theme_path');
             if ($themePath == null) {
                 $themePath = '';
             } else {

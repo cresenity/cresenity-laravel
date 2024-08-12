@@ -1,14 +1,11 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CElement\Element\FormInput;
 
-/**
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Jun 3, 2018, 2:00:52 PM
- */
-class CElement_FormInput_Range extends CElement_FormInput {
+use Cresenity\Laravel\CElement\FormInput;
+
+class CElement_FormInput_Range extends CElement_FormInput
+{
     use CTrait_Element_Property_Placeholder;
     use CTrait_Element_Property_ApplyJs;
 
@@ -20,7 +17,8 @@ class CElement_FormInput_Range extends CElement_FormInput {
 
     protected $valueContainerSelector;
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         parent::__construct($id);
         $this->type = 'range';
         $this->placeholder = '';
@@ -31,25 +29,29 @@ class CElement_FormInput_Range extends CElement_FormInput {
         $this->step = 1;
     }
 
-    public function setMin($min) {
+    public function setMin($min)
+    {
         $this->min = $min;
 
         return $this;
     }
 
-    public function setMax($max) {
+    public function setMax($max)
+    {
         $this->max = $max;
 
         return $this;
     }
 
-    public function setStep($step) {
+    public function setStep($step)
+    {
         $this->step = $step;
 
         return $this;
     }
 
-    public function setValueContainerSelector($selector) {
+    public function setValueContainerSelector($selector)
+    {
         if ($selector instanceof CRenderable) {
             $selector = '#' . $selector->id();
         }
@@ -58,7 +60,8 @@ class CElement_FormInput_Range extends CElement_FormInput {
         return $this;
     }
 
-    protected function build() {
+    protected function build()
+    {
         $this->setAttr('type', $this->type);
         $this->setAttr('value', $this->value);
         $this->setAttr('placeholder', $this->placeholder);
@@ -73,7 +76,8 @@ class CElement_FormInput_Range extends CElement_FormInput {
         }
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         $js = '';
         if ($this->applyJs == 'ion-rangeslider') {
             $jsonParams = '';

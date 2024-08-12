@@ -1,8 +1,14 @@
 <?php
+
+namespace Cresenity\Laravel\CElement\Element\FormInput;
+
+use Cresenity\Laravel\CElement\FormInput;
+
 /**
  * @see CManager_EditorJs
  */
-class CElement_FormInput_EditorJs extends CElement_FormInput {
+class CElement_FormInput_EditorJs extends CElement_FormInput
+{
     use CTrait_Element_Property_Placeholder;
     use CElement_FormInput_EditorJs_Trait_EditorJsToolTrait;
 
@@ -28,7 +34,8 @@ class CElement_FormInput_EditorJs extends CElement_FormInput {
      */
     protected $uploadImageByUrlEndpoint;
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         parent::__construct($id);
         $this->type = 'hidden';
         $this->placeholder = CElement_FormInput_EditorJs_DefaultConfig::get('editorSettings.placeholder');
@@ -53,29 +60,34 @@ class CElement_FormInput_EditorJs extends CElement_FormInput {
         $this->uploadImageByUrlEndpoint = c::url('cresenity/editorjs/upload/url');
     }
 
-    public function setUploadImageByFileEndpoint($url) {
+    public function setUploadImageByFileEndpoint($url)
+    {
         $this->uploadImageByFileEndpoint = $url;
 
         return $this;
     }
 
-    public function setUploadImageByUrlEndpoint($url) {
+    public function setUploadImageByUrlEndpoint($url)
+    {
         $this->uploadImageByUrlEndpoint = $url;
 
         return $this;
     }
 
-    public function setInitialBlock($block) {
+    public function setInitialBlock($block)
+    {
         $this->initialBlock = $block;
 
         return $this;
     }
 
-    public function holderId() {
+    public function holderId()
+    {
         return $this->id . '-editor';
     }
 
-    public function build() {
+    public function build()
+    {
         $divHolder = $this->before()->addDiv($this->holderId())->addClass('editorjs-holder cres-editor-js');
         $divHolder->setAttr('data-input-id', $this->id);
         $this->addClass('cres:element:control:EditorJs');
@@ -132,7 +144,8 @@ class CElement_FormInput_EditorJs extends CElement_FormInput {
         $manager->registerJs('plugins/editorjs/raw-2.4.0.js');
     }
 
-    protected function buildControlConfig() {
+    protected function buildControlConfig()
+    {
         $editorSettings = [
             'placeholder' => (string) $this->placeholder,
             'initialBlock' => $this->initialBlock,

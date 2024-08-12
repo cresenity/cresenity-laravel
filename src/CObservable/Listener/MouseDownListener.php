@@ -1,16 +1,13 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CObservable\Listener;
 
-/**
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Apr 20, 2019, 3:12:36 PM
- */
+use Cresenity\Laravel\CObservable\Listener;
 
-class CObservable_Listener_MouseDownListener extends CObservable_Listener {
-    public function __construct($owner) {
+class MouseDownListener extends Listener
+{
+    public function __construct($owner)
+    {
         parent::__construct($owner);
         $this->event = 'mousedown';
     }

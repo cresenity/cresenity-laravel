@@ -1,18 +1,17 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CElement\Element\FormInput;
 
-/**
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Jun 24, 2018, 6:26:04 PM
- */
-class CElement_FormInput_Currency extends CElement_FormInput {
-    use CTrait_Compat_Element_FormInput_Currency,
-        CTrait_Element_Property_Placeholder;
+use Cresenity\Laravel\CElement\FormInput;
+use Cresenity\Laravel\CElement\Traits\Property\PlaceholderPropertyTrait;
+use Cresenity\Laravel\CStringBuilder;
 
-    public function __construct($id) {
+class Currency extends FormInput
+{
+    use PlaceholderPropertyTrait;
+
+    public function __construct($id)
+    {
         parent::__construct($id);
 
         $this->type = 'text';
@@ -21,12 +20,14 @@ class CElement_FormInput_Currency extends CElement_FormInput {
         $this->addClass('form-control');
     }
 
-    protected function build() {
+    protected function build()
+    {
         $this->setAttr('type', $this->type);
         $this->setAttr('value', $this->value);
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         $js = new CStringBuilder();
         $js->setIndent($indent);
         $js->append(parent::jsChild());

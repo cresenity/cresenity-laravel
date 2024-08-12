@@ -2,6 +2,29 @@
 
 namespace Cresenity\Laravel\CObservable\Traits;
 
+use Cresenity\Laravel\CElement\Element\A;
+use Cresenity\Laravel\CElement\Element\Button;
+use Cresenity\Laravel\CElement\Element\Canvas;
+use Cresenity\Laravel\CElement\Element\Code;
+use Cresenity\Laravel\CElement\Element\Div;
+use Cresenity\Laravel\CElement\Element\H1;
+use Cresenity\Laravel\CElement\Element\H2;
+use Cresenity\Laravel\CElement\Element\H3;
+use Cresenity\Laravel\CElement\Element\H4;
+use Cresenity\Laravel\CElement\Element\H5;
+use Cresenity\Laravel\CElement\Element\H6;
+use Cresenity\Laravel\CElement\Element\Iframe;
+use Cresenity\Laravel\CElement\Element\Img;
+use Cresenity\Laravel\CElement\Element\Label;
+use Cresenity\Laravel\CElement\Element\Li;
+use Cresenity\Laravel\CElement\Element\Ol;
+use Cresenity\Laravel\CElement\Element\P;
+use Cresenity\Laravel\CElement\Element\Pre;
+use Cresenity\Laravel\CElement\Element\Span;
+use Cresenity\Laravel\CElement\Element\Td;
+use Cresenity\Laravel\CElement\Element\Tr;
+use Cresenity\Laravel\CElement\Element\Ul;
+
 trait ElementTrait
 {
     /**
@@ -9,11 +32,11 @@ trait ElementTrait
      *
      * @param null|string $id optional
      *
-     * @return CElement_Element_Div Div Element
+     * @return \Cresenity\Laravel\CElement\Element\Div Div Element
      */
     public function addDiv($id = null)
     {
-        $element = new CElement_Element_Div($id);
+        $element = new Div($id);
         $this->wrapper->add($element);
 
         return $element;
@@ -24,11 +47,11 @@ trait ElementTrait
      *
      * @param null|string $id optional
      *
-     * @return CElement_Element_Label Label Element
+     * @return \Cresenity\Laravel\CElement\Element\Label Label Element
      */
     public function addLabel($id = null)
     {
-        $element = new CElement_Element_Label($id);
+        $element = new Label($id);
         $this->wrapper->add($element);
 
         return $element;
@@ -39,11 +62,11 @@ trait ElementTrait
      *
      * @param null|string $id optional
      *
-     * @return CElement_Element_A Anchor Element
+     * @return \Cresenity\Laravel\CElement\Element\A Anchor Element
      */
     public function addA($id = null)
     {
-        $element = new CElement_Element_A($id);
+        $element = new A($id);
         $this->wrapper->add($element);
 
         return $element;
@@ -54,11 +77,11 @@ trait ElementTrait
      *
      * @param null|string $id optional
      *
-     * @return CElement_Element_H1 Heading 1 Element
+     * @return \Cresenity\Laravel\CElement\Element\H1 Heading 1 Element
      */
     public function addH1($id = null)
     {
-        $element = new CElement_Element_H1($id);
+        $element = new H1($id);
         $this->wrapper->add($element);
 
         return $element;
@@ -69,11 +92,11 @@ trait ElementTrait
      *
      * @param null|string $id optional
      *
-     * @return CElement_Element_H2 Heading 2 Element
+     * @return \Cresenity\Laravel\CElement\Element\H2 Heading 2 Element
      */
     public function addH2($id = null)
     {
-        $element = new CElement_Element_H2($id);
+        $element = new H2($id);
         $this->wrapper->add($element);
 
         return $element;
@@ -84,11 +107,11 @@ trait ElementTrait
      *
      * @param null|string $id optional
      *
-     * @return CElement_Element_H3 Heading 3 Element
+     * @return \Cresenity\Laravel\CElement\Element\H3 Heading 3 Element
      */
     public function addH3($id = null)
     {
-        $element = new CElement_Element_H3($id);
+        $element = new H3($id);
         $this->wrapper->add($element);
 
         return $element;
@@ -99,11 +122,11 @@ trait ElementTrait
      *
      * @param null|string $id optional
      *
-     * @return CElement_Element_H4 Heading 4 Element
+     * @return \Cresenity\Laravel\CElement\Element\H4 Heading 4 Element
      */
     public function addH4($id = null)
     {
-        $element = new CElement_Element_H4($id);
+        $element = new H4($id);
         $this->wrapper->add($element);
 
         return $element;
@@ -114,11 +137,11 @@ trait ElementTrait
      *
      * @param null|string $id optional
      *
-     * @return CElement_Element_H5 Heading 5 Element
+     * @return \Cresenity\Laravel\CElement\Element\H5 Heading 5 Element
      */
     public function addH5($id = null)
     {
-        $element = new CElement_Element_H5($id);
+        $element = new H5($id);
         $this->wrapper->add($element);
 
         return $element;
@@ -129,11 +152,11 @@ trait ElementTrait
      *
      * @param null|string $id optional
      *
-     * @return CElement_Element_H6 Heading 6 Element
+     * @return \Cresenity\Laravel\CElement\Element\H6 Heading 6 Element
      */
     public function addH6($id = null)
     {
-        $element = new CElement_Element_H6($id);
+        $element = new H6($id);
         $this->wrapper->add($element);
 
         return $element;
@@ -144,11 +167,11 @@ trait ElementTrait
      *
      * @param null|string $id optional
      *
-     * @return CElement_Element_Button Button Element
+     * @return \Cresenity\Laravel\CElement\Element\Button Button Element
      */
     public function addButton($id = null)
     {
-        $element = new CElement_Element_Button($id);
+        $element = new Button($id);
         $this->wrapper->add($element);
 
         return $element;
@@ -159,11 +182,11 @@ trait ElementTrait
      *
      * @param null|string $id optional
      *
-     * @return CElement_Element_P Paragraph Element
+     * @return \Cresenity\Laravel\CElement\Element\P Paragraph Element
      */
     public function addP($id = null)
     {
-        $element = new CElement_Element_P($id);
+        $element = new P($id);
         $this->wrapper->add($element);
 
         return $element;
@@ -174,11 +197,11 @@ trait ElementTrait
      *
      * @param null|string $id optional
      *
-     * @return CElement_Element_Ol Ordered List Element
+     * @return \Cresenity\Laravel\CElement\Element\Ol Ordered List Element
      */
     public function addOl($id = null)
     {
-        $element = new CElement_Element_Ol($id);
+        $element = new Ol($id);
         $this->wrapper->add($element);
 
         return $element;
@@ -189,11 +212,11 @@ trait ElementTrait
      *
      * @param null|string $id optional
      *
-     * @return CElement_Element_Ul Unordered List Element
+     * @return \Cresenity\Laravel\CElement\Element\Ul Unordered List Element
      */
     public function addUl($id = null)
     {
-        $element = new CElement_Element_Ul($id);
+        $element = new Ul($id);
         //$element = CUlElement::factory($id);
         $this->wrapper->add($element);
 
@@ -205,11 +228,11 @@ trait ElementTrait
      *
      * @param null|string $id optional
      *
-     * @return CElement_Element_Tr Table Row Element
+     * @return \Cresenity\Laravel\CElement\Element\Tr Table Row Element
      */
     public function addTr($id = null)
     {
-        $element = new CElement_Element_Tr($id);
+        $element = new Tr($id);
         $this->wrapper->add($element);
 
         return $element;
@@ -220,11 +243,11 @@ trait ElementTrait
      *
      * @param null|string $id optional
      *
-     * @return CElement_Element_Td Table Cell Element
+     * @return \Cresenity\Laravel\CElement\Element\Td Table Cell Element
      */
     public function addTd($id = null)
     {
-        $element = new CElement_Element_Td($id);
+        $element = new Td($id);
         $this->wrapper->add($element);
 
         return $element;
@@ -235,11 +258,11 @@ trait ElementTrait
      *
      * @param null|string $id optional
      *
-     * @return CElement_Element_Code Code Element
+     * @return \Cresenity\Laravel\CElement\Element\Code Code Element
      */
     public function addCode($id = null)
     {
-        $element = new CElement_Element_Code($id);
+        $element = new Code($id);
         $this->wrapper->add($element);
 
         return $element;
@@ -250,11 +273,11 @@ trait ElementTrait
      *
      * @param null|string $id
      *
-     * @return CElement_Element_Li List Item Element
+     * @return \Cresenity\Laravel\CElement\Element\Li List Item Element
      */
     public function addLi($id = null)
     {
-        $element = new CElement_Element_Li($id);
+        $element = new Li($id);
         $this->wrapper->add($element);
 
         return $element;
@@ -265,11 +288,11 @@ trait ElementTrait
      *
      * @param null|string $id
      *
-     * @return CElement_Element_Iframe Iframe Element
+     * @return \Cresenity\Laravel\CElement\Element\Iframe Iframe Element
      */
     public function addIframe($id = null)
     {
-        $element = new CElement_Element_Iframe($id);
+        $element = new Iframe($id);
         $this->wrapper->add($element);
 
         return $element;
@@ -280,11 +303,11 @@ trait ElementTrait
      *
      * @param null|string $id
      *
-     * @return CElement_Element_Canvas Canvas Element
+     * @return \Cresenity\Laravel\CElement\Element\Canvas Canvas Element
      */
     public function addCanvas($id = null)
     {
-        $element = new CElement_Element_Canvas($id);
+        $element = new Canvas($id);
         $this->wrapper->add($element);
 
         return $element;
@@ -295,11 +318,11 @@ trait ElementTrait
      *
      * @param null|string $id
      *
-     * @return CElement_Element_Img Img Element
+     * @return \Cresenity\Laravel\CElement\Element\Img Img Element
      */
     public function addImg($id = null)
     {
-        $element = new CElement_Element_Img($id);
+        $element = new Img($id);
         $this->wrapper->add($element);
 
         return $element;
@@ -310,11 +333,11 @@ trait ElementTrait
      *
      * @param null|string $id
      *
-     * @return CElement_Element_Pre Pre Element
+     * @return \Cresenity\Laravel\CElement\Element\Pre Pre Element
      */
     public function addPre($id = null)
     {
-        $element = new CElement_Element_Pre($id);
+        $element = new Pre($id);
         $this->wrapper->add($element);
 
         return $element;
@@ -325,11 +348,11 @@ trait ElementTrait
      *
      * @param null|string $id
      *
-     * @return CElement_Element_Span Span Element
+     * @return \Cresenity\Laravel\CElement\Element\Span Span Element
      */
     public function addSpan($id = null)
     {
-        $element = new CElement_Element_Span($id);
+        $element = new Span($id);
         $this->wrapper->add($element);
 
         return $element;

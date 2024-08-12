@@ -1,10 +1,19 @@
 <?php
 
-class CElement_FormInput_Label extends CElement_FormInput {
-    use CTrait_Element_Property_DependsOn;
-    use CTrait_Element_Transform;
+namespace Cresenity\Laravel\CElement\Element\FormInput;
 
-    public function __construct($id) {
+use Cresenity\Laravel\CElement\FormInput;
+use Cresenity\Laravel\CElement\Traits\Property\DependsOnPropertyTrait;
+use Cresenity\Laravel\CElement\Traits\TransformTrait;
+use Cresenity\Laravel\CRenderable;
+
+class Label extends FormInput
+{
+    use DependsOnPropertyTrait;
+    use TransformTrait;
+
+    public function __construct($id)
+    {
         parent::__construct($id);
 
         $this->tag = 'span';
@@ -12,12 +21,14 @@ class CElement_FormInput_Label extends CElement_FormInput {
         $this->isOneTag = false;
     }
 
-    public static function factory($id = null) {
+    public static function factory($id = null)
+    {
         /** @phpstan-ignore-next-line */
         return new static($id);
     }
 
-    protected function build() {
+    protected function build()
+    {
         $value = $this->value;
 
         $value = $this->applyTransform($value);

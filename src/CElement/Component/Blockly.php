@@ -1,8 +1,12 @@
 <?php
+namespace Cresenity\Laravel\CElement\Component;
 
-use CElement_Component_Blockly_Helper as Helper;
+use Cresenity\Laravel\CElement\Component;
+use Cresenity\Laravel\CElement\Component\Blockly\Helper as Helper;
+use Cresenity\Laravel\CManager;
 
-class CElement_Component_Blockly extends CElement_Component {
+class Blockly extends Component
+{
     protected $mediaDirectory;
 
     protected $toolbox;
@@ -23,7 +27,8 @@ class CElement_Component_Blockly extends CElement_Component {
 
     protected $saveUrl = '';
 
-    public function __construct($id = '', $tag = 'div') {
+    public function __construct($id = '', $tag = 'div')
+    {
         parent::__construct($id, $tag);
         if (!CManager::isRegisteredModule('blockly')) {
             CManager::registerModule('blockly');
@@ -42,26 +47,31 @@ class CElement_Component_Blockly extends CElement_Component {
         $this->variables = [];
     }
 
-    public function addVariable($variable) {
+    public function addVariable($variable)
+    {
         $this->variables[] = $variable;
         return $this;
     }
 
-    public function setFunctionWithReturn($funcName, $arguments = []) {
+    public function setFunctionWithReturn($funcName, $arguments = [])
+    {
         $this->isFunctionWithReturn = true;
         $this->functionName = $funcName;
         $this->functionArgs = $arguments;
     }
 
-    public function setSaveUrl($url) {
+    public function setSaveUrl($url)
+    {
         $this->saveUrl = $url;
         return $this;
     }
 
-    public function build() {
+    public function build()
+    {
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         $toolboxId = $jsOptions = [];
         $jsOptions['blocklyElementId'] = $this->blocklyWrapper->id();
         $jsOptions['toolboxElementId'] = $this->toolbox->id();

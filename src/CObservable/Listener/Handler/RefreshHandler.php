@@ -1,11 +1,18 @@
 <?php
 
-class CObservable_Listener_Handler_RefreshHandler extends CObservable_Listener_Handler {
-    public function __construct($listener) {
+namespace Cresenity\Laravel\CObservable\Listener\Handler;
+
+use Cresenity\Laravel\CObservable\Listener\Handler;
+
+class RefreshHandler extends Handler
+{
+    public function __construct($listener)
+    {
         parent::__construct($listener);
     }
 
-    public function js() {
+    public function js()
+    {
         $js = 'window.location.reload();';
 
         return $js;

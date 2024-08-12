@@ -2,6 +2,17 @@
 
 namespace Cresenity\Laravel\CObservable;
 
+use Cresenity\Laravel\CObservable\Listener\Handler\AjaxSubmitHandler;
+use Cresenity\Laravel\CObservable\Listener\Handler\AppendHandler;
+use Cresenity\Laravel\CObservable\Listener\Handler\CustomHandler;
+use Cresenity\Laravel\CObservable\Listener\Handler\DialogHandler;
+use Cresenity\Laravel\CObservable\Listener\Handler\DownloadProgressHandler;
+use Cresenity\Laravel\CObservable\Listener\Handler\PrependHandler;
+use Cresenity\Laravel\CObservable\Listener\Handler\ReloadDataTableHandler;
+use Cresenity\Laravel\CObservable\Listener\Handler\ReloadElementHandler;
+use Cresenity\Laravel\CObservable\Listener\Handler\ReloadHandler;
+use Cresenity\Laravel\CObservable\Listener\Handler\RemoveHandler;
+use Cresenity\Laravel\CObservable\Listener\Handler\SubmitHandler;
 use Cresenity\Laravel\CObservable\Listener\Traits\HandlerTrait;
 
 abstract class ListenerAbstract
@@ -74,47 +85,47 @@ abstract class ListenerAbstract
         if (is_string($handler)) {
             switch ($handler) {
                 case 'reload':
-                    $handler = new CObservable_Listener_Handler_ReloadHandler($this);
+                    $handler = new ReloadHandler($this);
 
                     break;
                 case 'reloadDataTable':
-                    $handler = new CObservable_Listener_Handler_ReloadDataTableHandler($this);
+                    $handler = new ReloadDataTableHandler($this);
 
                     break;
                 case 'reloadElement':
-                    $handler = new CObservable_Listener_Handler_ReloadElementHandler($this);
+                    $handler = new ReloadElementHandler($this);
 
                     break;
                 case 'dialog':
-                    $handler = new CObservable_Listener_Handler_DialogHandler($this);
+                    $handler = new DialogHandler($this);
 
                     break;
                 case 'append':
-                    $handler = new CObservable_Listener_Handler_AppendHandler($this);
+                    $handler = new AppendHandler($this);
 
                     break;
                 case 'prepend':
-                    $handler = new CObservable_Listener_Handler_PrependHandler($this);
+                    $handler = new PrependHandler($this);
 
                     break;
                 case 'submit':
-                    $handler = new CObservable_Listener_Handler_SubmitHandler($this);
+                    $handler = new SubmitHandler($this);
 
                     break;
                 case 'ajaxSubmit':
-                    $handler = new CObservable_Listener_Handler_AjaxSubmitHandler($this);
+                    $handler = new AjaxSubmitHandler($this);
 
                     break;
                 case 'remove':
-                    $handler = new CObservable_Listener_Handler_RemoveHandler($this);
+                    $handler = new RemoveHandler($this);
 
                     break;
                 case 'downloadProgress':
-                    $handler = new CObservable_Listener_Handler_DownloadProgressHandler($this);
+                    $handler = new DownloadProgressHandler($this);
 
                     break;
                 case 'custom':
-                    $handler = new CObservable_Listener_Handler_CustomHandler($this);
+                    $handler = new CustomHandler($this);
 
                     break;
                 default:

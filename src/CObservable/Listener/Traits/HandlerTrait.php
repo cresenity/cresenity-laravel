@@ -2,7 +2,25 @@
 
 namespace Cresenity\Laravel\CObservable\Listener\Traits;
 
+use Cresenity\Laravel\CObservable\Listener\Handler\AjaxHandler;
+use Cresenity\Laravel\CObservable\Listener\Handler\AjaxSubmitHandler;
+use Cresenity\Laravel\CObservable\Listener\Handler\AppendHandler;
+use Cresenity\Laravel\CObservable\Listener\Handler\CloseAllDialogHandler;
+use Cresenity\Laravel\CObservable\Listener\Handler\CloseDialogHandler;
+use Cresenity\Laravel\CObservable\Listener\Handler\CustomHandler;
+use Cresenity\Laravel\CObservable\Listener\Handler\DialogHandler;
+use Cresenity\Laravel\CObservable\Listener\Handler\DispatchWindowEventHandler;
+use Cresenity\Laravel\CObservable\Listener\Handler\DownloadProgressHandler;
+use Cresenity\Laravel\CObservable\Listener\Handler\EmitHandler;
+use Cresenity\Laravel\CObservable\Listener\Handler\PrependHandler;
+use Cresenity\Laravel\CObservable\Listener\Handler\ReloadDataTableHandler;
+use Cresenity\Laravel\CObservable\Listener\Handler\ReloadElementHandler;
 use Cresenity\Laravel\CObservable\Listener\Handler\ReloadHandler;
+use Cresenity\Laravel\CObservable\Listener\Handler\RemoveHandler;
+use Cresenity\Laravel\CObservable\Listener\Handler\SubmitHandler;
+use Cresenity\Laravel\CObservable\Listener\Handler\ToastHandler;
+use Cresenity\Laravel\CObservable\Listener\Handler\ToggleActiveHandler;
+use RedirectHandler;
 
 trait HandlerTrait
 {
@@ -18,198 +36,198 @@ trait HandlerTrait
     }
 
     /**
-     * @return \CObservable_Listener_Handler_ReloadElementHandler
+     * @return \Cresenity\Laravel\CObservable\Listener\Handler\ReloadElementHandler
      */
     public function addReloadElementHandler()
     {
-        $handler = new CObservable_Listener_Handler_ReloadElementHandler($this);
+        $handler = new ReloadElementHandler($this);
         $this->handlers[] = $handler;
 
         return $handler;
     }
 
     /**
-     * @return \CObservable_Listener_Handler_ReloadDataTableHandler
+     * @return \Cresenity\Laravel\CObservable\Listener\Handler\ReloadDataTableHandler
      */
     public function addReloadDataTableHandler()
     {
-        $handler = new CObservable_Listener_Handler_ReloadDataTableHandler($this);
+        $handler = new ReloadDataTableHandler($this);
         $this->handlers[] = $handler;
 
         return $handler;
     }
 
     /**
-     * @return \CObservable_Listener_Handler_DispatchWindowEventHandler
+     * @return \Cresenity\Laravel\CObservable\Listener\Handler\DispatchWindowEventHandler
      */
     public function addDispatchWindowEventHandler()
     {
-        $handler = new CObservable_Listener_Handler_DispatchWindowEventHandler($this);
+        $handler = new DispatchWindowEventHandler($this);
         $this->handlers[] = $handler;
 
         return $handler;
     }
 
     /**
-     * @return \CObservable_Listener_Handler_AppendHandler
+     * @return \Cresenity\Laravel\CObservable\Listener\Handler\AppendHandler
      */
     public function addAppendHandler()
     {
-        $handler = new CObservable_Listener_Handler_AppendHandler($this);
+        $handler = new AppendHandler($this);
         $this->handlers[] = $handler;
 
         return $handler;
     }
 
     /**
-     * @return \CObservable_Listener_Handler_PrependHandler
+     * @return \Cresenity\Laravel\CObservable\Listener\Handler\PrependHandler
      */
     public function addPrependHandler()
     {
-        $handler = new CObservable_Listener_Handler_PrependHandler($this);
+        $handler = new PrependHandler($this);
         $this->handlers[] = $handler;
 
         return $handler;
     }
 
     /**
-     * @return \CObservable_Listener_Handler_DialogHandler
+     * @return \Cresenity\Laravel\CObservable\Listener\Handler\DialogHandler
      */
     public function addDialogHandler()
     {
-        $handler = new CObservable_Listener_Handler_DialogHandler($this);
+        $handler = new DialogHandler($this);
         $this->handlers[] = $handler;
 
         return $handler;
     }
 
     /**
-     * @return \CObservable_Listener_Handler_CloseDialogHandler
+     * @return \Cresenity\Laravel\CObservable\Listener\Handler\CloseDialogHandler
      */
     public function addCloseDialogHandler()
     {
-        $handler = new CObservable_Listener_Handler_CloseDialogHandler($this);
+        $handler = new CloseDialogHandler($this);
         $this->handlers[] = $handler;
 
         return $handler;
     }
 
     /**
-     * @return \CObservable_Listener_Handler_CloseAllDialogHandler
+     * @return \Cresenity\Laravel\CObservable\Listener\Handler\CloseAllDialogHandler
      */
     public function addCloseAllDialogHandler()
     {
-        $handler = new CObservable_Listener_Handler_CloseAllDialogHandler($this);
+        $handler = new CloseAllDialogHandler($this);
         $this->handlers[] = $handler;
 
         return $handler;
     }
 
     /**
-     * @return \CObservable_Listener_Handler_AjaxSubmitHandler
+     * @return \Cresenity\Laravel\CObservable\Listener\Handler\AjaxSubmitHandler
      */
     public function addAjaxSubmitHandler()
     {
-        $handler = new CObservable_Listener_Handler_AjaxSubmitHandler($this);
+        $handler = new AjaxSubmitHandler($this);
         $this->handlers[] = $handler;
 
         return $handler;
     }
 
     /**
-     * @return \CObservable_Listener_Handler_AjaxHandler
+     * @return \Cresenity\Laravel\CObservable\Listener\Handler\AjaxHandler
      */
     public function addAjaxHandler()
     {
-        $handler = new CObservable_Listener_Handler_AjaxHandler($this);
+        $handler = new AjaxHandler($this);
         $this->handlers[] = $handler;
 
         return $handler;
     }
 
     /**
-     * @return \CObservable_Listener_Handler_RemoveHandler
+     * @return \Cresenity\Laravel\CObservable\Listener\Handler\RemoveHandler
      */
     public function addRemoveHandler()
     {
-        $handler = new CObservable_Listener_Handler_RemoveHandler($this);
+        $handler = new RemoveHandler($this);
         $this->handlers[] = $handler;
 
         return $handler;
     }
 
     /**
-     * @return \CObservable_Listener_Handler_ToggleActiveHandler
+     * @return \Cresenity\Laravel\CObservable\Listener\Handler\ToggleActiveHandler
      */
     public function addToggleActiveHandler()
     {
-        $handler = new CObservable_Listener_Handler_ToggleActiveHandler($this);
+        $handler = new ToggleActiveHandler($this);
         $this->handlers[] = $handler;
 
         return $handler;
     }
 
     /**
-     * @return \CObservable_Listener_Handler_ToastHandler
+     * @return \Cresenity\Laravel\CObservable\Listener\Handler\ToastHandler
      */
     public function addToastHandler()
     {
-        $handler = new CObservable_Listener_Handler_ToastHandler($this);
+        $handler = new ToastHandler($this);
         $this->handlers[] = $handler;
 
         return $handler;
     }
 
     /**
-     * @return \CObservable_Listener_Handler_RedirectHandler
+     * @return \Cresenity\Laravel\CObservable\Listener\Handler\RedirectHandler
      */
     public function addRedirectHandler()
     {
-        $handler = new CObservable_Listener_Handler_RedirectHandler($this);
+        $handler = new RedirectHandler($this);
         $this->handlers[] = $handler;
 
         return $handler;
     }
 
     /**
-     * @return \CObservable_Listener_Handler_SubmitHandler
+     * @return \Cresenity\Laravel\CObservable\Listener\Handler\SubmitHandler
      */
     public function addSubmitHandler()
     {
-        $handler = new CObservable_Listener_Handler_SubmitHandler($this);
+        $handler = new SubmitHandler($this);
         $this->handlers[] = $handler;
 
         return $handler;
     }
 
     /**
-     * @return \CObservable_Listener_Handler_CustomHandler
+     * @return \Cresenity\Laravel\CObservable\Listener\Handler\CustomHandler
      */
     public function addCustomHandler()
     {
-        $handler = new CObservable_Listener_Handler_CustomHandler($this);
+        $handler = new CustomHandler($this);
         $this->handlers[] = $handler;
 
         return $handler;
     }
 
     /**
-     * @return \CObservable_Listener_Handler_EmitHandler
+     * @return \Cresenity\Laravel\CObservable\Listener\Handler\EmitHandler
      */
     public function addEmitHandler()
     {
-        $handler = new CObservable_Listener_Handler_EmitHandler($this);
+        $handler = new EmitHandler($this);
         $this->handlers[] = $handler;
 
         return $handler;
     }
 
     /**
-     * @return \CObservable_Listener_Handler_DownloadProgressHandler
+     * @return \Cresenity\Laravel\CObservable\Listener\Handler\DownloadProgressHandler
      */
     public function addDownloadProgressHandler()
     {
-        $handler = new CObservable_Listener_Handler_DownloadProgressHandler($this);
+        $handler = new DownloadProgressHandler($this);
         $this->handlers[] = $handler;
 
         return $handler;

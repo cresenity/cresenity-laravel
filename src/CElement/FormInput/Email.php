@@ -1,24 +1,24 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CElement\Element\FormInput;
 
-/**
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Jun 3, 2018, 2:00:52 PM
- */
-class CElement_FormInput_Email extends CElement_FormInput {
-    use CTrait_Element_Property_Placeholder;
+use Cresenity\Laravel\CElement\FormInput;
+use Cresenity\Laravel\CElement\Traits\Property\PlaceholderPropertyTrait;
 
-    public function __construct($id) {
+class Email extends FormInput
+{
+    use PlaceholderPropertyTrait;
+
+    public function __construct($id)
+    {
         parent::__construct($id);
         $this->type = 'email';
         $this->placeholder = '';
         $this->addClass('form-control');
     }
 
-    protected function build() {
+    protected function build()
+    {
         $this->setAttr('type', $this->type);
         $this->setAttr('value', $this->value);
 

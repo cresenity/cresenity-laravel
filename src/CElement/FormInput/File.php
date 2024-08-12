@@ -1,13 +1,20 @@
 <?php
 
-class CElement_FormInput_File extends CElement_FormInput {
+namespace Cresenity\Laravel\CElement\Element\FormInput;
+
+use Cresenity\Laravel\CElement\FormInput;
+use Cresenity\Laravel\CStringBuilder;
+
+class CElement_FormInput_File extends CElement_FormInput
+{
     use CTrait_Compat_Element_FormInput_File;
 
     protected $multiple;
 
     protected $applyjs;
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         parent::__construct($id);
 
         $this->multiple = false;
@@ -19,14 +26,16 @@ class CElement_FormInput_File extends CElement_FormInput {
         $this->applyjs = c::theme('fileupload', 'file-upload');
     }
 
-    public static function factory($id = null) {
+    public static function factory($id = null)
+    {
         /** @phpstan-ignore-next-line */
         return new static($id);
     }
 
-    public function html($indent = 0) {
+    public function html($indent = 0)
+    {
         if ($this->applyjs == 'jquery-fileupload') {
-            c::manager()->registerModule('jquery-fileupload');
+            \c::manager()->registerModule('jquery-fileupload');
         }
         $html = new CStringBuilder();
         $html->setIndent($indent);
@@ -79,7 +88,8 @@ class CElement_FormInput_File extends CElement_FormInput {
         return $html->text();
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         $js = new CStringBuilder();
         $js->setIndent($indent);
         if ($this->applyjs == 'file-upload') {
@@ -158,13 +168,15 @@ class CElement_FormInput_File extends CElement_FormInput {
         return $js->text();
     }
 
-    public function setMultiple($bool) {
+    public function setMultiple($bool)
+    {
         $this->multiple = true;
 
         return $this;
     }
 
-    public function setApplyJs($applyjs) {
+    public function setApplyJs($applyjs)
+    {
         $this->applyjs = $applyjs;
 
         return $this;

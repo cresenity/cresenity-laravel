@@ -1,16 +1,14 @@
 <?php
 
-/**
- * Description of Checkbox.
- *
- * @author Alvin
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Mar 14, 2018, 15:35:24 PM
- */
-class CElement_FormInput_Checkbox extends CElement_FormInput {
-    use CTrait_Compat_Element_FormInput_Checkbox,
-        CTrait_Element_Property_Label;
+namespace Cresenity\Laravel\CElement\Element\FormInput;
+
+use Cresenity\Laravel\CElement\FormInput;
+use Cresenity\Laravel\CElement\Traits\Property\LabelPropertyTrait;
+use Cresenity\Laravel\CStringBuilder;
+
+class Checkbox extends FormInput
+{
+    use LabelPropertyTrait;
 
     protected $checked = '';
 
@@ -22,7 +20,8 @@ class CElement_FormInput_Checkbox extends CElement_FormInput {
 
     protected $style = '';
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         parent::__construct($id);
 
         $this->style = 'minimal';
@@ -32,21 +31,24 @@ class CElement_FormInput_Checkbox extends CElement_FormInput {
         $this->checked = false;
         $this->display_inline = false;
         $this->label_wrap = false;
-        $this->applyjs = c::theme('js_checkbox', 'uniform');
+        $this->applyjs = \c::theme('js_checkbox', 'uniform');
     }
 
-    public static function factory($id = null) {
+    public static function factory($id = null)
+    {
         /** @phpstan-ignore-next-line */
         return new static($id);
     }
 
-    public function setChecked($bool) {
+    public function setChecked($bool)
+    {
         $this->checked = $bool;
 
         return $this;
     }
 
-    public function html($indent = 0) {
+    public function html($indent = 0)
+    {
         $html = new CStringBuilder();
         $html->setIndent($indent);
         $disabled = '';
@@ -99,7 +101,8 @@ class CElement_FormInput_Checkbox extends CElement_FormInput {
         return $html->text();
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         $js = new CStringBuilder();
         $js->setIndent($indent);
         $js->append(parent::js($indent))->br();

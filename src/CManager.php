@@ -4,6 +4,7 @@ namespace Cresenity\Laravel;
 use Cresenity\Laravel\CManager\Theme;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 final class CManager
 {
@@ -249,7 +250,7 @@ final class CManager
             //check for class exists
             throw new \Exception(\c::__('Type of control :type not registered', [':type' => $type]));
         }
-        if (cstr::startsWith($class, 'CElement_FormInput')) {
+        if (Str::startsWith($class, 'CElement_FormInput')) {
             return CElement_Factory::createFormInput($class, $id);
         }
 
@@ -271,7 +272,7 @@ final class CManager
         }
         $class = $this->elements[$type];
 
-        if (cstr::startsWith($class, 'CElement_Element')) {
+        if (Str::startsWith($class, 'CElement_Element')) {
             return CElement_Factory::createElement($id);
         }
 

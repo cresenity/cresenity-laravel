@@ -1,16 +1,13 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CElement\Element\FormInput;
 
-/**
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Jun 24, 2018, 3:56:10 PM
- */
-class CElement_FormInput_Date extends CElement_FormInput {
-    use CTrait_Compat_Element_FormInput_Date;
+use Cresenity\Laravel\CElement\FormInput;
+use Cresenity\Laravel\CManager;
+use Cresenity\Laravel\CStringBuilder;
 
+class Date extends FormInput
+{
     protected $dateFormat;
 
     protected $haveButton;
@@ -23,7 +20,8 @@ class CElement_FormInput_Date extends CElement_FormInput {
 
     protected $inline;
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         parent::__construct($id);
 
         if (CManager::isRegisteredModule('bootstrap-4-material')) {
@@ -35,7 +33,7 @@ class CElement_FormInput_Date extends CElement_FormInput {
         }
         //CManager::instance()->registerModule('datepicker');
         $this->type = 'date';
-        $this->dateFormat = c::formatter()->getDateFormat();
+        $this->dateFormat = \c::formatter()->getDateFormat();
 
         $this->haveButton = false;
         $this->startDate = '';
@@ -45,18 +43,21 @@ class CElement_FormInput_Date extends CElement_FormInput {
         $this->addClass('form-control');
     }
 
-    public static function factory($id = null) {
+    public static function factory($id = null)
+    {
         /** @phpstan-ignore-next-line */
         return new static($id);
     }
 
-    public function setStartDate($str) {
+    public function setStartDate($str)
+    {
         $this->startDate = $str;
 
         return $this;
     }
 
-    public function setEndDate($str) {
+    public function setEndDate($str)
+    {
         $this->endDate = $str;
 
         return $this;
@@ -67,7 +68,8 @@ class CElement_FormInput_Date extends CElement_FormInput {
      *
      * @return $this
      */
-    public function addDisableDaysOfWeek($day) {
+    public function addDisableDaysOfWeek($day)
+    {
         $dayArray = $day;
         if (!is_array($day)) {
             $dayArray = explode(',', $day);
@@ -80,13 +82,15 @@ class CElement_FormInput_Date extends CElement_FormInput {
         return $this;
     }
 
-    public function setDateFormat($str) {
+    public function setDateFormat($str)
+    {
         $this->dateFormat = $str;
 
         return $this;
     }
 
-    public function html($indent = 0) {
+    public function html($indent = 0)
+    {
         $html = new CStringBuilder();
         $html->setIndent($indent);
         $disabled = '';
@@ -120,18 +124,20 @@ class CElement_FormInput_Date extends CElement_FormInput {
                         <span class="add-on"><i class="icon-th"></i></span>
                     </div>')->br();
         } else {
-            $html->appendln('<input type="text" name="' . $this->name . '" id="' . $this->id . '" class="datepicker input-unstyled' . $classes . $this->validation->validationClass() . '" value="' . c::formatter()->formatDate($this->value, $this->dateFormat) . '"' . $disabled . $readonly . $addition_attribute . $custom_css . '>')->br();
+            $html->appendln('<input type="text" name="' . $this->name . '" id="' . $this->id . '" class="datepicker input-unstyled' . $classes . $this->validation->validationClass() . '" value="' . \c::formatter()->formatDate($this->value, $this->dateFormat) . '"' . $disabled . $readonly . $addition_attribute . $custom_css . '>')->br();
         }
         //$html->appendln('<input type="text" name="'.$this->name.'"  data-date-format="'.$this->dateFormat.'" id="'.$this->id.'" class="datepicker input-unstyled'.$classes.$this->validation->validation_class().'" value="'.$this->value.'"'.$disabled.$custom_css.'>')->br();
 
         return $html->text();
     }
 
-    protected function getTranslation($key) {
-        return c::__('element/date.datepicker.' . $key);
+    protected function getTranslation($key)
+    {
+        return \c::__('element/date.datepicker.' . $key);
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         $jsLanguages = "$.fn.datepicker.dates['custom'] = {
             days: [
                 '" . $this->getTranslation('days.Sunday') . "',

@@ -1,8 +1,11 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CElement\Element\FormInput;
 
-class CElement_FormInput_SelectModal extends CElement_FormInput {
+use Cresenity\Laravel\CElement\FormInput;
+
+class CElement_FormInput_SelectModal extends CElement_FormInput
+{
     use CElement_Trait_UseViewTrait;
 
     protected $fields;
@@ -35,7 +38,8 @@ class CElement_FormInput_SelectModal extends CElement_FormInput {
 
     protected $delay;
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         parent::__construct($id);
 
         $this->type = 'selectModal';
@@ -74,41 +78,48 @@ class CElement_FormInput_SelectModal extends CElement_FormInput {
         });
     }
 
-    public static function factory($id = null) {
+    public static function factory($id = null)
+    {
         return new CElement_FormInput_SelectModal($id);
     }
 
-    public function setFields($fields) {
+    public function setFields($fields)
+    {
         $this->fields = $fields;
 
         return $this;
     }
 
-    public function setFormat($format) {
+    public function setFormat($format)
+    {
         $this->format = $format;
 
         return $this;
     }
 
-    public function setKeyField($key) {
+    public function setKeyField($key)
+    {
         $this->keyField = $key;
 
         return $this;
     }
 
-    public function setSearchField(array $fields) {
+    public function setSearchField(array $fields)
+    {
         $this->searchField = $fields;
 
         return $this;
     }
 
-    public function setLimit($total) {
+    public function setLimit($total)
+    {
         $this->limit = $total;
 
         return $this;
     }
 
-    public function setTitle($title, $lang = true) {
+    public function setTitle($title, $lang = true)
+    {
         if ($lang) {
             $title = c::__($title);
         }
@@ -117,31 +128,36 @@ class CElement_FormInput_SelectModal extends CElement_FormInput {
         return $this;
     }
 
-    public function setItemName($itemName) {
+    public function setItemName($itemName)
+    {
         $this->itemName = $itemName;
 
         return $this;
     }
 
-    public function setImgSrc($imgsrc) {
+    public function setImgSrc($imgsrc)
+    {
         $this->imgSrc = $imgsrc;
 
         return $this;
     }
 
-    public function setMinWidth($minWidth) {
+    public function setMinWidth($minWidth)
+    {
         $this->minWidth = $minWidth;
 
         return $this;
     }
 
-    public function setMinHeight($minHeight) {
+    public function setMinHeight($minHeight)
+    {
         $this->minHeight = $minHeight;
 
         return $this;
     }
 
-    public function setButtonLabel($label, $lang = true) {
+    public function setButtonLabel($label, $lang = true)
+    {
         if ($lang) {
             $label = c::__($label);
         }
@@ -150,7 +166,8 @@ class CElement_FormInput_SelectModal extends CElement_FormInput {
         return $this;
     }
 
-    public function setPlaceholder($placeholder, $lang = true) {
+    public function setPlaceholder($placeholder, $lang = true)
+    {
         if ($lang) {
             $placeholder = c::__($placeholder);
         }
@@ -159,25 +176,29 @@ class CElement_FormInput_SelectModal extends CElement_FormInput {
         return $this;
     }
 
-    public function setItemTemplateName($templateName) {
+    public function setItemTemplateName($templateName)
+    {
         $this->itemTemplateName = $templateName;
 
         return $this;
     }
 
-    public function setItemTemplateVariables(array $vars) {
+    public function setItemTemplateVariables(array $vars)
+    {
         $this->itemTemplateVariables = $vars;
 
         return $this;
     }
 
-    public function setDelay($delay) {
+    public function setDelay($delay)
+    {
         $this->delay = $delay;
 
         return $this;
     }
 
-    public function createAjaxName() {
+    public function createAjaxName()
+    {
         $ajaxName = $this->name;
         $ajaxName = str_replace('[', '-', $this->name);
         $ajaxName = str_replace(']', '-', $ajaxName);
@@ -185,7 +206,8 @@ class CElement_FormInput_SelectModal extends CElement_FormInput {
         return $ajaxName;
     }
 
-    public function createAjaxUrl() {
+    public function createAjaxUrl()
+    {
         return CAjax::createMethod()
             ->setType('SelectModal')
             ->setData('format', $this->format)
@@ -196,14 +218,16 @@ class CElement_FormInput_SelectModal extends CElement_FormInput {
             ->makeurl();
     }
 
-    public function html($indent = 0) {
+    public function html($indent = 0)
+    {
         $templateHtml = $this->getViewHtml();
         $html = $templateHtml;
 
         return $html;
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         $templateJs = $this->getViewJs();
         $js = $templateJs;
 

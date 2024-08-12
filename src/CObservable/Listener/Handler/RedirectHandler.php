@@ -1,9 +1,14 @@
 <?php
 
-class CObservable_Listener_Handler_RedirectHandler extends CObservable_Listener_Handler {
-    use CTrait_Element_Property_Url;
+use Cresenity\Laravel\CElement\Traits\Property\UrlPropertyTrait;
+use Cresenity\Laravel\CObservable\Listener\Handler;
 
-    public function js() {
+class RedirectHandler extends Handler
+{
+    use UrlPropertyTrait;
+
+    public function js()
+    {
         //parse url to normalize the value
         $url = $this->url;
 

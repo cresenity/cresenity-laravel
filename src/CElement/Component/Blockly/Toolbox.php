@@ -1,28 +1,31 @@
 <?php
+namespace Cresenity\Laravel\CElement\Component\Blockly;
 
-use CElement_Component_Blockly_BlockHelper as BlockHelper;
-use CElement_Component_Blockly_ToolboxHelper as ToolboxHelper;
-use CElement_Component_Blockly_CategoryHelper as CategoryHelper;
+use Cresenity\Laravel\CElement\Element;
 
-class CElement_Component_Blockly_Toolbox extends CElement_Element {
+class Toolbox extends Element
+{
     protected $categories = [];
 
-    public function __construct($id = '', $tag = 'div') {
+    public function __construct($id = '', $tag = 'div')
+    {
         parent::__construct($id, $tag);
         $this->tag = 'xml';
         $this->categories = [];
     }
 
-    public function build() {
+    public function build()
+    {
         $this->categories = ToolboxHelper::getAllCategoryData();
     }
 
-    public function html($indent = 0) {
+    public function html($indent = 0)
+    {
         $this->buildOnce();
         $xmlOpen = '<xml id="' . $this->id . '" style="display: none">';
         $xmlClose = '</xml>';
 
-        $categoryXml = carr::reduce($this->categories, function ($output, $blockArray, $name) {
+        $categoryXml = \c::collect($this->categories)->reduce(function ($output, $blockArray, $name) {
             return $output . CategoryHelper::renderCategory($name, $blockArray);
         }, '');
 

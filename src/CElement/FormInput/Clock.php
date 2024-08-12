@@ -1,10 +1,15 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CElement\Element\FormInput;
 
-class CElement_FormInput_Clock extends CElement_FormInput {
-    use CTrait_Compat_Element_FormInput_Clock,
-        CTrait_Element_Property_Placeholder;
+use Cresenity\Laravel\CElement\FormInput;
+use Cresenity\Laravel\CElement\Traits\Property\PlaceholderPropertyTrait;
+use Cresenity\Laravel\CManager;
+use Cresenity\Laravel\CStringBuilder;
+
+class Clock extends FormInput
+{
+    use PlaceholderPropertyTrait;
 
     protected $show_second;
 
@@ -12,7 +17,8 @@ class CElement_FormInput_Clock extends CElement_FormInput {
 
     protected $minute_step;
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         parent::__construct($id);
 
         $this->type = 'clockpicker';
@@ -35,12 +41,14 @@ class CElement_FormInput_Clock extends CElement_FormInput {
         CManager::registerModule('clockpicker', $dataModule);
     }
 
-    protected function build() {
+    protected function build()
+    {
         $this->setAttr('type', $this->type);
         $this->setAttr('value', $this->value);
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         $js = new CStringBuilder();
         $js->setIndent($indent);
 

@@ -1,18 +1,26 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CElement\Element\FormInput;
 
-class CElement_FormInput_Text extends CElement_FormInput {
-    use CTrait_Compat_Element_FormInput_Text,
-        CTrait_Element_Property_Placeholder;
+use Cresenity\Laravel\CElement\FormInput;
+use Cresenity\Laravel\CElement\Traits\Property\PlaceholderPropertyTrait;
+use Cresenity\Laravel\CStringBuilder;
+
+class Text extends FormInput
+{
+    use PlaceholderPropertyTrait;
 
     protected $input_style;
 
     protected $button_position;
 
+    /**
+     * @var \Cresenity\Laravel\CElement\Component\Action|null
+     */
     protected $action;
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         parent::__construct($id);
 
         $this->type = 'text';
@@ -29,13 +37,15 @@ class CElement_FormInput_Text extends CElement_FormInput {
     /**
      * @param null|string $id
      *
-     * @return \CElement_FormInput_Text
+     * @return \Cresenity\Laravel\CElement\Element\FormInput\Text
      */
-    public static function factory($id = null) {
-        return new CElement_FormInput_Text($id);
+    public static function factory($id = null)
+    {
+        return new Text($id);
     }
 
-    public function html($indent = 0) {
+    public function html($indent = 0)
+    {
         $html = new CStringBuilder();
         $html->setIndent($indent);
         $disabled = '';
@@ -62,12 +72,13 @@ class CElement_FormInput_Text extends CElement_FormInput {
         foreach ($this->attr as $k => $v) {
             $addition_attribute .= ' ' . $k . '="' . $v . '"';
         }
-        $html->appendln('<input type="text" placeholder="' . c::e($this->placeholder) . '" name="' . $this->name . '" id="' . $this->id . '" class="form-control input-unstyled' . $classes . $this->validation->validationClass() . '" value="' . c::e($this->value) . '"' . $disabled . $custom_css . $addition_attribute . '/>')->br();
+        $html->appendln('<input type="text" placeholder="' . \c::e($this->placeholder) . '" name="' . $this->name . '" id="' . $this->id . '" class="form-control input-unstyled' . $classes . $this->validation->validationClass() . '" value="' . \c::e($this->value) . '"' . $disabled . $custom_css . $addition_attribute . '/>')->br();
 
         return $html->text();
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         $js = new CStringBuilder();
         $js->setIndent($indent);
 

@@ -1,14 +1,11 @@
 <?php
 
-/**
- * Description of Textarea.
- *
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Jan 28, 2018, 9:50:24 PM
- */
-class CElement_FormInput_QueryBuilder extends CElement_FormInput {
+namespace Cresenity\Laravel\CElement\Element\FormInput;
+
+use Cresenity\Laravel\CElement\FormInput;
+
+class CElement_FormInput_QueryBuilder extends CElement_FormInput
+{
     protected $filters;
 
     protected $inputId;
@@ -19,7 +16,8 @@ class CElement_FormInput_QueryBuilder extends CElement_FormInput {
 
     protected $containerId;
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         if ($id == '') {
             $id = spl_object_hash($this);
         }
@@ -38,13 +36,15 @@ class CElement_FormInput_QueryBuilder extends CElement_FormInput {
         $this->addClass('capp-query-builder capp-input');
     }
 
-    public static function parseToModelQuery($rules, $modelClass) {
+    public static function parseToModelQuery($rules, $modelClass)
+    {
         $parser = new CElement_FormInput_QueryBuilder_Parser($modelClass);
 
         return $parser->parse($rules);
     }
 
-    public function withFilterBuilder($callback) {
+    public function withFilterBuilder($callback)
+    {
         $this->filters = c::tap(new CElement_FormInput_QueryBuilder_FilterBuilder(), $callback);
 
         return $this;
@@ -53,7 +53,8 @@ class CElement_FormInput_QueryBuilder extends CElement_FormInput {
     /**
      * @return CElement_FormInput_QueryBuilder_FilterBuilder
      */
-    public function filterBuilder() {
+    public function filterBuilder()
+    {
         if ($this->filters == null) {
             $this->filters = new CElement_FormInput_QueryBuilder_FilterBuilder();
         }
@@ -61,13 +62,15 @@ class CElement_FormInput_QueryBuilder extends CElement_FormInput {
         return $this->filters;
     }
 
-    public function setName($val) {
+    public function setName($val)
+    {
         $this->input->setName($val);
 
         return $this;
     }
 
-    public function build() {
+    public function build()
+    {
         parent::build();
         if ($this->readonly) {
             $this->setAttr('readonly', 'readonly');
@@ -77,7 +80,8 @@ class CElement_FormInput_QueryBuilder extends CElement_FormInput {
         }
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         $filters = $this->filters;
         if ($filters instanceof CInterface_Arrayable) {
             $filters = $filters->toArray();

@@ -1,23 +1,21 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CElement\Element\FormInput;
 
-/**
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Jun 3, 2018, 2:34:55 PM
- */
-class CElement_FormInput_Password extends CElement_FormInput {
-    use CTrait_Compat_Element_FormInput_Password,
-        CTrait_Element_Property_Placeholder,
+use Cresenity\Laravel\CElement\FormInput;
+use Cresenity\Laravel\CElement\Traits\Property\PlaceholderPropertyTrait;
+
+class CElement_FormInput_Password extends CElement_FormInput
+{
+    use PlaceholderPropertyTrait,
         CTrait_Element_Property_AutoComplete;
 
     private $showPassword = false;
 
     private $toggleVisibility = false;
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         parent::__construct($id);
         $this->type = 'password';
         $this->autoComplete = false;
@@ -25,7 +23,8 @@ class CElement_FormInput_Password extends CElement_FormInput {
         $this->addClass('form-control');
     }
 
-    public function build() {
+    public function build()
+    {
         $this->setAttr('type', $this->type);
         $this->setAttr('value', $this->value);
         $this->setAttr('placeholder', $this->placeholder);
@@ -42,19 +41,22 @@ class CElement_FormInput_Password extends CElement_FormInput {
         }
     }
 
-    public function setShowPassword($bool = true) {
+    public function setShowPassword($bool = true)
+    {
         $this->showPassword = $bool;
 
         return $this;
     }
 
-    public function setToggleVisibility($bool = true) {
+    public function setToggleVisibility($bool = true)
+    {
         $this->toggleVisibility = $bool;
 
         return $this;
     }
 
-    protected function buildControlConfig() {
+    protected function buildControlConfig()
+    {
         $config = [
             'toggleVisibility' => (bool) $this->toggleVisibility,
 

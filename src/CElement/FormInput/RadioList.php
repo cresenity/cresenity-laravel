@@ -1,16 +1,21 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CElement\Element\FormInput;
 
-class CElement_FormInput_RadioList extends CElement_FormInput {
-    public function __construct($id) {
+use Cresenity\Laravel\CElement\FormInput;
+
+class CElement_FormInput_RadioList extends CElement_FormInput
+{
+    public function __construct($id)
+    {
         parent::__construct($id);
 
         $this->tag = 'div';
         $this->addClass('checkbox-list');
     }
 
-    protected function build() {
+    protected function build()
+    {
         parent::build();
         foreach ($this->list as $key => $value) {
             $controlName = $this->name ?: $this->id;

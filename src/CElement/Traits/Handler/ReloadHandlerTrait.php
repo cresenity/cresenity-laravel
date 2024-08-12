@@ -3,6 +3,7 @@
 namespace Cresenity\Laravel\CElement\Traits\Handler;
 
 use Cresenity\Laravel\CObservable\Listener\Handler\ReloadHandler;
+use Illuminate\Support\Str;
 
 /**
  * Description of Reloadable.
@@ -42,7 +43,7 @@ trait ReloadHandlerTrait
         if ($this->reloadHandler) {
             $attributes = $this->reloadHandler->toAttributeArray();
             foreach ($attributes as $key => $value) {
-                $this->setAttr('data-' . cstr::snake($key, '-'), c::e($value));
+                $this->setAttr('data-' . Str::snake($key, '-'), \c::e($value));
             }
         }
     }

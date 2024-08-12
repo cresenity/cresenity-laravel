@@ -1,14 +1,11 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CElement\Element\FormInput;
 
-/**
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Jun 24, 2018, 6:09:43 PM
- */
-class CElement_FormInput_Time extends CElement_FormInput {
+use Cresenity\Laravel\CElement\FormInput;
+
+class CElement_FormInput_Time extends CElement_FormInput
+{
     use CTrait_Compat_Element_FormInput_Time,
         CTrait_Element_Property_Placeholder;
 
@@ -20,7 +17,8 @@ class CElement_FormInput_Time extends CElement_FormInput {
 
     protected $minute_step;
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         parent::__construct($id);
 
         $this->type = 'timepicker';
@@ -34,7 +32,8 @@ class CElement_FormInput_Time extends CElement_FormInput {
         CManager::instance()->registerModule('timepicker');
     }
 
-    public function html($indent = 0) {
+    public function html($indent = 0)
+    {
         $html = new CStringBuilder();
         $html->setIndent($indent);
         $disabled = '';
@@ -69,7 +68,8 @@ class CElement_FormInput_Time extends CElement_FormInput {
         return $html->text();
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         $js = new CStringBuilder();
         $js->setIndent($indent);
 

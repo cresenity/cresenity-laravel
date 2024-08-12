@@ -1,6 +1,11 @@
 <?php
 
-class CElement_FormInput_FileAjax extends CElement_FormInput {
+namespace Cresenity\Laravel\CElement\Element\FormInput;
+
+use Cresenity\Laravel\CElement\FormInput;
+
+class CElement_FormInput_FileAjax extends CElement_FormInput
+{
     use CElement_Trait_UseViewTrait;
 
     protected $fileName;
@@ -19,7 +24,8 @@ class CElement_FormInput_FileAjax extends CElement_FormInput {
 
     protected $withInfo;
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         parent::__construct($id);
         $this->type = 'file';
         $this->tag = 'div';
@@ -56,25 +62,29 @@ class CElement_FormInput_FileAjax extends CElement_FormInput {
         });
     }
 
-    public function setFileName($fileName) {
+    public function setFileName($fileName)
+    {
         $this->fileName = $fileName;
 
         return $this;
     }
 
-    public function setAcceptFile($accept) {
+    public function setAcceptFile($accept)
+    {
         $this->acceptFile = $accept;
 
         return $this;
     }
 
-    public function setMaxUploadSize($size) {
+    public function setMaxUploadSize($size)
+    {
         $this->maxUploadSize = $size;
 
         return $this;
     }
 
-    public function setWithInfo($withInfo = true) {
+    public function setWithInfo($withInfo = true)
+    {
         $this->withInfo = $withInfo;
 
         return $this;
@@ -85,7 +95,8 @@ class CElement_FormInput_FileAjax extends CElement_FormInput {
      *
      * @return $this
      */
-    public function setAllowedExtension($ext) {
+    public function setAllowedExtension($ext)
+    {
         $arr = $ext;
         if (!is_array($arr)) {
             $arr = [$ext];
@@ -95,33 +106,38 @@ class CElement_FormInput_FileAjax extends CElement_FormInput {
         return $this;
     }
 
-    public function setValidationCallback($callback) {
+    public function setValidationCallback($callback)
+    {
         $this->validationCallback = c::toSerializableClosure($callback);
 
         return $this;
     }
 
-    public function setDisabledUpload($bool) {
+    public function setDisabledUpload($bool)
+    {
         $this->disabledUpload = $bool;
 
         return $this;
     }
 
-    public function html($indent = 0) {
+    public function html($indent = 0)
+    {
         $templateHtml = $this->getViewHtml();
         $html = $templateHtml;
 
         return $html;
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         $templateJs = $this->getViewJs();
         $js = $templateJs;
 
         return $js;
     }
 
-    public function setTempStorage($tempStorage) {
+    public function setTempStorage($tempStorage)
+    {
         $this->tempStorage = $tempStorage;
 
         return $this;

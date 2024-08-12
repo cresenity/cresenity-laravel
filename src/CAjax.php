@@ -1,6 +1,8 @@
 <?php
 namespace Cresenity\Laravel;
 
+use Cresenity\Laravel\CAjax\Info;
+use Cresenity\Laravel\CAjax\Method;
 use Cresenity\Laravel\CBase\ForwarderStaticClass;
 
 class CAjax
@@ -24,17 +26,17 @@ class CAjax
     /**
      * @param null|array|string $options
      *
-     * @return \CAjax_Method
+     * @return \Cresenity\Laravel\CAjax\Method
      */
     public static function createMethod($options = null)
     {
         if (!is_array($options)) {
             if ($options != null) {
-                return CAjax_Method::createFromJson($options);
+                return Method::createFromJson($options);
             }
         }
 
-        return new CAjax_Method($options);
+        return new Method($options);
     }
 
     public static function getData($file)
@@ -73,10 +75,10 @@ class CAjax
     }
 
     /**
-     * @return CAjax_Info|ForwarderStaticClass
+     * @return \Cresenity\Laravel\CAjax\Info|ForwarderStaticClass
      */
     public static function info()
     {
-        return new ForwarderStaticClass(CAjax_Info::class);
+        return new ForwarderStaticClass(Info::class);
     }
 }

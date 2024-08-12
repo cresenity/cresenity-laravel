@@ -1,6 +1,11 @@
 <?php
 
-class CElement_FormInput_GoogleRecaptcha extends CElement_FormInput {
+namespace Cresenity\Laravel\CElement\Element\FormInput;
+
+use Cresenity\Laravel\CElement\FormInput;
+
+class GoogleRecaptcha extends FormInput
+{
     /**
      * @var null|CVendor_Google_Recaptcha_AbstractRecaptcha
      */
@@ -21,7 +26,8 @@ class CElement_FormInput_GoogleRecaptcha extends CElement_FormInput {
      */
     protected $recaptchaInputName;
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         parent::__construct($id);
         $this->type = 'hidden';
         $this->recaptcha = null;
@@ -31,13 +37,15 @@ class CElement_FormInput_GoogleRecaptcha extends CElement_FormInput {
         $this->addClass('capp-google-recaptcha-control');
     }
 
-    protected function build() {
+    protected function build()
+    {
         $this->setAttr('type', $this->type);
         $this->setAttr('value', $this->value);
         parent::build();
     }
 
-    public function getRecaptcha() {
+    public function getRecaptcha()
+    {
         if ($this->recaptcha == null) {
             $this->recaptcha = CVendor_Google::recaptchaV3();
         }
@@ -45,35 +53,41 @@ class CElement_FormInput_GoogleRecaptcha extends CElement_FormInput {
         return $this->recaptcha;
     }
 
-    public function setRecaptcha(CVendor_Google_Recaptcha_AbstractRecaptcha $recaptcha) {
+    public function setRecaptcha(CVendor_Google_Recaptcha_AbstractRecaptcha $recaptcha)
+    {
         $this->recaptcha = $recaptcha;
 
         return $this;
     }
 
-    public function setRecaptchaType($type) {
+    public function setRecaptchaType($type)
+    {
         $this->recaptchaType = $type;
 
         return $this;
     }
 
-    public function setRecaptchaLabel($label) {
+    public function setRecaptchaLabel($label)
+    {
         $this->recaptchaLabel = $label;
 
         return $this;
     }
 
-    public function setRecaptchaInputName($name) {
+    public function setRecaptchaInputName($name)
+    {
         $this->recaptchaInputName = $name;
 
         return $this;
     }
 
-    protected function buttonCallbackName() {
+    protected function buttonCallbackName()
+    {
         return cstr::camel($this->id) . 'CallbackSubmit';
     }
 
-    public function html($indent = 0) {
+    public function html($indent = 0)
+    {
         $recaptcha = $this->getRecaptcha();
         $html = '';
         if ($recaptcha instanceof CVendor_Google_Recaptcha_RecaptchaV2) {
@@ -94,7 +108,8 @@ class CElement_FormInput_GoogleRecaptcha extends CElement_FormInput {
         return $html;
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         $recaptcha = $this->getRecaptcha();
         $js = '';
         if ($recaptcha instanceof CVendor_Google_Recaptcha_RecaptchaV2) {

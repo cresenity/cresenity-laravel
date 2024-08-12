@@ -1,17 +1,16 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CObservable\Listener\Handler;
 
-/**
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Apr 20, 2019, 3:07:56 PM
- */
-class CObservable_Listener_Handler_PrependHandler extends CObservable_Listener_Handler {
-    use CTrait_Compat_Handler_Driver_Prepend,
-        CObservable_Listener_Handler_Trait_TargetHandlerTrait,
-        CObservable_Listener_Handler_Trait_AjaxHandlerTrait;
+use Cresenity\Laravel\CObservable\HandlerElement;
+use Cresenity\Laravel\CObservable\Listener\Handler;
+use Cresenity\Laravel\CObservable\Listener\Handler\Traits\AjaxHandlerTrait;
+use Cresenity\Laravel\CObservable\Listener\Handler\Traits\TargetHandlerTrait;
+
+class PrependHandler extends Handler
+{
+    use TargetHandlerTrait,
+        AjaxHandlerTrait;
 
     protected $content;
 
@@ -21,16 +20,18 @@ class CObservable_Listener_Handler_PrependHandler extends CObservable_Listener_H
 
     protected $check_duplicate_selector;
 
-    public function __construct($listener) {
+    public function __construct($listener)
+    {
         parent::__construct($listener);
         $this->name = 'Prepend';
         $this->method = 'get';
         $this->target = '';
-        $this->content = CHandlerElement::factory();
+        $this->content = HandlerElement::factory();
         $this->param_inputs = [];
     }
 
-    public function addParamInput($inputs) {
+    public function addParamInput($inputs)
+    {
         if (!is_array($inputs)) {
             $inputs = [$inputs];
         }
@@ -40,21 +41,25 @@ class CObservable_Listener_Handler_PrependHandler extends CObservable_Listener_H
         return $this;
     }
 
-    public function setMethod($method) {
+    public function setMethod($method)
+    {
         $this->method = $method;
         return $this;
     }
 
-    public function content() {
+    public function content()
+    {
         return $this->content;
     }
 
-    public function setCheckDuplicateSelector($selector) {
+    public function setCheckDuplicateSelector($selector)
+    {
         $this->check_duplicate_selector = $selector;
         return $this;
     }
 
-    public function js() {
+    public function js()
+    {
         $js = '';
         $data_addition = '';
 

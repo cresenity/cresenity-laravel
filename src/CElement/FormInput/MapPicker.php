@@ -1,6 +1,11 @@
 <?php
 
-class CElement_FormInput_MapPicker extends CElement_FormInput {
+namespace Cresenity\Laravel\CElement\Element\FormInput;
+
+use Cresenity\Laravel\CElement\FormInput;
+
+class CElement_FormInput_MapPicker extends CElement_FormInput
+{
     protected $lat;
 
     protected $lng;
@@ -39,7 +44,8 @@ class CElement_FormInput_MapPicker extends CElement_FormInput {
 
     protected $rawJsOnChanged;
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         parent::__construct($id);
         $this->type = 'text';
         $this->tag = 'div';
@@ -69,7 +75,8 @@ class CElement_FormInput_MapPicker extends CElement_FormInput {
         CManager::registerModule('locationpicker');
     }
 
-    public function setValue($val) {
+    public function setValue($val)
+    {
         parent::setValue($val);
         $latlngArray = explode(',', $val);
         $this->lat = carr::get($latlngArray, 0, 0);
@@ -78,17 +85,20 @@ class CElement_FormInput_MapPicker extends CElement_FormInput {
         return $this;
     }
 
-    public function radius($val) {
+    public function radius($val)
+    {
         return $this->setRadius($val);
     }
 
-    public function setRadius($val) {
+    public function setRadius($val)
+    {
         $this->radius = $val;
 
         return $this;
     }
 
-    public function setLatitudeSelector($latitude) {
+    public function setLatitudeSelector($latitude)
+    {
         if ($latitude instanceof CRenderable) {
             $latitude = '#' . $latitude->id();
         }
@@ -97,7 +107,8 @@ class CElement_FormInput_MapPicker extends CElement_FormInput {
         return $this;
     }
 
-    public function setLongitudeSelector($longitude) {
+    public function setLongitudeSelector($longitude)
+    {
         if ($longitude instanceof CRenderable) {
             $longitude = '#' . $longitude->id();
         }
@@ -106,7 +117,8 @@ class CElement_FormInput_MapPicker extends CElement_FormInput {
         return $this;
     }
 
-    public function setRadiusSelector($selector) {
+    public function setRadiusSelector($selector)
+    {
         if ($selector instanceof CRenderable) {
             $selector = '#' . $selector->id();
         }
@@ -115,7 +127,8 @@ class CElement_FormInput_MapPicker extends CElement_FormInput {
         return $this;
     }
 
-    public function setSearchSelector($selector) {
+    public function setSearchSelector($selector)
+    {
         if ($selector instanceof CRenderable) {
             $selector = '#' . $selector->id();
         }
@@ -124,37 +137,43 @@ class CElement_FormInput_MapPicker extends CElement_FormInput {
         return $this;
     }
 
-    public function setDraggable($bool = true) {
+    public function setDraggable($bool = true)
+    {
         $this->draggable = $bool;
 
         return $this;
     }
 
-    public function setScrollwheel($bool = true) {
+    public function setScrollwheel($bool = true)
+    {
         $this->scrollwheel = $bool;
 
         return $this;
     }
 
-    public function markerDraggable($bool = true) {
+    public function markerDraggable($bool = true)
+    {
         $this->markerDraggable = $bool;
 
         return $this;
     }
 
-    public function markerInCenter($bool = true) {
+    public function markerInCenter($bool = true)
+    {
         $this->markerInCenter = $bool;
 
         return $this;
     }
 
-    public function setJsOnChanged($js) {
+    public function setJsOnChanged($js)
+    {
         $this->rawJsOnChanged = $js;
 
         return $this;
     }
 
-    public function build() {
+    public function build()
+    {
         //$this->wrapperContainer->add('<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=' . $this->geoCodingApiKey . '" type="text/javascript"></script>');
 
         if ($this->haveSearch) {
@@ -182,7 +201,8 @@ class CElement_FormInput_MapPicker extends CElement_FormInput {
             ->add('Loading...');
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         $js = new CStringBuilder();
         $js->setIndent($indent);
 

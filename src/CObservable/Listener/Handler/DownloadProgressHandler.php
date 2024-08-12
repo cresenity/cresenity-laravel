@@ -1,20 +1,30 @@
 <?php
 
-class CObservable_Listener_Handler_DownloadProgressHandler extends CObservable_Listener_Handler {
-    use CObservable_Listener_Handler_Trait_ParamHandlerTrait;
-    use CObservable_Listener_Handler_Trait_AjaxHandlerTrait;
+namespace Cresenity\Laravel\CObservable\Listener\Handler;
 
-    public function __construct($listener) {
+use Cresenity\Laravel\CBase;
+use Cresenity\Laravel\CObservable\Listener\Handler;
+use Cresenity\Laravel\CObservable\Listener\Handler\Traits\AjaxHandlerTrait;
+use Cresenity\Laravel\CObservable\Listener\Handler\Traits\ParamHandlerTrait;
+
+class DownloadProgressHandler extends Handler
+{
+    use ParamHandlerTrait;
+    use AjaxHandlerTrait;
+
+    public function __construct($listener)
+    {
         parent::__construct($listener);
         $this->method = 'get';
-        $this->target = '';
+        // $this->target = '';
 
         $this->name = 'DownloadProgress';
         $this->url = '';
-        $this->urlParam = [];
+        // $this->urlParam = [];
     }
 
-    public function js() {
+    public function js()
+    {
         $js = '';
         $dataAddition = $this->populateParamJson();
 

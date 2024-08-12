@@ -1,14 +1,19 @@
 <?php
 
-class CElement_FormInput_Textarea extends CElement_FormInput {
-    use CTrait_Compat_Element_FormInput_Textarea;
+namespace Cresenity\Laravel\CElement\Element\FormInput;
+
+use Cresenity\Laravel\CElement\FormInput;
+
+class Textarea extends FormInput
+{
     use CTrait_Element_Property_Placeholder;
 
     protected $col;
 
     protected $row;
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         parent::__construct($id);
 
         $this->tag = 'textarea';
@@ -20,7 +25,8 @@ class CElement_FormInput_Textarea extends CElement_FormInput {
         $this->addClass('form-control');
     }
 
-    public function build() {
+    public function build()
+    {
         parent::build();
         if ($this->readonly) {
             $this->setAttr('readonly', 'readonly');
@@ -39,7 +45,8 @@ class CElement_FormInput_Textarea extends CElement_FormInput {
         }
     }
 
-    public function html($indent = 0) {
+    public function html($indent = 0)
+    {
         $html = new CStringBuilder();
         $html->setIndent($indent);
         $this->buildOnce();
@@ -54,13 +61,15 @@ class CElement_FormInput_Textarea extends CElement_FormInput {
         return $html->text();
     }
 
-    public function setCol($col) {
+    public function setCol($col)
+    {
         $this->col = $col;
 
         return $this;
     }
 
-    public function setRow($row) {
+    public function setRow($row)
+    {
         $this->row = $row;
 
         return $this;

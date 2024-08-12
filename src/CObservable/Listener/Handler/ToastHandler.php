@@ -1,25 +1,34 @@
 <?php
 
-class CObservable_Listener_Handler_ToastHandler extends CObservable_Listener_Handler {
-    use CTrait_Element_Property_Title;
+namespace Cresenity\Laravel\CObservable\Listener\Handler;
+
+use Cresenity\Laravel\CElement\Traits\Property\TitlePropertyTrait;
+use Cresenity\Laravel\CObservable\Listener\Handler;
+
+class ToastHandler extends Handler
+{
+    use TitlePropertyTrait;
 
     protected $toastType = 'success';
 
     protected $message = '';
 
-    public function setMessage($message) {
+    public function setMessage($message)
+    {
         $this->message = $message;
 
         return $this;
     }
 
-    public function setType($type) {
+    public function setType($type)
+    {
         $this->toastType = $type;
 
         return $this;
     }
 
-    public function js() {
+    public function js()
+    {
         $optionsToast = [];
 
         $js = "toastr['" . $this->toastType . "']('" . $this->message . "', '" . $this->title . "', {

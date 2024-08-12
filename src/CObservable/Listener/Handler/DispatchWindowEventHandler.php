@@ -1,19 +1,18 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CObservable\Listener\Handler;
 
-/**
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Apr 20, 2019, 3:27:04 PM
- */
-class CObservable_Listener_Handler_DispatchWindowEventHandler extends CObservable_Listener_Handler {
+use Cresenity\Laravel\CBase;
+use Cresenity\Laravel\CObservable\Listener\Handler;
+
+class DispatchWindowEventHandler extends Handler
+{
     protected $method;
 
     protected $parameters;
 
-    public function __construct($listener) {
+    public function __construct($listener)
+    {
         parent::__construct($listener);
 
         $this->name = 'DispatchWindowEvent';
@@ -26,7 +25,8 @@ class CObservable_Listener_Handler_DispatchWindowEventHandler extends CObservabl
      *
      * @return $this
      */
-    public function setMethod($method) {
+    public function setMethod($method)
+    {
         $this->method = $method;
 
         return $this;
@@ -39,7 +39,8 @@ class CObservable_Listener_Handler_DispatchWindowEventHandler extends CObservabl
      *
      * @return $this
      */
-    public function addParameter($param) {
+    public function addParameter($param)
+    {
         $this->parameters[] = $param;
     }
 
@@ -50,7 +51,8 @@ class CObservable_Listener_Handler_DispatchWindowEventHandler extends CObservabl
      *
      * @return $this
      */
-    public function setParameters(array $params) {
+    public function setParameters(array $params)
+    {
         $this->parameters = $params;
     }
 
@@ -61,7 +63,8 @@ class CObservable_Listener_Handler_DispatchWindowEventHandler extends CObservabl
      *
      * @return array
      */
-    protected function applyArrayParams(array $array) {
+    protected function applyArrayParams(array $array)
+    {
         foreach ($array as $key => $value) {
             if (is_array($value)) {
                 $array[$key] = $this->applyArrayParams($value);
@@ -74,10 +77,11 @@ class CObservable_Listener_Handler_DispatchWindowEventHandler extends CObservabl
         return $array;
     }
 
-    public function js() {
+    public function js()
+    {
         $js = '';
         if ($this->method) {
-            $js .= "window.cresenity.dispatchWindowEvent('" . c::e($this->method) . "'";
+            $js .= "window.cresenity.dispatchWindowEvent('" . \c::e($this->method) . "'";
 
             if (is_array($this->parameters) && count($this->parameters) > 0) {
                 $parameters = $this->applyArrayParams($this->parameters);

@@ -1,6 +1,8 @@
 <?php
 namespace Cresenity\Laravel;
 
+use Cresenity\Laravel\CElement\PseudoElement;
+
 abstract class CElement extends CObservable
 {
 
@@ -70,9 +72,9 @@ abstract class CElement extends CObservable
         }
 
         $classes = (string) $classes;
-        $classes = c::collect(explode(' ', $classes))->filter()->all();
+        $classes = \c::collect(explode(' ', $classes))->filter()->all();
 
-        $this->classes = carr::merge($this->classes, $classes);
+        $this->classes = \carr::merge($this->classes, $classes);
 
         return $this;
     }
@@ -92,7 +94,7 @@ abstract class CElement extends CObservable
             }
         }
         $classes = (string) $classes;
-        $classes = c::collect(explode(' ', $classes))->filter()->all();
+        $classes = \c::collect(explode(' ', $classes))->filter()->all();
 
         foreach ($classes as $class) {
             if (($key = array_search($class, $this->classes)) !== false) {
@@ -264,24 +266,24 @@ abstract class CElement extends CObservable
     }
 
     /**
-     * @return CElement_PseudoElement
+     * @return \Cresenity\Laravel\CElement\PseudoElement
      */
     public function before()
     {
         if ($this->before == null) {
-            $this->before = CElement_PseudoElement::factory();
+            $this->before = PseudoElement::factory();
         }
 
         return $this->before;
     }
 
     /**
-     * @return CElement_PseudoElement
+     * @return \Cresenity\Laravel\CElement\PseudoElement
      */
     public function after()
     {
         if ($this->after == null) {
-            $this->after = CElement_PseudoElement::factory();
+            $this->after = PseudoElement::factory();
         }
 
         return $this->after;

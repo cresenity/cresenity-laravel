@@ -1,6 +1,8 @@
 <?php
 namespace Cresenity\Laravel\CBase;
 
+use Illuminate\Support\Arr;
+
 class StringParamable
 {
     /**
@@ -38,7 +40,7 @@ class StringParamable
         foreach ($matches as $val) {
             $str = $val[1]; //matches str without bracket {}
             $bStr = $val[0]; //matches str with bracket {}
-            $value = carr::get($this->params, $str);
+            $value = Arr::get($this->params, $str);
             if ($value !== null) {
                 $string = str_replace($bStr, $value, $string);
             }

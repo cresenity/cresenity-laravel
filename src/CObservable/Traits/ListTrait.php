@@ -2,6 +2,9 @@
 
 namespace Cresenity\Laravel\CObservable\Traits;
 
+use Cresenity\Laravel\CElement\ElementList\ActionList;
+use Cresenity\Laravel\CElement\ElementList\TabList;
+
 trait ListTrait
 {
     /**
@@ -11,7 +14,7 @@ trait ListTrait
      */
     public function addActionList($id = null)
     {
-        $actlist = new CElement_List_ActionList($id);
+        $actlist = new ActionList($id);
         $this->wrapper->add($actlist);
         if ($this instanceof CElement_Component_Form) {
             $actlist->setStyle('form-action');
@@ -27,7 +30,7 @@ trait ListTrait
      */
     public function addTabList($id = null)
     {
-        $tabs = CElement_Factory::createList('TabList', $id);
+        $tabs = new TabList($id);
         $this->add($tabs);
 
         return $tabs;

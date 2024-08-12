@@ -1,11 +1,11 @@
 <?php
 
-/**
- * Description of ImageAjax.
- *
- * @author Hery
- */
-class CElement_FormInput_MultipleFileAjax extends CElement_FormInput {
+namespace Cresenity\Laravel\CElement\Element\FormInput;
+
+use Cresenity\Laravel\CElement\FormInput;
+
+class CElement_FormInput_MultipleFileAjax extends CElement_FormInput
+{
     use CElement_Trait_UseViewTrait;
 
     protected $imgSrc;
@@ -45,7 +45,8 @@ class CElement_FormInput_MultipleFileAjax extends CElement_FormInput {
 
     protected $withInfo;
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         parent::__construct($id);
         $this->type = 'image';
         $this->tag = 'div';
@@ -100,7 +101,8 @@ class CElement_FormInput_MultipleFileAjax extends CElement_FormInput {
         });
     }
 
-    public function setWithInfo($withInfo = true) {
+    public function setWithInfo($withInfo = true)
+    {
         $this->withInfo = $withInfo;
 
         return $this;
@@ -111,7 +113,8 @@ class CElement_FormInput_MultipleFileAjax extends CElement_FormInput {
      *
      * @return string
      */
-    public function html($indent = 0) {
+    public function html($indent = 0)
+    {
         $templateHtml = $this->getViewHtml();
         $html = $templateHtml;
         if ($this->cropper != null) {
@@ -121,7 +124,8 @@ class CElement_FormInput_MultipleFileAjax extends CElement_FormInput {
         return $html;
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         $templateJs = $this->getViewJs();
         $js = $templateJs;
         if ($this->cropper != null) {
@@ -131,7 +135,8 @@ class CElement_FormInput_MultipleFileAjax extends CElement_FormInput {
         return $js;
     }
 
-    public function setMaxUploadSize($size) {
+    public function setMaxUploadSize($size)
+    {
         $this->maxUploadSize = $size;
 
         return $this;
@@ -142,7 +147,8 @@ class CElement_FormInput_MultipleFileAjax extends CElement_FormInput {
      *
      * @return $this
      */
-    public function setAllowedExtension($ext) {
+    public function setAllowedExtension($ext)
+    {
         $arr = $ext;
         if (!is_array($arr)) {
             $arr = [$ext];
@@ -152,13 +158,15 @@ class CElement_FormInput_MultipleFileAjax extends CElement_FormInput {
         return $this;
     }
 
-    public function setValidationCallback($callback) {
+    public function setValidationCallback($callback)
+    {
         $this->validationCallback = c::toSerializableClosure($callback);
 
         return $this;
     }
 
-    public function setLimitFile($limit) {
+    public function setLimitFile($limit)
+    {
         $this->limitFile = $limit;
 
         return $this;
@@ -167,7 +175,8 @@ class CElement_FormInput_MultipleFileAjax extends CElement_FormInput {
     /**
      * @return CElement_Helper_Cropper
      */
-    public function cropper() {
+    public function cropper()
+    {
         if ($this->cropper == null) {
             $this->cropper = new CElement_Helper_Cropper();
             $this->cropper->setOwner($this);
@@ -176,7 +185,8 @@ class CElement_FormInput_MultipleFileAjax extends CElement_FormInput {
         return $this->cropper;
     }
 
-    public function setFileFromResources(CModel_Collection $collection, $inputName = '') {
+    public function setFileFromResources(CModel_Collection $collection, $inputName = '')
+    {
         foreach ($collection as $model) {
             $this->addFile($model->getUrl(), $inputName, $model->getKey());
         }
@@ -184,7 +194,8 @@ class CElement_FormInput_MultipleFileAjax extends CElement_FormInput {
         return $this;
     }
 
-    public function addFile($fileUrl, $inputName = '', $inputValue = '') {
+    public function addFile($fileUrl, $inputName = '', $inputValue = '')
+    {
         $arr = [];
         $arr['input_name'] = $inputName;
         $arr['input_value'] = $inputValue;
@@ -195,7 +206,8 @@ class CElement_FormInput_MultipleFileAjax extends CElement_FormInput {
         return $this;
     }
 
-    public function addCustomControl($control, $inputName, $inputLabel) {
+    public function addCustomControl($control, $inputName, $inputLabel)
+    {
         $arr = [];
         $arr['control'] = $control;
         $arr['input_name'] = $inputName;
@@ -205,19 +217,22 @@ class CElement_FormInput_MultipleFileAjax extends CElement_FormInput {
         return $this;
     }
 
-    public function addCustomControlValue($inputName, $controlName, $inputValue) {
+    public function addCustomControlValue($inputName, $controlName, $inputValue)
+    {
         $this->customControlValue[$inputName][$controlName] = $inputValue;
 
         return $this;
     }
 
-    public function setMaximum($maximum = null) {
+    public function setMaximum($maximum = null)
+    {
         $this->maximum = $maximum;
 
         return $this;
     }
 
-    public function setAccept($accept) {
+    public function setAccept($accept)
+    {
         $this->accept = $accept;
 
         return $this;

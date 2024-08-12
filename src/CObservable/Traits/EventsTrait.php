@@ -2,6 +2,8 @@
 
 namespace Cresenity\Laravel\CObservable\Traits;
 
+use Cresenity\Laravel\CObservable;
+
 trait EventsTrait
 {
     public function onClick(\Closure $event = null, $options = [])
@@ -24,7 +26,7 @@ trait EventsTrait
         return $this;
     }
 
-    public function onMouseEnter(Closure $event = null, $options = [])
+    public function onMouseEnter(\Closure $event = null, $options = [])
     {
         /** @var CObservable $this */
         $compiledJs = $this->getCompiledEventJs($event);
@@ -34,7 +36,7 @@ trait EventsTrait
         return $this;
     }
 
-    public function onMouseLeave(Closure $event = null, $options = [])
+    public function onMouseLeave(\Closure $event = null, $options = [])
     {
         /** @var CObservable $this */
         $compiledJs = $this->getCompiledEventJs($event);
@@ -44,7 +46,7 @@ trait EventsTrait
         return $this;
     }
 
-    public function onChange(Closure $event, $options = [])
+    public function onChange(\Closure $event, $options = [])
     {
         /** @var CObservable $this */
         $compiledJs = $this->getCompiledEventJs($event);
@@ -53,7 +55,7 @@ trait EventsTrait
         return $this;
     }
 
-    private function getCompiledEventJs(Closure $event)
+    private function getCompiledEventJs(\Closure $event)
     {
         return CJavascript::getJsStatementFromClosure($event, [$this->javascript()]);
     }

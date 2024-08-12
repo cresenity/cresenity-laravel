@@ -19,6 +19,7 @@ class CresenityServiceProvider extends ServiceProvider
             define('DS', \DIRECTORY_SEPARATOR);
         }
         require_once dirname(__FILE__).'/../helpers/c.php';
+        require_once dirname(__FILE__).'/../helpers/carr.php';
         $this->registerCommands();
         $this->registerPublishing();
         $this->registerRoutes();
