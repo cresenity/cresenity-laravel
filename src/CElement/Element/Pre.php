@@ -1,9 +1,13 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CElement\Element;
 
-class CElement_Element_Pre extends CElement_Element {
-    public function __construct($id = '') {
+use Cresenity\Laravel\CElement\Element;
+
+class Pre extends Element
+{
+    public function __construct($id = '')
+    {
         parent::__construct($id);
         $this->tag = 'pre';
         $this->haveIndent = false;
@@ -12,9 +16,10 @@ class CElement_Element_Pre extends CElement_Element {
     /**
      * @param string $id
      *
-     * @return CElement_Element_Pre
+     * @return Pre
      */
-    public static function factory($id = null) {
-        return new CElement_Element_Pre($id);
+    public static function factory($id = null)
+    {
+        return new Pre($id);
     }
 }

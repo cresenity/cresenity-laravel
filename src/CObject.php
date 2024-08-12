@@ -58,16 +58,6 @@ class CObject
         return isset($traits[$trait]);
     }
 
-    /**
-     * @deprecated since 1.2
-     *
-     * @return string
-     */
-    public function domain()
-    {
-        return $this->domain;
-    }
-
     public function toArray()
     {
         $data = [

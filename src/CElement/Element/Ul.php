@@ -1,9 +1,13 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CElement\Element;
 
-class CElement_Element_Ul extends CElement_Element {
-    public function __construct($id = '') {
+use Cresenity\Laravel\CElement\Element;
+
+class Ul extends Element
+{
+    public function __construct($id = '')
+    {
         parent::__construct($id);
         $this->tag = 'ul';
     }

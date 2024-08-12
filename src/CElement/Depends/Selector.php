@@ -1,13 +1,20 @@
 <?php
 
-class CElement_Depends_Selector {
+namespace Cresenity\Laravel\CElement\Element\Depends;
+
+use Cresenity\Laravel\CRenderable;
+
+class Selector
+{
     protected $selectors = [];
 
-    public function __construct(array $selectors = []) {
+    public function __construct(array $selectors = [])
+    {
         $this->setSelectors($selectors);
     }
 
-    public function addSelector($selector) {
+    public function addSelector($selector)
+    {
         if (is_array($selector)) {
             foreach ($selector as $selectorItem) {
                 $this->addSelector($selectorItem);
@@ -22,7 +29,8 @@ class CElement_Depends_Selector {
         return $this;
     }
 
-    public function setSelectors($selectors) {
+    public function setSelectors($selectors)
+    {
         $this->selectors = [];
         $this->addSelector($selectors);
 
@@ -32,11 +40,13 @@ class CElement_Depends_Selector {
     /**
      * @return string
      */
-    public function getQuerySelector() {
+    public function getQuerySelector()
+    {
         return implode(', ', $this->selectors);
     }
 
-    public function getScriptForValue() {
+    public function getScriptForValue()
+    {
         $valueScripts = [];
         foreach ($this->selectors as $dependsOnSelector) {
             $valueScripts[] = "$('" . $dependsOnSelector . "').is(':checkbox') ? $('" . $dependsOnSelector . ":checked').val() : $('" . $dependsOnSelector . "').val()";

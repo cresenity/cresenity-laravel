@@ -1,15 +1,14 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CElement\Element\FormInput;
 
-/**
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Jun 24, 2018, 6:26:04 PM
- */
-class CElement_FormInput_AutoNumeric extends CElement_FormInput {
-    use CTrait_Element_Property_Placeholder;
+use Cresenity\Laravel\CElement\FormInput;
+use Cresenity\Laravel\CElement\Traits\Property\PlaceholderPropertyTrait;
+use Cresenity\Laravel\CManager;
+
+class AutoNumeric extends FormInput
+{
+    use PlaceholderPropertyTrait;
 
     protected $decimalDigit = 0;
 
@@ -21,15 +20,16 @@ class CElement_FormInput_AutoNumeric extends CElement_FormInput {
 
     protected $maxValue = null;
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         parent::__construct($id);
 
         $this->type = 'text';
         $this->placeholder = '';
         $this->value = '0';
-        $this->decimalDigit = CApp::formatter()->getDecimalDigit();
-        $this->thousandSeparator = CApp::formatter()->getThousandSeparator();
-        $this->decimalSeparator = CApp::formatter()->getDecimalSeparator();
+        $this->decimalDigit = \c::formatter()->getDecimalDigit();
+        $this->thousandSeparator = \c::formatter()->getThousandSeparator();
+        $this->decimalSeparator = \c::formatter()->getDecimalSeparator();
         $this->addClass('form-control');
 
         if (!CManager::asset()->module()->isRegisteredModule('auto-numeric')) {
@@ -37,23 +37,27 @@ class CElement_FormInput_AutoNumeric extends CElement_FormInput {
         }
     }
 
-    public static function factory($id = null) {
-        return new CElement_FormInput_AutoNumeric($id);
+    public static function factory($id = null)
+    {
+        return new AutoNumeric($id);
     }
 
-    public function setDecimalDigit($digit) {
+    public function setDecimalDigit($digit)
+    {
         $this->decimalDigit = $digit;
 
         return $this;
     }
 
-    public function setThousandSeparator($separator) {
+    public function setThousandSeparator($separator)
+    {
         $this->thousandSeparator = $separator;
 
         return $this;
     }
 
-    public function setDecimalSeparator($separator) {
+    public function setDecimalSeparator($separator)
+    {
         $this->decimalSeparator = $separator;
 
         return $this;
@@ -64,7 +68,8 @@ class CElement_FormInput_AutoNumeric extends CElement_FormInput {
      *
      * @return $this
      */
-    public function setMaxValue($maxValue) {
+    public function setMaxValue($maxValue)
+    {
         $this->maxValue = $maxValue;
 
         return $this;
@@ -75,13 +80,15 @@ class CElement_FormInput_AutoNumeric extends CElement_FormInput {
      *
      * @return $this
      */
-    public function setMinValue($minValue) {
+    public function setMinValue($minValue)
+    {
         $this->minValue = $minValue;
 
         return $this;
     }
 
-    protected function build() {
+    protected function build()
+    {
         $this->setAttr('type', $this->type);
         $this->setAttr('value', $this->value);
         if (!isset($this->attr['data-m-dec'])) {
@@ -111,10 +118,11 @@ class CElement_FormInput_AutoNumeric extends CElement_FormInput {
         }
         $this->addClass('cres:element:control:AutoNumeric');
         $this->setAttr('cres-element', 'control:AutoNumeric');
-        $this->setAttr('cres-config', c::json($this->buildControlConfig()));
+        $this->setAttr('cres-config', \c::json($this->buildControlConfig()));
     }
 
-    protected function buildControlConfig() {
+    protected function buildControlConfig()
+    {
         $config = [
             'applyJs' => 'autoNumeric',
         ];

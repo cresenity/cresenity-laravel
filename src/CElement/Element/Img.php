@@ -1,19 +1,15 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CElement\Element;
 
-/**
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Mar 24, 2019, 12:41:06 PM
- */
-class CElement_Element_Img extends CElement_Element {
-    use CTrait_Compat_Element_Img;
+use Cresenity\Laravel\CElement\Element;
 
+class Img extends Element
+{
     protected $progressiveImage = null;
 
-    public function __construct($id = '') {
+    public function __construct($id = '')
+    {
         parent::__construct($id);
         $this->isOneTag = true;
         $this->tag = 'img';
@@ -22,10 +18,11 @@ class CElement_Element_Img extends CElement_Element {
     /**
      * @param string $id
      *
-     * @return CElement_Element_Img
+     * @return Img
      */
-    public static function factory($id = '') {
-        return new CElement_Element_Img($id);
+    public static function factory($id = '')
+    {
+        return new self($id);
     }
 
     /**
@@ -33,7 +30,8 @@ class CElement_Element_Img extends CElement_Element {
      *
      * @param string $src
      */
-    public function setSrc($src) {
+    public function setSrc($src)
+    {
         $this->setAttr('src', $src);
 
         return $this;
@@ -44,7 +42,8 @@ class CElement_Element_Img extends CElement_Element {
      *
      * @param string $alt
      */
-    public function setAlt($alt) {
+    public function setAlt($alt)
+    {
         $this->setAttr('alt', $alt);
 
         return $this;

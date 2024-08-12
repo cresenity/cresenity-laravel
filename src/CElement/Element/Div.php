@@ -3,11 +3,14 @@
 namespace Cresenity\Laravel\CElement\Element;
 
 use Cresenity\Laravel\CElement\Element;
+use Cresenity\Laravel\CElement\Traits\Handler\ReloadHandlerTrait;
+use Cresenity\Laravel\CElement\Traits\Property\DependsOnPropertyTrait;
+use Cresenity\Laravel\CStringBuilder;
 
-class CElement_Element_Div extends CElement_Element
+class Div extends Element
 {
-    use CTrait_Element_Handler_ReloadHandler;
-    use CTrait_Element_Property_DependsOn;
+    use ReloadHandlerTrait;
+    use DependsOnPropertyTrait;
 
     public function __construct($id = null)
     {

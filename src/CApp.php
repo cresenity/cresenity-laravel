@@ -169,22 +169,25 @@ final class CApp implements Responsable, IlluminateRenderable, Jsonable
         return json_encode($data, $options);
     }
 
-      /**
+    /**
      * @return \Cresenity\Laravel\CApp\SEO
      */
-    public static function seo() {
+    public static function seo()
+    {
         return SEO::instance();
     }
 
     /**
      * @return \Cresenity\Laravel\CApp\Notification
      */
-    public function notification() {
+    public function notification()
+    {
         return Notification::instance();
     }
 
 
-    public function __call($method, $parameters) {
+    public function __call($method, $parameters)
+    {
         if (method_exists($this->element, $method)) {
             return call_user_func_array([$this->element, $method], $parameters);
         }
@@ -194,5 +197,4 @@ final class CApp implements Responsable, IlluminateRenderable, Jsonable
 
         throw new \Exception('undefined method on CApp: ' . $method);
     }
-
 }

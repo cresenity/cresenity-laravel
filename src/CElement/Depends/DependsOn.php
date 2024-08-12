@@ -1,4 +1,9 @@
 <?php
+
+namespace Cresenity\Laravel\CElement\Element\Depends;
+
+use Cresenity\Laravel\Traits\HasOptions;
+use Illuminate\Support\Arr;
 use Opis\Closure\SerializableClosure;
 
 /**
@@ -6,54 +11,63 @@ use Opis\Closure\SerializableClosure;
  * @see CElement_FormInput_Select
  * @see CElement_FormInput_SelectSearch
  */
-class CElement_Depends_DependsOn {
-    use CTrait_HasOptions;
+class DependsOn
+{
+    use HasOptions;
 
     /**
-     * @var CElement_Depends_Selector
+     * @var \Cresenity\Laravel\CElement\Element\Depends\Selector
      */
     protected $selector;
 
     protected $resolver;
 
-    public function __construct($selector, $resolver, $options = []) {
+    public function __construct($selector, $resolver, $options = [])
+    {
         $this->options = $options;
 
         $this->setResolver($resolver);
-        $this->selector = new CElement_Depends_Selector(carr::wrap($selector));
+        $this->selector = new Selector(Arr::wrap($selector));
     }
 
-    public function addSelector($selector) {
+    public function addSelector($selector)
+    {
         $this->selector->addSelector($selector);
 
         return $this;
     }
 
-    public function setSelector($selector) {
+    public function setSelector($selector)
+    {
         $this->selector->setSelectors($selector);
 
         return $this;
     }
 
-    public function setResolver($resolver) {
+    public function setResolver($resolver)
+    {
         $this->resolver = new SerializableClosure($resolver);
 
         return $this;
     }
 
-    public function getSelector() {
+    public function getSelector()
+    {
         return $this->selector;
     }
 
-    public function getResolver() {
+    public function getResolver()
+    {
         return $this->resolver;
     }
 
-    public function getThrottle() {
+    public function getThrottle()
+    {
         return $this->getOption('throttle', 100);
     }
 
-    public function getBlock() {
+    public function getBlock()
+    {
         return $this->getOption('block', true);
     }
 }

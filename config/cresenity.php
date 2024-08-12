@@ -2,6 +2,9 @@
 
 
 return [
+    'ajax'=>[
+        'expiration' => 60,
+    ],
     'auth'=>[
 
     ],

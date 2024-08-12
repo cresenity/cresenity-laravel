@@ -1,31 +1,33 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CElement\Element;
 
-class CElement_Element_Iframe extends CElement_Element {
-    use CTrait_Element_Property_Width,
-        CTrait_Element_Property_Height;
+use Cresenity\Laravel\CElement\Element;
+use Cresenity\Laravel\CElement\Traits\Property\HeightPropertyTrait;
+use Cresenity\Laravel\CElement\Traits\Property\WidthPropertyTrait;
+
+class Iframe extends Element
+{
+    use WidthPropertyTrait,
+        HeightPropertyTrait;
 
     protected $src = '';
 
-    public function __construct($id = '') {
+    public function __construct($id = '')
+    {
         parent::__construct($id);
         $this->tag = 'iframe';
     }
 
-    // @codingStandardsIgnoreStart
-    public function set_src($src) {
-        // @codingStandardsIgnoreEnd
+
+    public function setSrc($src)
+    {
         $this->src = $src;
         return $this;
     }
 
-    public function setSrc($src) {
-        $this->src = $src;
-        return $this;
-    }
-
-    public function build() {
+    public function build()
+    {
         $this->setAttr('src', $this->src);
         if ($this->width) {
             $this->setAttr('width', $this->width);
