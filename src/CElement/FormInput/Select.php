@@ -188,8 +188,8 @@ class CElement_FormInput_Select extends CElement_FormInput
                 $value = $v;
                 $addition_attribute = ' ';
                 if (is_array($v)) {
-                    $value = carr::get($v, 'value');
-                    $attributes = carr::get($v, 'attributes', []);
+                    $value = \carr::get($v, 'value');
+                    $attributes = \carr::get($v, 'attributes', []);
                     foreach ($attributes as $attribute_k => $attribute_v) {
                         $addition_attribute .= ' ' . $attribute_k . '="' . $attribute_v . '"';
                     }

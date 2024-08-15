@@ -1,6 +1,9 @@
 <?php
 
-class CElement_FormInput_EditorJs_Editor {
+namespace Cresenity\Laravel\CElement\Element\FormInput\EditorJs;
+
+class Editor
+{
     /**
      * @var string
      */
@@ -37,11 +40,13 @@ class CElement_FormInput_EditorJs_Editor {
         $this->data = $data;
     }
 
-    public function getHolder(): string {
+    public function getHolder(): string
+    {
         return $this->holder;
     }
 
-    public function setHolder(string $holder): CElement_FormInput_EditorJs_Editor {
+    public function setHolder(string $holder): CElement_FormInput_EditorJs_Editor
+    {
         $this->holder = $holder;
 
         return $this;
@@ -50,7 +55,8 @@ class CElement_FormInput_EditorJs_Editor {
     /**
      * @return null|CElement_FormInput_EditorJs_EditorConfig
      */
-    public function getConfig() {
+    public function getConfig()
+    {
         return $this->config;
     }
 
@@ -59,13 +65,15 @@ class CElement_FormInput_EditorJs_Editor {
      *
      * @return CElement_FormInput_EditorJs_Editor
      */
-    public function setConfig(CElement_FormInput_EditorJs_EditorConfig $config) {
+    public function setConfig(CElement_FormInput_EditorJs_EditorConfig $config)
+    {
         $this->config = $config;
 
         return $this;
     }
 
-    public function getData(): array {
+    public function getData(): array
+    {
         return $this->data;
     }
 
@@ -74,7 +82,8 @@ class CElement_FormInput_EditorJs_Editor {
      *
      * @return CElement_FormInput_EditorJs_Editor
      */
-    public function setData(array $data) {
+    public function setData(array $data)
+    {
         $this->data = $data;
 
         return $this;

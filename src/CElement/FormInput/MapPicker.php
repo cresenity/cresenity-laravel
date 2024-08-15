@@ -3,8 +3,9 @@
 namespace Cresenity\Laravel\CElement\Element\FormInput;
 
 use Cresenity\Laravel\CElement\FormInput;
+use Cresenity\Laravel\CManager;
 
-class CElement_FormInput_MapPicker extends CElement_FormInput
+class MapPicker extends FormInput
 {
     protected $lat;
 
@@ -67,7 +68,7 @@ class CElement_FormInput_MapPicker extends CElement_FormInput
         $this->geoCodingApiKey = CF::config('vendor.google.geocoding_api_key');
         $this->rawJsOnChanged = '';
         if (strlen($this->geoCodingApiKey) == 0) {
-            throw new Exception('no api key found in config vendor.google.geocoding_api_key');
+            throw new \Exception('no api key found in config vendor.google.geocoding_api_key');
         }
         CManager::registerModule('locationpicker-googleruntime', [
             'js' => 'https://maps.googleapis.com/maps/api/js?libraries=places&key=' . $this->geoCodingApiKey . ''

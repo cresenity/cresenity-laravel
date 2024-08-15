@@ -1,15 +1,19 @@
 <?php
 
+namespace Cresenity\Laravel\CElement\Element\FormInput\EditorJs\Traits;
+
 /**
  * Class BlockHandler.
  */
-trait CElement_FormInput_EditorJs_Trait_EditorJsToolTrait {
+trait EditorJsToolTrait
+{
     protected $tools;
 
     /**
      * @return CElement_FormInput_EditorJs_Tool_HeaderTool
      */
-    public function headerTool() {
+    public function headerTool()
+    {
         return $this->tools['header'];
     }
 
@@ -18,7 +22,8 @@ trait CElement_FormInput_EditorJs_Trait_EditorJsToolTrait {
      *
      * @return CElement_FormInput_EditorJs
      */
-    public function withHeaderTool(Closure $callback) {
+    public function withHeaderTool(\Closure $callback)
+    {
         $callback($this->headerTool());
 
         return $this;
@@ -27,16 +32,18 @@ trait CElement_FormInput_EditorJs_Trait_EditorJsToolTrait {
     /**
      * @return CElement_FormInput_EditorJs_Tool_ChecklistTool
      */
-    public function checklistTool() {
+    public function checklistTool()
+    {
         return $this->tools['checklist'];
     }
 
     /**
-     * @param Closure $callback
+     * @param \Closure $callback
      *
      * @return CElement_FormInput_EditorJs
      */
-    public function withChecklistTool(Closure $callback) {
+    public function withChecklistTool(\Closure $callback)
+    {
         $callback($this->checklistTool());
 
         return $this;
@@ -45,16 +52,18 @@ trait CElement_FormInput_EditorJs_Trait_EditorJsToolTrait {
     /**
      * @return CElement_FormInput_EditorJs_Tool_LinkTool
      */
-    public function linkTool() {
+    public function linkTool()
+    {
         return $this->tools['link'];
     }
 
     /**
-     * @param Closure $callback
+     * @param \Closure $callback
      *
      * @return CElement_FormInput_EditorJs
      */
-    public function withLinkTool(Closure $callback) {
+    public function withLinkTool(\Closure $callback)
+    {
         $callback($this->linkTool());
 
         return $this;
@@ -63,16 +72,18 @@ trait CElement_FormInput_EditorJs_Trait_EditorJsToolTrait {
     /**
      * @return CElement_FormInput_EditorJs_Tool_ImageTool
      */
-    public function imageTool() {
+    public function imageTool()
+    {
         return $this->tools['image'];
     }
 
     /**
-     * @param Closure $callback
+     * @param \Closure $callback
      *
      * @return CElement_FormInput_EditorJs
      */
-    public function withImageTool(Closure $callback) {
+    public function withImageTool(\Closure $callback)
+    {
         $callback($this->imageTool());
 
         return $this;
@@ -81,16 +92,18 @@ trait CElement_FormInput_EditorJs_Trait_EditorJsToolTrait {
     /**
      * @return CElement_FormInput_EditorJs_Tool_RawTool
      */
-    public function rawTool() {
+    public function rawTool()
+    {
         return $this->tools['raw'];
     }
 
     /**
-     * @param Closure $callback
+     * @param \Closure $callback
      *
      * @return CElement_FormInput_EditorJs
      */
-    public function withRawTool(Closure $callback) {
+    public function withRawTool(\Closure $callback)
+    {
         $callback($this->rawTool());
 
         return $this;

@@ -2,11 +2,15 @@
 
 namespace Cresenity\Laravel\CElement\Element\FormInput;
 
+use Cresenity\Laravel\CAjax;
+use Cresenity\Laravel\CAjax\Engine\FileUpload;
 use Cresenity\Laravel\CElement\FormInput;
+use Cresenity\Laravel\CElement\Traits\UseViewTrait;
+use Illuminate\View\View;
 
-class CElement_FormInput_FileAjax extends CElement_FormInput
+class FileAjax extends FormInput
 {
-    use CElement_Trait_UseViewTrait;
+    use UseViewTrait;
 
     protected $fileName;
 
@@ -36,12 +40,12 @@ class CElement_FormInput_FileAjax extends CElement_FormInput
         $this->allowedExtension = [];
         $this->disabledUpload = false;
         $this->view = 'cresenity/element/form-input/file-ajax';
-        $this->onBeforeParse(function (CView_View $view) {
+        $this->onBeforeParse(function (View $view) {
             $ajaxName = $this->name;
             $ajaxName = str_replace('[', '-', $ajaxName);
             $ajaxName = str_replace(']', '-', $ajaxName);
 
-            $ajaxUrl = CAjax::createMethod()->setType(CAjax_Engine_FileUpload::class)
+            $ajaxUrl = CAjax::createMethod()->setType(FileUpload::class)
                 ->setData('inputName', $ajaxName)
                 ->setData('allowedExtension', $this->allowedExtension)
                 ->setData('validationCallback', $this->validationCallback)

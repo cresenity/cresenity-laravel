@@ -1,17 +1,23 @@
 <?php
 
-abstract class CElement_FormInput_EditorJs_ToolAbstract {
+namespace Cresenity\Laravel\CElement\Element\FormInput\EditorJs;
+
+abstract class ToolAbstract
+{
     protected $enabled;
 
-    public function enable() {
+    public function enable()
+    {
         $this->enabled = true;
     }
 
-    public function disable() {
+    public function disable()
+    {
         $this->enabled = false;
     }
 
-    public function isEnabled() {
+    public function isEnabled()
+    {
         return $this->enabled;
     }
 

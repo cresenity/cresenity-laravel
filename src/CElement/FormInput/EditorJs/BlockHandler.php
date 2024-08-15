@@ -1,9 +1,12 @@
 <?php
 
+namespace Cresenity\Laravel\CElement\Element\FormInput\EditorJs;
+
 /**
  * Class BlockHandler.
  */
-class CElement_FormInput_EditorJs_BlockHandler {
+class BlockHandler
+{
     /**
      * Default pseudo-key for numerical arrays.
      */
@@ -21,7 +24,8 @@ class CElement_FormInput_EditorJs_BlockHandler {
      *
      * @throws CElement_FormInput_EditorJs_EditorJsException
      */
-    public function __construct($configuration = null) {
+    public function __construct($configuration = null)
+    {
         require_once DOCROOT . 'system/vendor/HTMLPurifier.auto.php';
         $this->rules = new CElement_FormInput_EditorJs_ConfigLoader($configuration);
     }
@@ -36,7 +40,8 @@ class CElement_FormInput_EditorJs_BlockHandler {
      *
      * @return bool
      */
-    public function validateBlock($blockType, $blockData) {
+    public function validateBlock($blockType, $blockData)
+    {
         /**
          * Default action for blocks that are not mentioned in a configuration.
          */
@@ -60,7 +65,8 @@ class CElement_FormInput_EditorJs_BlockHandler {
      *
      * @return array|bool
      */
-    public function sanitizeBlock($blockType, $blockData, $blockTunes = []) {
+    public function sanitizeBlock($blockType, $blockData, $blockTunes = [])
+    {
         $rule = $this->rules->tools[$blockType];
 
         return [
@@ -80,7 +86,8 @@ class CElement_FormInput_EditorJs_BlockHandler {
      *
      * @return bool
      */
-    private function validate($rules, $blockData) {
+    private function validate($rules, $blockData)
+    {
         /**
          * Make sure that every required param exists in data block.
          */
@@ -189,7 +196,8 @@ class CElement_FormInput_EditorJs_BlockHandler {
      *
      * @return array
      */
-    private function sanitize($rules, $blockData) {
+    private function sanitize($rules, $blockData)
+    {
         /**
          * Sanitize every key in data block.
          */
@@ -234,7 +242,8 @@ class CElement_FormInput_EditorJs_BlockHandler {
      *
      * @return \HTMLPurifier
      */
-    private function getPurifier($allowedTags) {
+    private function getPurifier($allowedTags)
+    {
         $sanitizer = $this->getDefaultPurifier();
 
         $sanitizer->set('HTML.Allowed', $allowedTags);
@@ -254,7 +263,8 @@ class CElement_FormInput_EditorJs_BlockHandler {
     /**
      * Initialize HTML Purifier with default settings.
      */
-    private function getDefaultPurifier() {
+    private function getDefaultPurifier()
+    {
         $sanitizer = \HTMLPurifier_Config::createDefault();
 
         $sanitizer->set('HTML.TargetBlank', true);
@@ -279,7 +289,8 @@ class CElement_FormInput_EditorJs_BlockHandler {
      *
      * @return bool – true if the array is associative
      */
-    private function isAssoc(array $arr) {
+    private function isAssoc(array $arr)
+    {
         if ([] === $arr) {
             return false;
         }
@@ -296,7 +307,8 @@ class CElement_FormInput_EditorJs_BlockHandler {
      *
      * @return array – expanded tool settings
      */
-    private function expandToolSettings($rule) {
+    private function expandToolSettings($rule)
+    {
         if (is_string($rule)) {
             // 'blockName': 'string' – tool with string type and default settings
             $expandedRule = ['type' => $rule];

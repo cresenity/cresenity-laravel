@@ -3,13 +3,14 @@
 namespace Cresenity\Laravel\CElement\Element\FormInput;
 
 use Cresenity\Laravel\CElement\FormInput;
+use Cresenity\Laravel\CElement\Traits\Property\PlaceholderPropertyTrait;
 
 /**
  * @see CManager_EditorJs
  */
-class CElement_FormInput_EditorJs extends CElement_FormInput
+class EditorJs extends FormInput
 {
-    use CTrait_Element_Property_Placeholder;
+    use PlaceholderPropertyTrait;
     use CElement_FormInput_EditorJs_Trait_EditorJsToolTrait;
 
     protected $editor;
@@ -108,8 +109,8 @@ class CElement_FormInput_EditorJs extends CElement_FormInput
                 $value = [];
             }
         }
-        $this->setAttr('value', c::json($value));
-        $manager = c::manager();
+        $this->setAttr('value', \c::json($value));
+        $manager = \c::manager();
         // $manager->registerJs('https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest');
         // $manager->registerJs('https://cdn.jsdelivr.net/npm/@editorjs/simple-image@latest');
         // $manager->registerJs('https://cdn.jsdelivr.net/npm/@editorjs/list@latest');

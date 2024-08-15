@@ -5,10 +5,8 @@ namespace Cresenity\Laravel\CElement\Element\FormInput;
 use Cresenity\Laravel\CElement\FormInput;
 use Cresenity\Laravel\CStringBuilder;
 
-class CElement_FormInput_File extends CElement_FormInput
+class File extends FormInput
 {
-    use CTrait_Compat_Element_FormInput_File;
-
     protected $multiple;
 
     protected $applyjs;
@@ -23,7 +21,7 @@ class CElement_FormInput_File extends CElement_FormInput
 
         $this->input_help = '';
 
-        $this->applyjs = c::theme('fileupload', 'file-upload');
+        $this->applyjs = \c::theme('fileupload', 'file-upload');
     }
 
     public static function factory($id = null)
@@ -71,11 +69,11 @@ class CElement_FormInput_File extends CElement_FormInput
             $html->appendln('<div class="fileupload ' . $add_class . '" data-provides="fileupload">');
             $html->appendln('	<div class="input-group">');
             $html->appendln('		<div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i> <span class="fileupload-preview">' . $this->value . '</span></div>');
-            $html->appendln('		<span class="btn btn-file"><span class="fileupload-new">' . c::__('Select file') . '</span><span class="fileupload-exists">' . c::__('Change') . '</span>');
+            $html->appendln('		<span class="btn btn-file"><span class="fileupload-new">' . \c::__('Select file') . '</span><span class="fileupload-exists">' . \c::__('Change') . '</span>');
         }
         $html->appendln('			<input type="file" name="' . $name . '" id="' . $this->id . '" class="file' . $classes . $this->validation->validationClass() . '"' . $custom_css . $disabled . $multiple . ' />')->incIndent()->br();
         if ($this->applyjs == 'file-upload') {
-            $html->appendln('		</span><a href="#" class="btn remove fileupload-exists" data-dismiss="fileupload">' . c::__('Remove') . '</a>');
+            $html->appendln('		</span><a href="#" class="btn remove fileupload-exists" data-dismiss="fileupload">' . \c::__('Remove') . '</a>');
             $html->appendln('	</div>');
             $html->appendln('</div>');
         }

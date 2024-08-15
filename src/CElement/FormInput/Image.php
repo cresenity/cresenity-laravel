@@ -2,8 +2,10 @@
 
 namespace Cresenity\Laravel\CElement\Element\FormInput;
 
+use Cresenity\Laravel\CApp\Base;
 use Cresenity\Laravel\CElement\FormInput;
 use Cresenity\Laravel\CElement\Traits\UseViewTrait;
+use Illuminate\View\View;
 
 class Image extends FormInput
 {
@@ -27,14 +29,14 @@ class Image extends FormInput
         parent::__construct($id);
         $this->type = 'image';
         $this->tag = 'div';
-        $this->imgSrc = CApp_Base::noImageUrl();
+        $this->imgSrc = Base::noImageUrl();
         $this->maxWidth = '200';
         $this->maxHeight = '150';
         $this->disabledUpload = false;
         $this->accept = 'image/*';
         $this->view = 'cresenity/element/form-input/image';
 
-        $this->onBeforeParse(function (CView_View $view) {
+        $this->onBeforeParse(function (View $view) {
             $view->with('id', $this->id);
             $view->with('imgSrc', $this->imgSrc);
             $view->with('maxWidth', $this->maxWidth);

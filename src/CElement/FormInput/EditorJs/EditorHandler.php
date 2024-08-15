@@ -1,6 +1,9 @@
 <?php
 
-class CElement_FormInput_EditorJs_EditorHandler {
+namespace Cresenity\Laravel\CElement\Element\FormInput\EditorJs;
+
+class EditorHandler
+{
     /**
      * @var array - blocks classes
      */
@@ -23,16 +26,17 @@ class CElement_FormInput_EditorJs_EditorHandler {
      * @param string $json
      * @param mixed  $configuration
      *
-     * @throws CElement_FormInput_EditorJs_EditorJsException()
+     * @throws EditorJsException
      */
-    public function __construct($json, $configuration) {
-        $this->handler = new CElement_FormInput_EditorJs_BlockHandler($configuration);
+    public function __construct($json, $configuration)
+    {
+        $this->handler = new BlockHandler($configuration);
 
         /**
          * Check if json string is empty.
          */
         if (empty($json)) {
-            throw new CElement_FormInput_EditorJs_EditorJsException('JSON is empty');
+            throw new EditorJsException('JSON is empty');
         }
 
         /**
@@ -43,39 +47,39 @@ class CElement_FormInput_EditorJs_EditorHandler {
          * Handle decoding JSON error.
          */
         if (json_last_error()) {
-            throw new CElement_FormInput_EditorJs_EditorJsException('Wrong JSON format: ' . json_last_error_msg());
+            throw new EditorJsException('Wrong JSON format: ' . json_last_error_msg());
         }
 
         /**
          * Check if data is null.
          */
         if (is_null($data)) {
-            throw new CElement_FormInput_EditorJs_EditorJsException('Input is null');
+            throw new EditorJsException('Input is null');
         }
 
         /**
          * Count elements in data array.
          */
         if (is_array($data) && count($data) === 0) {
-            throw new CElement_FormInput_EditorJs_EditorJsException('Input array is empty');
+            throw new EditorJsException('Input array is empty');
         }
 
         /**
          * Check if blocks param is missing in data.
          */
         if (!isset($data['blocks'])) {
-            throw new CElement_FormInput_EditorJs_EditorJsException('Field `blocks` is missing');
+            throw new EditorJsException('Field `blocks` is missing');
         }
 
         if (!is_array($data['blocks'])) {
-            throw new CElement_FormInput_EditorJs_EditorJsException('Blocks is not an array');
+            throw new EditorJsException('Blocks is not an array');
         }
 
         foreach ($data['blocks'] as $blockData) {
             if (is_array($blockData)) {
                 array_push($this->blocks, $blockData);
             } else {
-                throw new CElement_FormInput_EditorJs_EditorJsException('Block must be an Array');
+                throw new EditorJsException('Block must be an Array');
             }
         }
 
@@ -90,7 +94,8 @@ class CElement_FormInput_EditorJs_EditorHandler {
      *
      * @return array
      */
-    public function getBlocks() {
+    public function getBlocks()
+    {
         $sanitizedBlocks = [];
 
         foreach ($this->blocks as $blockIndex => $block) {
@@ -109,7 +114,8 @@ class CElement_FormInput_EditorJs_EditorHandler {
      *
      * @return bool
      */
-    private function validateBlocks() {
+    private function validateBlocks()
+    {
         foreach ($this->blocks as $block) {
             if (!$this->handler->validateBlock($block['type'], $block['data'])) {
                 return false;

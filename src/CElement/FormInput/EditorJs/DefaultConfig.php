@@ -1,5 +1,9 @@
 <?php
-class CElement_FormInput_EditorJs_DefaultConfig {
+
+namespace Cresenity\Laravel\CElement\Element\FormInput\EditorJs;
+
+class DefaultConfig
+{
     protected static $defaultConfig = [
 
         /**
@@ -310,16 +314,18 @@ class CElement_FormInput_EditorJs_DefaultConfig {
         ]
     ];
 
-    public static function get($key, $default = null) {
-        $result = carr::get(static::$defaultConfig, $key, $default);
+    public static function get($key, $default = null)
+    {
+        $result = \carr::get(static::$defaultConfig, $key, $default);
         if ($result === null) {
-            cdbg::dd($key);
+            dd($key);
         }
 
         return $result;
     }
 
-    public static function data() {
+    public static function data()
+    {
         return static::$defaultConfig;
     }
 }

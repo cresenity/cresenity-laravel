@@ -2,9 +2,13 @@
 
 namespace Cresenity\Laravel\CElement\Element\FormInput;
 
+use Cresenity\Laravel\CAjax;
+use Cresenity\Laravel\CAjax\Engine\ImgUpload;
+use Cresenity\Laravel\CApp\Base;
 use Cresenity\Laravel\CElement\FormInput;
+use Illuminate\View\View;
 
-class CElement_FormInput_ImageAjax extends CElement_FormInput_Image
+class ImageAjax extends Image
 {
     protected $maxUploadSize;   // in MB
 
@@ -30,7 +34,7 @@ class CElement_FormInput_ImageAjax extends CElement_FormInput_Image
         parent::__construct($id);
         $this->type = 'image';
         $this->tag = 'div';
-        $this->imgSrc = CApp_Base::noImageUrl();
+        $this->imgSrc = Base::noImageUrl();
         $this->maxWidth = '200';
         $this->maxHeight = '150';
         $this->maxUploadSize = 0;
@@ -40,12 +44,12 @@ class CElement_FormInput_ImageAjax extends CElement_FormInput_Image
         $this->onExists = false;
         $this->accept = 'image/*';
         $this->view = 'cresenity/element/form-input/image-ajax';
-        $this->onBeforeParse(function (CView_View $view) {
+        $this->onBeforeParse(function (View $view) {
             $ajaxName = $this->name;
             $ajaxName = str_replace('[', '-', $ajaxName);
             $ajaxName = str_replace(']', '-', $ajaxName);
 
-            $ajaxUrl = CAjax::createMethod()->setType(CAjax_Engine_ImgUpload::class)
+            $ajaxUrl = CAjax::createMethod()->setType(ImgUpload::class)
                 ->setData('inputName', $ajaxName)
                 ->setData('allowedExtension', $this->allowedExtension)
                 ->setData('withInfo', $this->withInfo)
