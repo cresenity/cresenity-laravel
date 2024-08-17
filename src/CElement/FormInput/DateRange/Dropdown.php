@@ -1,15 +1,15 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CElement\Element\FormInput\DateRange;
 
-/**
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Jun 13, 2019, 6:38:26 PM
- */
-class CElement_FormInput_DateRange_Dropdown extends CElement_FormInput {
-    use CElement_Trait_MomentJsTrait;
+use Cresenity\Laravel\CElement\FormInput;
+use Cresenity\Laravel\CElement\Traits\MomentJsTrait;
+use Cresenity\Laravel\CManager;
+use Cresenity\Laravel\CPeriod;
+
+class Dropdown extends FormInput
+{
+    use MomentJsTrait;
 
     protected $dateFormat;
 
@@ -19,13 +19,14 @@ class CElement_FormInput_DateRange_Dropdown extends CElement_FormInput {
 
     protected $dateEnd;
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         parent::__construct($id);
 
         CManager::instance()->registerModule('bootstrap-daterangepicker');
 
         $this->type = 'text';
-        $dateFormat = c::formatter()->getDateFormat();
+        $dateFormat = \c::formatter()->getDateFormat();
         if ($dateFormat == null) {
             $dateFormat = 'Y-m-d';
         }
@@ -33,7 +34,8 @@ class CElement_FormInput_DateRange_Dropdown extends CElement_FormInput {
         $this->momentFormat = $this->convertPHPToMomentFormat($dateFormat);
     }
 
-    public function setValue($value) {
+    public function setValue($value)
+    {
         if ($value instanceof CPeriod) {
             $this->setValueStart($value->startDate);
             $this->setValueEnd($value->endDate);
@@ -45,23 +47,27 @@ class CElement_FormInput_DateRange_Dropdown extends CElement_FormInput {
         return $this;
     }
 
-    public function setValueStart($dateStart) {
+    public function setValueStart($dateStart)
+    {
         $this->dateStart = $dateStart;
 
         return $this;
     }
 
-    public function setValueEnd($dateEnd) {
+    public function setValueEnd($dateEnd)
+    {
         $this->dateEnd = $dateEnd;
 
         return $this;
     }
 
-    public function build() {
+    public function build()
+    {
         $this->addClass('form-control');
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         $js = '';
         $js .= "
             $('#" . $this->id . "').daterangepicker({

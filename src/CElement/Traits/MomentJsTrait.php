@@ -1,7 +1,11 @@
 <?php
 
-trait CElement_Trait_MomentJsTrait {
-    public function convertPHPToMomentFormat($format) {
+namespace Cresenity\Laravel\CElement\Traits;
+
+trait MomentJsTrait
+{
+    public function convertPHPToMomentFormat($format)
+    {
         $replacements = [
             'd' => 'DD',
             'D' => 'ddd',
@@ -46,7 +50,8 @@ trait CElement_Trait_MomentJsTrait {
         return $momentFormat;
     }
 
-    public function convertMomentToPhpFormat($format) {
+    public function convertMomentToPhpFormat($format)
+    {
         $replacements = [
             'DD' => 'd',
             'ddd' => 'D',
