@@ -1,17 +1,13 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CElement\Element\FormInput\DateRange;
 
-/**
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Jun 13, 2019, 6:38:34 PM
- */
 use Carbon\Carbon;
+use Cresenity\Laravel\CElement\Element\FormInput\Traits\PredefinedDateRangeTrait;
 
-class CElement_FormInput_DateRange_DropdownButton extends CElement_FormInput_DateRange_Dropdown {
-    use CElement_FormInput_Trait_PredefinedDateRangeTrait;
+class DropdownButton extends Dropdown
+{
+    use PredefinedDateRangeTrait;
 
     protected $start;
 
@@ -27,7 +23,8 @@ class CElement_FormInput_DateRange_DropdownButton extends CElement_FormInput_Dat
 
     protected $previewMomentFormat;
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         parent::__construct($id);
         $this->tag = 'button';
         $this->openDirection = 'left';
@@ -42,7 +39,8 @@ class CElement_FormInput_DateRange_DropdownButton extends CElement_FormInput_Dat
      *
      * @return $this
      */
-    public function setPreviewFormat($format) {
+    public function setPreviewFormat($format)
+    {
         $this->previewFormat = $format;
         $this->previewMomentFormat = $this->convertPHPToMomentFormat($this->previewFormat);
 
@@ -54,29 +52,34 @@ class CElement_FormInput_DateRange_DropdownButton extends CElement_FormInput_Dat
      *
      * @return $this
      */
-    public function setOpenDirection($direction) {
+    public function setOpenDirection($direction)
+    {
         $this->openDirection = $direction;
 
         return $this;
     }
 
-    public function setDisableCustomRange($bool = true) {
+    public function setDisableCustomRange($bool = true)
+    {
         $this->disableCustomRange = $bool;
 
         return $this;
     }
 
-    public function setMaxSpan($span) {
+    public function setMaxSpan($span)
+    {
         $this->maxSpan = $span;
 
         return $this;
     }
 
-    protected function getTranslation($key) {
-        return c::__('element/date.daterangepicker.' . $key);
+    protected function getTranslation($key)
+    {
+        return \c::__('element/date.daterangepicker.' . $key);
     }
 
-    public function build() {
+    public function build()
+    {
         $this->addClass('btn dropdown-toggle md-btn-flat daterange-dropdownbutton uninit');
         $this->setAttr('type', 'button');
         $this->add($this->dateStart . ' - ' . $this->dateEnd);
@@ -84,7 +87,8 @@ class CElement_FormInput_DateRange_DropdownButton extends CElement_FormInput_Dat
         $this->after()->addControl($this->id . '-end', 'hidden')->setName($this->name . '[end]')->setValue($this->dateEnd);
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         $js = '';
         //make sure this element is builded
         $this->buildOnce();
@@ -111,9 +115,9 @@ class CElement_FormInput_DateRange_DropdownButton extends CElement_FormInput_Dat
         $jsRange = '';
         $jsRangeProperty = '';
         foreach ($this->predefinedRanges as $range) {
-            $label = carr::get($range, 'label');
-            $dateStart = carr::get($range, 'dateStart');
-            $dateEnd = carr::get($range, 'dateEnd');
+            $label = \carr::get($range, 'label');
+            $dateStart = \carr::get($range, 'dateStart');
+            $dateEnd = \carr::get($range, 'dateEnd');
             $dateStartJs = 'null';
             if ($dateStart != null) {
                 $dateStartJs = "moment('" . ((string) $dateStart) . "')";
@@ -131,7 +135,7 @@ class CElement_FormInput_DateRange_DropdownButton extends CElement_FormInput_Dat
 
         $js .= "
 
-            var untilLabel = '" . c::__('element/date.until') . "';
+            var untilLabel = '" . \c::__('element/date.until') . "';
             $('#" . $this->id . "').daterangepicker({
                 startDate: moment('" . $this->dateStart . "'),
                 endDate: moment('" . $this->dateEnd . "'),

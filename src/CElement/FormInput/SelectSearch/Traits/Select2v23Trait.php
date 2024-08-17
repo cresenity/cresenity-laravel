@@ -1,14 +1,23 @@
 <?php
 
+namespace Cresenity\Laravel\CElement\Element\FormInput\SelectSearch\Traits;
+
+use Cresenity\Laravel\CRenderable;
+use Cresenity\Laravel\CStringBuilder;
+use Illuminate\Database\Eloquent\Model;
+
 /**
  * @see CElement_FormInput_SelectSearch
  */
-trait CElement_FormInput_SelectSearch_Trait_Select2v23Trait {
-    public function htmlSelect2v23($indent = 0) {
+trait Select2v23Trait
+{
+    public function htmlSelect2v23($indent = 0)
+    {
         return '<input type="text" name="' . $this->name . '" id="' . $this->id . '" class="input-unstyled validate[]" value="' . $this->value . '">';
     }
 
-    public function jsSelect2v23($indent = 0) {
+    public function jsSelect2v23($indent = 0)
+    {
         if ($this->value > 0) {
             $this->autoSelect = true;
         }
@@ -28,7 +37,7 @@ trait CElement_FormInput_SelectSearch_Trait_Select2v23Trait {
         $strSelection = $this->generateSelect2Template($strSelection);
 
         if (strlen($strSelection) == 0) {
-            $searchFieldText = c::value(carr::first($this->searchField));
+            $searchFieldText = \c::value(\carr::first($this->searchField));
             if (strlen($searchFieldText) > 0) {
                 $strSelection = "'+item." . $searchFieldText . "+'";
             }
@@ -37,7 +46,7 @@ trait CElement_FormInput_SelectSearch_Trait_Select2v23Trait {
         if (is_string($strResult)) {
             $strResult = $this->generateSelect2Template($strResult);
             if (strlen($strResult) == 0) {
-                $searchFieldText = c::value(carr::first($this->searchField));
+                $searchFieldText = \c::value(\carr::first($this->searchField));
                 if (strlen($searchFieldText) > 0) {
                     $strResult = "'+item." . $searchFieldText . "+'";
                 }
@@ -59,7 +68,7 @@ trait CElement_FormInput_SelectSearch_Trait_Select2v23Trait {
                 if ($selectedRow != null) {
                     $row = $selectedRow;
                     $model = null;
-                    if ($row instanceof CModel) {
+                    if ($row instanceof Model) {
                         $model = $row;
                         $row = $this->modelToSelect2Array($model);
                     }
@@ -80,7 +89,7 @@ trait CElement_FormInput_SelectSearch_Trait_Select2v23Trait {
                             $data['cappFormatResultIsHtml'] = true;
                         } else {
                             $data['cappFormatResult'] = $formatResult;
-                            $data['cappFormatResultIsHtml'] = c::isHtml($formatResult);
+                            $data['cappFormatResultIsHtml'] = \c::isHtml($formatResult);
                         }
                     }
                     $formatSelection = $this->formatSelection;
@@ -91,7 +100,7 @@ trait CElement_FormInput_SelectSearch_Trait_Select2v23Trait {
                             $row['cappFormatSelectionIsHtml'] = true;
                         } else {
                             $row['cappFormatSelection'] = $formatSelection;
-                            $row['cappFormatSelectionIsHtml'] = c::isHtml($formatSelection);
+                            $row['cappFormatSelectionIsHtml'] = \c::isHtml($formatSelection);
                         }
                     }
                     $selectedData[] = $row;
@@ -101,7 +110,7 @@ trait CElement_FormInput_SelectSearch_Trait_Select2v23Trait {
 
         if ($selectedData && is_array($selectedData) && count($selectedData) > 0) {
             if (!$this->multiple) {
-                $selectedData = carr::first($selectedData);
+                $selectedData = \carr::first($selectedData);
             }
             $rjson = json_encode($selectedData);
 

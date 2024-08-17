@@ -1,6 +1,9 @@
 <?php
 
-final class CElement_FormInput_QueryBuilder_Constant {
+namespace Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder;
+
+final class Constant
+{
     const FILTER_TYPE_STRING = 'string';
 
     const FILTER_TYPE_INTEGER = 'integer';

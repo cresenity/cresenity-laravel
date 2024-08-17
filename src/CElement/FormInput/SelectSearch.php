@@ -2,15 +2,19 @@
 
 namespace Cresenity\Laravel\CElement\Element\FormInput;
 
+use Cresenity\Laravel\CElement\Element\FormInput\SelectSearch\Traits\Select2v23Trait;
 use Cresenity\Laravel\CElement\FormInput;
+use Cresenity\Laravel\CElement\Traits\Property\ApplyJsPropertyTrait;
+use Cresenity\Laravel\CElement\Traits\Property\DependsOnPropertyTrait;
+use Cresenity\Laravel\CElement\Traits\Property\PlaceholderPropertyTrait;
+use Cresenity\Laravel\CF;
 
-class CElement_FormInput_SelectSearch extends CElement_FormInput
+class SelectSearch extends FormInput
 {
-    use CTrait_Compat_Element_FormInput_SelectSearch;
-    use CElement_FormInput_SelectSearch_Trait_Select2v23Trait;
-    use CTrait_Element_Property_ApplyJs;
-    use CTrait_Element_Property_DependsOn;
-    use CTrait_Element_Property_Placeholder;
+    use Select2v23Trait;
+    use ApplyJsPropertyTrait;
+    use DependsOnPropertyTrait;
+    use PlaceholderPropertyTrait;
 
     protected $query;
 
@@ -61,14 +65,14 @@ class CElement_FormInput_SelectSearch extends CElement_FormInput
         $this->formatResult = null;
         $this->keyField = '';
         $this->searchField = [];
-        $this->placeholder = c::__('element/selectsearch.placeholder');
+        $this->placeholder = \c::__('element/selectsearch.placeholder');
         $this->multiple = false;
         $this->autoSelect = false;
         $this->minInputLength = 0;
         $this->delay = 100;
         $this->requires = [];
         $this->valueCallback = null;
-        $this->applyJs = c::theme('selectsearch.applyJs', 'select2');
+        $this->applyJs = \c::theme('selectsearch.applyJs', 'select2');
         $this->perPage = 10;
         $this->value = null;
         $this->allowClear = false;

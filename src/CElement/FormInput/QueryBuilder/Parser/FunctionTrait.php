@@ -1,8 +1,16 @@
 <?php
 
-use Carbon\Carbon;
+namespace Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Parser;
 
-trait CElement_FormInput_QueryBuilder_Parser_FunctionTrait {
+use Carbon\Carbon;
+use Cresenity\Laravel\CCarbon;
+use Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\ParseException;
+use Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\RuleException;
+use Illuminate\Database\Eloquent\Builder;
+use stdClass;
+
+trait FunctionTrait
+{
     protected $operators = [
         'equal' => ['accept_values' => true,  'apply_to' => ['string', 'number', 'datetime']],
         'not_equal' => ['accept_values' => true,  'apply_to' => ['string', 'number', 'datetime']],
@@ -54,9 +62,9 @@ trait CElement_FormInput_QueryBuilder_Parser_FunctionTrait {
     ];
 
     /**
-     * @param stdClass $rule
+     * @param \stdClass $rule
      */
-    abstract protected function checkRuleCorrect(stdClass $rule);
+    abstract protected function checkRuleCorrect(\stdClass $rule);
 
     /**
      * Determine if an operator (LIKE/IN) requires an array.
@@ -65,7 +73,8 @@ trait CElement_FormInput_QueryBuilder_Parser_FunctionTrait {
      *
      * @return bool
      */
-    protected function operatorRequiresArray($operator) {
+    protected function operatorRequiresArray($operator)
+    {
         return in_array($operator, $this->needs_array);
     }
 
@@ -76,7 +85,8 @@ trait CElement_FormInput_QueryBuilder_Parser_FunctionTrait {
      *
      * @return bool
      */
-    protected function operatorIsNull($operator) {
+    protected function operatorIsNull($operator)
+    {
         return ($operator == 'NULL' || $operator == 'NOT NULL') ? true : false;
     }
 
@@ -85,15 +95,16 @@ trait CElement_FormInput_QueryBuilder_Parser_FunctionTrait {
      *
      * @param $condition
      *
-     * @throws CElement_FormInput_QueryBuilder_Exception_ParseException
+     * @throws \Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\ParseException
      *
      * @return string
      */
-    protected function validateCondition($condition) {
+    protected function validateCondition($condition)
+    {
         $condition = trim(strtolower($condition));
 
         if ($condition !== 'and' && $condition !== 'or') {
-            throw new CElement_FormInput_QueryBuilder_Exception_ParseException("Condition can only be one of: 'and', 'or'.");
+            throw new ParseException("Condition can only be one of: 'and', 'or'.");
         }
 
         return $condition;
@@ -106,11 +117,12 @@ trait CElement_FormInput_QueryBuilder_Parser_FunctionTrait {
      * @param mixed  $value        the value we are checking against
      * @param string $field        the field that we are enforcing
      *
-     * @throws CElement_FormInput_QueryBuilder_Exception_ParseException if value is not a correct type
+     * @throws \Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\ParseException if value is not a correct type
      *
      * @return mixed value after enforcement
      */
-    protected function enforceArrayOrString($requireArray, $value, $field) {
+    protected function enforceArrayOrString($requireArray, $value, $field)
+    {
         $this->checkFieldIsAnArray($requireArray, $value, $field);
 
         if (!$requireArray && is_array($value)) {
@@ -129,11 +141,12 @@ trait CElement_FormInput_QueryBuilder_Parser_FunctionTrait {
      *
      * @see enforceArrayOrString
      *
-     * @throws CElement_FormInput_QueryBuilder_Exception_ParseException
+     * @throws \Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\ParseException
      */
-    protected function checkFieldIsAnArray($requireArray, $value, $field) {
+    protected function checkFieldIsAnArray($requireArray, $value, $field)
+    {
         if ($requireArray && !is_array($value)) {
-            throw new CElement_FormInput_QueryBuilder_Exception_ParseException("Field (${field}) should be an array, but it isn't.");
+            throw new ParseException("Field (${field}) should be an array, but it isn't.");
         }
     }
 
@@ -147,13 +160,14 @@ trait CElement_FormInput_QueryBuilder_Parser_FunctionTrait {
      *
      * @see enforceArrayOrString
      *
-     * @throws CElement_FormInput_QueryBuilder_Exception_ParseException
+     * @throws \Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\ParseException
      *
      * @return mixed
      */
-    protected function convertArrayToFlatValue($field, $value) {
+    protected function convertArrayToFlatValue($field, $value)
+    {
         if (count($value) !== 1) {
-            throw new CElement_FormInput_QueryBuilder_Exception_ParseException("Field (${field}) should not be an array, but it is.");
+            throw new ParseException("Field (${field}) should not be an array, but it is.");
         }
 
         return $value[0];
@@ -164,11 +178,12 @@ trait CElement_FormInput_QueryBuilder_Parser_FunctionTrait {
      *
      * @param $value
      *
-     * @throws CElement_FormInput_QueryBuilder_Exception_ParseException
+     * @throws \Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\ParseException
      *
      * @return \CCarbon|\CCarbon[]
      */
-    protected function convertDatetimeToCarbon($value) {
+    protected function convertDatetimeToCarbon($value)
+    {
         if (is_array($value)) {
             return array_map(function ($v) {
                 return new CCarbon($v);
@@ -187,7 +202,8 @@ trait CElement_FormInput_QueryBuilder_Parser_FunctionTrait {
      *
      * @return mixed $value
      */
-    protected function appendOperatorIfRequired($requireArray, $value, $sqlOperator) {
+    protected function appendOperatorIfRequired($requireArray, $value, $sqlOperator)
+    {
         if (!$requireArray) {
             if (isset($sqlOperator['append'])) {
                 $value = $sqlOperator['append'] . $value;
@@ -206,22 +222,23 @@ trait CElement_FormInput_QueryBuilder_Parser_FunctionTrait {
      *
      * @param string|array $json
      *
-     * @throws CElement_FormInput_QueryBuilder_Exception_ParseException
+     * @throws \Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\ParseException
      *
      * @return stdClass
      */
-    private function decodeJSON($json) {
+    private function decodeJSON($json)
+    {
         if (is_array($json)) {
             $json = json_encode($json);
         }
         $query = json_decode($json);
 
         if (json_last_error()) {
-            throw new CElement_FormInput_QueryBuilder_Exception_ParseException('JSON parsing threw an error: ' . json_last_error_msg());
+            throw new ParseException('JSON parsing threw an error: ' . json_last_error_msg());
         }
 
         if (!is_object($query)) {
-            throw new CElement_FormInput_QueryBuilder_Exception_ParseException('The query is not valid JSON');
+            throw new ParseException('The query is not valid JSON');
         }
 
         return $query;
@@ -232,13 +249,14 @@ trait CElement_FormInput_QueryBuilder_Parser_FunctionTrait {
      *
      * throws an exception if the rule is not correct.
      *
-     * @param stdClass $rule
+     * @param \stdClass $rule
      *
-     * @throws CElement_FormInput_QueryBuilder_Exception_RuleException
+     * @throws \Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\RuleException
      */
-    private function getRuleValue(stdClass $rule) {
+    private function getRuleValue(\stdClass $rule)
+    {
         if (!$this->checkRuleCorrect($rule)) {
-            throw new CElement_FormInput_QueryBuilder_Exception_RuleException();
+            throw new RuleException();
         }
 
         return $rule->value;
@@ -250,11 +268,12 @@ trait CElement_FormInput_QueryBuilder_Parser_FunctionTrait {
      * @param $fields
      * @param $field
      *
-     * @throws CElement_FormInput_QueryBuilder_Exception_ParseException
+     * @throws \Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\ParseException
      */
-    private function ensureFieldIsAllowed($fields, $field) {
+    private function ensureFieldIsAllowed($fields, $field)
+    {
         if (is_array($fields) && !in_array($field, $fields)) {
-            throw new CElement_FormInput_QueryBuilder_Exception_ParseException("Field ({$field}) does not exist in fields list");
+            throw new ParseException("Field ({$field}) does not exist in fields list");
         }
     }
 
@@ -263,52 +282,54 @@ trait CElement_FormInput_QueryBuilder_Parser_FunctionTrait {
      * This function enforces those requirements.
      * makeQuery, for arrays.
      *
-     * @param CModel_Query $query
-     * @param stdClass     $rule
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param \stdClass     $rule
      * @param array        $sqlOperator
      * @param array        $value
      * @param string       $condition
      *
-     * @throws CElement_FormInput_QueryBuilder_Exception_ParseException
+     * @throws \Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\ParseException
      *
-     * @return CModel_Query
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    protected function makeQueryWhenArray(CModel_Query $query, stdClass $rule, array $sqlOperator, array $value, $condition) {
+    protected function makeQueryWhenArray(Builder $query, \stdClass $rule, array $sqlOperator, array $value, $condition)
+    {
         if ($sqlOperator['operator'] == 'IN' || $sqlOperator['operator'] == 'NOT IN') {
             return $this->makeArrayQueryIn($query, $rule, $sqlOperator['operator'], $value, $condition);
         } elseif ($sqlOperator['operator'] == 'BETWEEN' || $sqlOperator['operator'] == 'NOT BETWEEN') {
             return $this->makeArrayQueryBetween($query, $rule, $sqlOperator['operator'], $value, $condition);
         }
 
-        throw new CElement_FormInput_QueryBuilder_Exception_ParseException('makeQueryWhenArray could not return a value');
+        throw new ParseException('makeQueryWhenArray could not return a value');
     }
 
     /**
      * Create a 'null' query when required.
      *
-     * @param CModel_Query $query
+     * @param \Illuminate\Database\Eloquent\Builder $query
      * @param stdClass     $rule
      * @param array        $sqlOperator
      * @param string       $condition
      *
      * @throws CElement_FormInput_QueryBuilder_Exception_ParseException when SQL operator is !null
      *
-     * @return CModel_Query
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    protected function makeQueryWhenNull(CModel_Query $query, stdClass $rule, array $sqlOperator, $condition) {
+    protected function makeQueryWhenNull(Builder $query, stdClass $rule, array $sqlOperator, $condition)
+    {
         if ($sqlOperator['operator'] == 'NULL') {
             return $query->whereNull($rule->field, $condition);
         } elseif ($sqlOperator['operator'] == 'NOT NULL') {
             return $query->whereNotNull($rule->field, $condition);
         }
 
-        throw new CElement_FormInput_QueryBuilder_Exception_ParseException('makeQueryWhenNull was called on an SQL operator that is not null');
+        throw new ParseException('makeQueryWhenNull was called on an SQL operator that is not null');
     }
 
     /**
      * MakeArrayQueryIn, when the query is an IN or NOT IN...
      *
-     * @param CModel_Query $query
+     * @param \Illuminate\Database\Eloquent\Builder $query
      * @param stdClass     $rule
      * @param string       $operator
      * @param array        $value
@@ -316,9 +337,10 @@ trait CElement_FormInput_QueryBuilder_Parser_FunctionTrait {
      *
      * @see makeQueryWhenArray
      *
-     * @return CModel_Query
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    private function makeArrayQueryIn(CModel_Query $query, stdClass $rule, $operator, array $value, $condition) {
+    private function makeArrayQueryIn(Builder $query, stdClass $rule, $operator, array $value, $condition)
+    {
         if ($operator == 'NOT IN') {
             return $query->whereNotIn($rule->field, $value, $condition);
         }
@@ -329,7 +351,7 @@ trait CElement_FormInput_QueryBuilder_Parser_FunctionTrait {
     /**
      * MakeArrayQueryBetween, when the query is a BETWEEN or NOT BETWEEN...
      *
-     * @param CModel_Query $query
+     * @param \Illuminate\Database\Eloquent\Builder $query
      * @param stdClass     $rule
      * @param string       $operator  the SQL operator used. [BETWEEN|NOT BETWEEN]
      * @param array        $value
@@ -339,11 +361,12 @@ trait CElement_FormInput_QueryBuilder_Parser_FunctionTrait {
      *
      * @throws CElement_FormInput_QueryBuilder_Exception_ParseException when more then two items given for the between
      *
-     * @return CModel_Query
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    private function makeArrayQueryBetween(CModel_Query $query, stdClass $rule, $operator, array $value, $condition) {
+    private function makeArrayQueryBetween(Builder $query, stdClass $rule, $operator, array $value, $condition)
+    {
         if (count($value) !== 2) {
-            throw new CElement_FormInput_QueryBuilder_Exception_ParseException("{$rule->field} should be an array with only two items.");
+            throw new ParseException("{$rule->field} should be an array with only two items.");
         }
 
         if ($operator == 'NOT BETWEEN') {

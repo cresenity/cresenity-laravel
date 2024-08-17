@@ -1,3 +1,7 @@
 <?php
-class CElement_FormInput_QueryBuilder_Exception_ParseException extends \Exception {
+
+namespace Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception;
+
+class ParseException extends \Exception
+{
 }

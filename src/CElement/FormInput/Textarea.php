@@ -3,10 +3,12 @@
 namespace Cresenity\Laravel\CElement\Element\FormInput;
 
 use Cresenity\Laravel\CElement\FormInput;
+use Cresenity\Laravel\CElement\Traits\Property\PlaceholderPropertyTrait;
+use Cresenity\Laravel\CStringBuilder;
 
 class Textarea extends FormInput
 {
-    use CTrait_Element_Property_Placeholder;
+    use PlaceholderPropertyTrait;
 
     protected $col;
 

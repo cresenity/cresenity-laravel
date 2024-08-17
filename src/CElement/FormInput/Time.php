@@ -3,11 +3,13 @@
 namespace Cresenity\Laravel\CElement\Element\FormInput;
 
 use Cresenity\Laravel\CElement\FormInput;
+use Cresenity\Laravel\CElement\Traits\Property\PlaceholderPropertyTrait;
+use Cresenity\Laravel\CManager;
+use Cresenity\Laravel\CStringBuilder;
 
-class CElement_FormInput_Time extends CElement_FormInput
+class Time extends FormInput
 {
-    use CTrait_Compat_Element_FormInput_Time,
-        CTrait_Element_Property_Placeholder;
+    use PlaceholderPropertyTrait;
 
     protected $show_second;
 

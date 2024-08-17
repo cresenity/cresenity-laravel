@@ -1,37 +1,40 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CElement\Element\FormInput\TextArea;
 
-/**
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Jun 3, 2019, 7:17:38 PM
- */
-class CElement_FormInput_Textarea_Quill extends CElement_Element_Div {
-    use CTrait_Element_Property_Value;
+use Cresenity\Laravel\CElement\Element\Div;
+use Cresenity\Laravel\CElement\Traits\Property\ValuePropertyTrait;
+use Cresenity\Laravel\CManager;
+
+class Quill extends Div
+{
+    use ValuePropertyTrait;
     protected $theme;
 
     protected $toolbar;
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         parent::__construct($id);
         CManager::registerModule('quill');
         $this->theme = 'snow';
         $this->toolbar = $this->setToolbar('full');
     }
 
-    public function setTheme($theme) {
+    public function setTheme($theme)
+    {
         $this->theme = $theme;
 
         return $this;
     }
 
-    public function setToolbarType($toolbar) {
+    public function setToolbarType($toolbar)
+    {
         $this->setToolbar($toolbar);
     }
 
-    public function setToolbar($toolbar) {
+    public function setToolbar($toolbar)
+    {
         if (!is_array($toolbar)) {
             $toolbarValue = $this->getToolbarJson($toolbar);
             if ($toolbarValue != null) {
@@ -45,7 +48,8 @@ class CElement_FormInput_Textarea_Quill extends CElement_Element_Div {
         $this->toolbar = $toolbar;
     }
 
-    protected function getToolbarJson($toolbarType = null) {
+    protected function getToolbarJson($toolbarType = null)
+    {
         $json = null;
         switch ($toolbarType) {
             case 'full':
@@ -77,12 +81,14 @@ class CElement_FormInput_Textarea_Quill extends CElement_Element_Div {
         return $json;
     }
 
-    public function build() {
+    public function build()
+    {
         $this->addClass('quill-control');
         $this->add($this->value);
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         switch ($this->theme) {
             case 'bubble':
                 CManager::registerCss('plugins/quill/quill.bubble.css');

@@ -3,11 +3,11 @@
 namespace Cresenity\Laravel\CElement\Element\FormInput;
 
 use Cresenity\Laravel\CElement\FormInput;
+use Cresenity\Laravel\CManager;
+use Cresenity\Laravel\CStringBuilder;
 
-class CElement_FormInput_SelectTag extends CElement_FormInput
+class SelectTag extends FormInput
 {
-    use CTrait_Compat_Element_FormInput_SelectTag;
-
     protected $multiple;
 
     public function __construct($id = null)
@@ -70,8 +70,8 @@ class CElement_FormInput_SelectTag extends CElement_FormInput
                     $value = $v;
                     $addition_attribute = ' ';
                     if (is_array($v)) {
-                        $value = carr::get($v, 'value');
-                        $attributes = carr::get($v, 'attributes', []);
+                        $value = \carr::get($v, 'value');
+                        $attributes = \carr::get($v, 'attributes', []);
                         foreach ($attributes as $attribute_k => $attribute_v) {
                             $addition_attribute .= ' ' . $attribute_k . '="' . $attribute_v . '"';
                         }

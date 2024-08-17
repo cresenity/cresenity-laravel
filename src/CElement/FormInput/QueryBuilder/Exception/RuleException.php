@@ -1,3 +1,7 @@
 <?php
-class CElement_FormInput_QueryBuilder_Exception_RuleException extends \Exception {
+
+namespace Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception;
+
+class RuleException extends \Exception
+{
 }

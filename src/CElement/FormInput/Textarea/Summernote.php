@@ -1,14 +1,12 @@
 <?php
 
-/**
- * Description of Summernote.
- *
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Jan 28, 2018, 9:43:02 PM
- */
-class CElement_FormInput_Textarea_Summernote extends CElement_FormInput_Textarea {
+namespace Cresenity\Laravel\CElement\Element\FormInput\TextArea;
+
+use Cresenity\Laravel\CElement\Element\FormInput\Textarea;
+use Cresenity\Laravel\CManager;
+
+class Summernote extends Textarea
+{
     protected $toolbarType = 'default';
 
     protected $customToolbarJson = '[]';
@@ -19,46 +17,54 @@ class CElement_FormInput_Textarea_Summernote extends CElement_FormInput_Textarea
 
     protected $sanitizePaste = false;
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         parent::__construct($id);
         CManager::registerModule('summernote');
     }
 
-    public function build() {
+    public function build()
+    {
         $this->addClass('summernote-control');
     }
 
-    public function setToolbarType($toolbarType) {
+    public function setToolbarType($toolbarType)
+    {
         $this->toolbarType = $toolbarType;
 
         return $this;
     }
 
-    public function setCustomToolbarJson($json) {
+    public function setCustomToolbarJson($json)
+    {
         $this->customToolbarJson = $json;
 
         return $this;
     }
 
-    public function setDragDrop($bool = true) {
+    public function setDragDrop($bool = true)
+    {
         $this->haveDragDrop = $bool;
 
         return $this;
     }
 
-    public function setUploadUrl($url) {
+    public function setUploadUrl($url)
+    {
         $this->uploadUrl = $url;
 
         return $this;
     }
 
-    public function setSanitizePaste($bool = true) {
+    public function setSanitizePaste($bool = true)
+    {
         $this->sanitizePaste = $bool;
 
         return $this;
     }
 
-    protected function getToolbarJson($toolbarType = null) {
+    protected function getToolbarJson($toolbarType = null)
+    {
         if ($toolbarType == null) {
             $toolbarType = $this->toolbarType;
         }
@@ -165,7 +171,8 @@ class CElement_FormInput_Textarea_Summernote extends CElement_FormInput_Textarea
         return $json;
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         $placeholder = '';
         if ($this->placeholder) {
             $placeholder = 'placeholder: "' . $this->placeholder . '",';

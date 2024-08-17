@@ -1,10 +1,15 @@
 <?php
 
-use CElement_FormInput_QueryBuilder_Constant as Constant;
+namespace Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder;
 
-class CElement_FormInput_QueryBuilder_Filter implements CInterface_Arrayable {
-    use CElement_FormInput_QueryBuilder_Filter_OperatorTrait;
-    use CElement_FormInput_QueryBuilder_Filter_InputTrait;
+use Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Filter\InputTrait;
+use Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Filter\OperatorTrait;
+use Illuminate\Contracts\Support\Arrayable;
+
+class Filter implements Arrayable
+{
+    use OperatorTrait;
+    use InputTrait;
 
     protected $id;
 
@@ -21,7 +26,8 @@ class CElement_FormInput_QueryBuilder_Filter implements CInterface_Arrayable {
 
     protected $placeholder;
 
-    public function __construct($id = null) {
+    public function __construct($id = null)
+    {
         $this->id = $id;
         $this->label = 'Name';
 
@@ -32,7 +38,8 @@ class CElement_FormInput_QueryBuilder_Filter implements CInterface_Arrayable {
         $this->placeholder = null;
     }
 
-    public function setId($id) {
+    public function setId($id)
+    {
         $this->id = $id;
 
         return $this;
@@ -43,55 +50,64 @@ class CElement_FormInput_QueryBuilder_Filter implements CInterface_Arrayable {
      *
      * @return $this
      */
-    public function setLabel($label) {
+    public function setLabel($label)
+    {
         $this->label = $label;
 
         return $this;
     }
 
-    public function setTypeString() {
+    public function setTypeString()
+    {
         $this->type = Constant::FILTER_TYPE_STRING;
 
         return $this;
     }
 
-    public function setTypeInteger() {
+    public function setTypeInteger()
+    {
         $this->type = Constant::FILTER_TYPE_INTEGER;
 
         return $this;
     }
 
-    public function setTypeDouble() {
+    public function setTypeDouble()
+    {
         $this->type = Constant::FILTER_TYPE_DOUBLE;
 
         return $this;
     }
 
-    public function setTypeDate() {
+    public function setTypeDate()
+    {
         $this->type = Constant::FILTER_TYPE_DATE;
 
         return $this;
     }
 
-    public function setTypeTime() {
+    public function setTypeTime()
+    {
         $this->type = Constant::FILTER_TYPE_TIME;
 
         return $this;
     }
 
-    public function setTypeDatetime() {
+    public function setTypeDatetime()
+    {
         $this->type = Constant::FILTER_TYPE_DATETIME;
 
         return $this;
     }
 
-    public function setTypeBoolean() {
+    public function setTypeBoolean()
+    {
         $this->type = Constant::FILTER_TYPE_BOOLEAN;
 
         return $this;
     }
 
-    public function setType($type) {
+    public function setType($type)
+    {
         $this->type = $type;
 
         return $this;
@@ -102,7 +118,8 @@ class CElement_FormInput_QueryBuilder_Filter implements CInterface_Arrayable {
      *
      * @return $this
      */
-    public function setValidation(array $validation) {
+    public function setValidation(array $validation)
+    {
         $this->validation = $validation;
 
         return $this;
@@ -113,13 +130,15 @@ class CElement_FormInput_QueryBuilder_Filter implements CInterface_Arrayable {
      *
      * @return $this
      */
-    public function setPlaceholder($placeholder) {
+    public function setPlaceholder($placeholder)
+    {
         $this->placeholder = $placeholder;
 
         return $this;
     }
 
-    public function toArray() {
+    public function toArray()
+    {
         $result = [];
         $result['id'] = $this->id;
         $result['label'] = $this->label;

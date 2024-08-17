@@ -1,26 +1,30 @@
 <?php
 
-defined('SYSPATH') or die('No direct access allowed.');
+namespace Cresenity\Laravel\CElement\Element\FormInput\DateTime;
+
+use Cresenity\Laravel\CElement\Element\FormInput\DateTime;
+use Cresenity\Laravel\CRenderable;
 
 /**
  * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
  *
  * @see https://github.com/nehakadam/DateTimePicker
  */
-class CElement_FormInput_DateTime_ModalDateTime extends CElement_FormInput_DateTime {
+class ModalDateTime extends DateTime
+{
     /**
      * @var string
      */
     protected $parentElementSelector;
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         parent::__construct($id);
-        c::manager()->registerModule('datetimepicker');
+        \c::manager()->registerModule('datetimepicker');
 
         $this->dateTimeFormat = 'YYYY-MM-DD';
 
-        $dateTimeFormat = c::formatter()->getDatetimeFormat();
+        $dateTimeFormat = \c::formatter()->getDatetimeFormat();
         if ($dateTimeFormat != null) {
             $dateTimeFormat = str_replace('Y', 'YYYY', $dateTimeFormat);
             $dateTimeFormat = str_replace('m', 'MM', $dateTimeFormat);
@@ -32,7 +36,8 @@ class CElement_FormInput_DateTime_ModalDateTime extends CElement_FormInput_DateT
         }
     }
 
-    protected function build() {
+    protected function build()
+    {
         $this->setReadonly();
         parent::build();
         $this->setAttr('data-field', 'datetime');
@@ -41,18 +46,21 @@ class CElement_FormInput_DateTime_ModalDateTime extends CElement_FormInput_DateT
         $this->after()->addDiv($this->id . '-dtbox');
     }
 
-    public function setParentElementSelector($selector) {
+    public function setParentElementSelector($selector)
+    {
         if ($selector instanceof CRenderable) {
             $selector = '#' . $selector->id();
         }
         $this->parentElementSelector = $selector;
     }
 
-    protected function getTranslation($key) {
-        return c::__('element/date.datepicker.' . $key);
+    protected function getTranslation($key)
+    {
+        return \c::__('element/date.datepicker.' . $key);
     }
 
-    private function getShortDayNames() {
+    private function getShortDayNames()
+    {
         return "[
             '" . $this->getTranslation('daysShort.Sun') . "',
             '" . $this->getTranslation('daysShort.Mon') . "',
@@ -64,7 +72,8 @@ class CElement_FormInput_DateTime_ModalDateTime extends CElement_FormInput_DateT
         ]";
     }
 
-    private function getFullDayNames() {
+    private function getFullDayNames()
+    {
         return "[
             '" . $this->getTranslation('days.Sunday') . "',
             '" . $this->getTranslation('days.Monday') . "',
@@ -76,7 +85,8 @@ class CElement_FormInput_DateTime_ModalDateTime extends CElement_FormInput_DateT
         ]";
     }
 
-    private function getShortMonthNames() {
+    private function getShortMonthNames()
+    {
         return "[
             '" . $this->getTranslation('monthsShort.Jan') . "',
             '" . $this->getTranslation('monthsShort.Feb') . "',
@@ -93,7 +103,8 @@ class CElement_FormInput_DateTime_ModalDateTime extends CElement_FormInput_DateT
         ]";
     }
 
-    private function getFullMonthNames() {
+    private function getFullMonthNames()
+    {
         return "[
             '" . $this->getTranslation('months.January') . "',
             '" . $this->getTranslation('months.February') . "',
@@ -110,7 +121,8 @@ class CElement_FormInput_DateTime_ModalDateTime extends CElement_FormInput_DateT
         ]";
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         $dateTimeFormat = $this->dateTimeFormat;
         $options = '{';
         $options .= "dateTimeFormat:'" . $dateTimeFormat . "',";

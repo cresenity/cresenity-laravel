@@ -1,18 +1,28 @@
 <?php
 
-class CElement_FormInput_QueryBuilder_Parser {
-    use CElement_FormInput_QueryBuilder_Parser_FunctionTrait;
+namespace Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder;
+
+use Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\RuleException;
+use Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Parser\FunctionTrait;
+use Illuminate\Database\Eloquent\Builder;
+use stdClass;
+
+class Parser
+{
+    use FunctionTrait;
 
     protected $modelClass;
 
     protected $fields;
 
-    public function __construct($modelClass, $fields = []) {
+    public function __construct($modelClass, $fields = [])
+    {
         $this->modelClass = $modelClass;
         $this->fields = $fields;
     }
 
-    public function parse($rules) {
+    public function parse($rules)
+    {
         $modelClass = $this->modelClass;
         // do a JSON decode (throws exceptions if there is a JSON error...)
         $query = $this->decodeJSON($rules);
@@ -34,14 +44,15 @@ class CElement_FormInput_QueryBuilder_Parser {
      * Called by parse, loops through all the rules to find out if nested or not.
      *
      * @param array        $rules
-     * @param CModel_Query $querybuilder
+     * @param \Illuminate\Database\Eloquent\Builder $querybuilder
      * @param string       $queryCondition
      *
-     * @throws CElement_FormInput_QueryBuilder_Exception_ParseException
+     * @throws \Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\ParseException
      *
-     * @return CModel_Query
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    protected function loopThroughRules(array $rules, CModel_Query $querybuilder, $queryCondition = 'AND') {
+    protected function loopThroughRules(array $rules, \Illuminate\Database\Eloquent\Builder $querybuilder, $queryCondition = 'AND')
+    {
         foreach ($rules as $rule) {
             /*
              * If makeQuery does not see the correct fields, it will return the QueryBuilder without modifications
@@ -63,7 +74,8 @@ class CElement_FormInput_QueryBuilder_Parser {
      *
      * @return bool
      */
-    protected function isNested($rule) {
+    protected function isNested($rule)
+    {
         if (isset($rule->rules) && is_array($rule->rules) && count($rule->rules) > 0) {
             return true;
         }
@@ -76,13 +88,14 @@ class CElement_FormInput_QueryBuilder_Parser {
      *
      * When a rule is actually a group of rules, we want to build a nested query with the specified condition (AND/OR)
      *
-     * @param CModel_Query $querybuilder
+     * @param \Illuminate\Database\Eloquent\Builder $querybuilder
      * @param stdClass     $rule
      * @param null|string  $condition
      *
-     * @return CModel_Query
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    protected function createNestedQuery(CModel_Query $querybuilder, stdClass $rule, $condition = null) {
+    protected function createNestedQuery(\Illuminate\Database\Eloquent\Builder $querybuilder, stdClass $rule, $condition = null)
+    {
         if ($condition === null) {
             $condition = $rule->condition;
         }
@@ -111,7 +124,8 @@ class CElement_FormInput_QueryBuilder_Parser {
      *
      * @return bool true if values are correct
      */
-    protected function checkRuleCorrect(stdClass $rule) {
+    protected function checkRuleCorrect(stdClass $rule)
+    {
         if (!isset($rule->operator, $rule->id, $rule->field, $rule->type)) {
             return false;
         }
@@ -130,7 +144,8 @@ class CElement_FormInput_QueryBuilder_Parser {
      *
      * @return null|string
      */
-    protected function operatorValueWhenNotAcceptingOne(stdClass $rule) {
+    protected function operatorValueWhenNotAcceptingOne(stdClass $rule)
+    {
         if ($rule->operator == 'is_empty' || $rule->operator == 'is_not_empty') {
             return '';
         }
@@ -151,7 +166,8 @@ class CElement_FormInput_QueryBuilder_Parser {
      *
      * @return string
      */
-    protected function getCorrectValue($operator, stdClass $rule, $value) {
+    protected function getCorrectValue($operator, stdClass $rule, $value)
+    {
         $field = $rule->field;
         $sqlOperator = $this->operator_sql[$rule->operator];
         $requireArray = $this->operatorRequiresArray($operator);
@@ -175,21 +191,22 @@ class CElement_FormInput_QueryBuilder_Parser {
      * the query that was given by the user to the QueryBuilder.
      * makeQuery: The money maker!
      *
-     * @param CModel_Query $query
+     * @param \Illuminate\Database\Eloquent\Builder $query
      * @param stdClass     $rule
      * @param string       $queryCondition and/or...
      *
-     * @throws CElement_FormInput_QueryBuilder_Exception_ParseException
+     * @throws \Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\ParseException
      *
-     * @return CModel_Query
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    protected function makeQuery(CModel_Query $query, stdClass $rule, $queryCondition = 'AND') {
+    protected function makeQuery(\Illuminate\Database\Eloquent\Builder $query, stdClass $rule, $queryCondition = 'AND')
+    {
         /*
          * Ensure that the value is correct for the rule, return query on exception
          */
         try {
             $value = $this->getValueForQueryFromRule($rule);
-        } catch (CElement_FormInput_QueryBuilder_Exception_RuleException $e) {
+        } catch (RuleException $e) {
             return $query;
         }
 
@@ -202,14 +219,15 @@ class CElement_FormInput_QueryBuilder_Parser {
      * (This used to be part of makeQuery, where the name made sense, but I pulled it
      * out to reduce some duplicated code inside JoinSupportingQueryBuilder)
      *
-     * @param CModel_Query $query
+     * @param \Illuminate\Database\Eloquent\Builder $query
      * @param stdClass     $rule
      * @param mixed        $value          the value that needs to be queried in the database
      * @param string       $queryCondition and/or...
      *
-     * @return CModel_Query
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    protected function convertIncomingQBtoQuery(CModel_Query $query, stdClass $rule, $value, $queryCondition = 'AND') {
+    protected function convertIncomingQBtoQuery(Builder $query, stdClass $rule, $value, $queryCondition = 'AND')
+    {
         /*
          * Convert the Operator (LIKE/NOT LIKE/GREATER THAN) given to us by QueryBuilder
          * into on one that we can use inside the SQL query
@@ -232,12 +250,13 @@ class CElement_FormInput_QueryBuilder_Parser {
      *
      * @param stdClass $rule
      *
-     * @throws QBRuleException
-     * @throws \timgws\QBParseException
+     * @throws \Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\RuleException
+     * @throws \Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\ParseException
      *
      * @return mixed
      */
-    protected function getValueForQueryFromRule(stdClass $rule) {
+    protected function getValueForQueryFromRule(stdClass $rule)
+    {
         /*
          * Make sure most of the common fields from the QueryBuilder have been added.
          */

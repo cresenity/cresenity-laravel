@@ -1,8 +1,11 @@
 <?php
 
-use CElement_FormInput_QueryBuilder_Constant as Constant;
+namespace Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Filter;
 
-trait CElement_FormInput_QueryBuilder_Filter_OperatorTrait {
+use Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Constant;
+
+trait OperatorTrait
+{
     protected $operators = [];
 
     protected $defaultOperator;
@@ -12,7 +15,8 @@ trait CElement_FormInput_QueryBuilder_Filter_OperatorTrait {
      *
      * @return $this
      */
-    public function addOperator($operator) {
+    public function addOperator($operator)
+    {
         $this->operators[] = $operator;
 
         return $this;
@@ -23,7 +27,8 @@ trait CElement_FormInput_QueryBuilder_Filter_OperatorTrait {
      *
      * @return $this
      */
-    public function setOperators(array $operators) {
+    public function setOperators(array $operators)
+    {
         $this->operators = $operators;
 
         return $this;
@@ -32,140 +37,160 @@ trait CElement_FormInput_QueryBuilder_Filter_OperatorTrait {
     /**
      * @return $this
      */
-    public function addOperatorEqual() {
+    public function addOperatorEqual()
+    {
         return $this->addOperator(Constant::FILTER_OPERATOR_EQUAL);
     }
 
     /**
      * @return $this
      */
-    public function addOperatorNotEqual() {
+    public function addOperatorNotEqual()
+    {
         return $this->addOperator(Constant::FILTER_OPERATOR_NOT_EQUAL);
     }
 
     /**
      * @return $this
      */
-    public function addOperatorIn() {
+    public function addOperatorIn()
+    {
         return $this->addOperator(Constant::FILTER_OPERATOR_IN);
     }
 
     /**
      * @return $this
      */
-    public function addOperatorNotIn() {
+    public function addOperatorNotIn()
+    {
         return $this->addOperator(Constant::FILTER_OPERATOR_NOT_IN);
     }
 
     /**
      * @return $this
      */
-    public function addOperatorLess() {
+    public function addOperatorLess()
+    {
         return $this->addOperator(Constant::FILTER_OPERATOR_LESS);
     }
 
     /**
      * @return $this
      */
-    public function addOperatorLessOrEqual() {
+    public function addOperatorLessOrEqual()
+    {
         return $this->addOperator(Constant::FILTER_OPERATOR_LESS_OR_EQUAL);
     }
 
     /**
      * @return $this
      */
-    public function addOperatorGreater() {
+    public function addOperatorGreater()
+    {
         return $this->addOperator(Constant::FILTER_OPERATOR_GREATER);
     }
 
     /**
      * @return $this
      */
-    public function addOperatorGreaterOrEqual() {
+    public function addOperatorGreaterOrEqual()
+    {
         return $this->addOperator(Constant::FILTER_OPERATOR_GREATER_OR_EQUAL);
     }
 
     /**
      * @return $this
      */
-    public function addOperatorBetween() {
+    public function addOperatorBetween()
+    {
         return $this->addOperator(Constant::FILTER_OPERATOR_BETWEEN);
     }
 
     /**
      * @return $this
      */
-    public function addOperatorNotBetween() {
+    public function addOperatorNotBetween()
+    {
         return $this->addOperator(Constant::FILTER_OPERATOR_NOT_BETWEEN);
     }
 
     /**
      * @return $this
      */
-    public function addOperatorBeginsWith() {
+    public function addOperatorBeginsWith()
+    {
         return $this->addOperator(Constant::FILTER_OPERATOR_BEGINS_WITH);
     }
 
     /**
      * @return $this
      */
-    public function addOperatorNotBeginsWith() {
+    public function addOperatorNotBeginsWith()
+    {
         return $this->addOperator(Constant::FILTER_OPERATOR_NOT_BEGINS_WITH);
     }
 
     /**
      * @return $this
      */
-    public function addOperatorContains() {
+    public function addOperatorContains()
+    {
         return $this->addOperator(Constant::FILTER_OPERATOR_CONTAINS);
     }
 
     /**
      * @return $this
      */
-    public function addOperatorNotContains() {
+    public function addOperatorNotContains()
+    {
         return $this->addOperator(Constant::FILTER_OPERATOR_NOT_CONTAINS);
     }
 
     /**
      * @return $this
      */
-    public function addOperatorEndsWith() {
+    public function addOperatorEndsWith()
+    {
         return $this->addOperator(Constant::FILTER_OPERATOR_ENDS_WITH);
     }
 
     /**
      * @return $this
      */
-    public function addOperatorNotEndsWith() {
+    public function addOperatorNotEndsWith()
+    {
         return $this->addOperator(Constant::FILTER_OPERATOR_NOT_ENDS_WITH);
     }
 
     /**
      * @return $this
      */
-    public function addOperatorIsEmpty() {
+    public function addOperatorIsEmpty()
+    {
         return $this->addOperator(Constant::FILTER_OPERATOR_IS_EMPTY);
     }
 
     /**
      * @return $this
      */
-    public function addOperatorNotIsEmpty() {
+    public function addOperatorNotIsEmpty()
+    {
         return $this->addOperator(Constant::FILTER_OPERATOR_NOT_IS_EMPTY);
     }
 
     /**
      * @return $this
      */
-    public function addOperatoIsNull() {
+    public function addOperatoIsNull()
+    {
         return $this->addOperator(Constant::FILTER_OPERATOR_IS_NULL);
     }
 
     /**
      * @return $this
      */
-    public function addOperatoIsNotNull() {
+    public function addOperatoIsNotNull()
+    {
         return $this->addOperator(Constant::FILTER_OPERATOR_IS_NOT_NULL);
     }
 
@@ -174,7 +199,8 @@ trait CElement_FormInput_QueryBuilder_Filter_OperatorTrait {
      *
      * @return $this
      */
-    public function setDefaultOperator($operator) {
+    public function setDefaultOperator($operator)
+    {
         $this->defaultOperator = $operator;
 
         return $this;

@@ -37,6 +37,6 @@ trait FactoryTrait
      */
     public static function fromString($string)
     {
-        return CPeriod_Factory::fromString($string);
+        return Factory::fromString($string);
     }
 }
