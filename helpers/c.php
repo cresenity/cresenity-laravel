@@ -12,6 +12,7 @@ use Symfony\Component\Debug\Exception\FatalThrowableError;
 use Symfony\Component\PropertyAccess\Exception\NoSuchIndexException;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Cresenity\Laravel\CApp;
+use Cresenity\Laravel\CApp\Message;
 use Cresenity\Laravel\CAuth;
 use Cresenity\Laravel\CCarbon;
 use Cresenity\Laravel\CConfig;
@@ -20,8 +21,11 @@ use Cresenity\Laravel\CF;
 use Cresenity\Laravel\CHTTP;
 use Cresenity\Laravel\CManager;
 use Cresenity\Laravel\CRouting;
+use Cresenity\Laravel\CStorage;
+use Cresenity\Laravel\CApp\Formatter;
 use Cresenity\Laravel\CTranslation;
 use Illuminate\Container\Container;
+use Illuminate\Http\Request;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HigherOrderTapProxy;
@@ -1505,7 +1509,7 @@ class c
      */
     public static function msg($type, $message)
     {
-        CApp_Message::add($type, $message);
+        Message::add($type, $message);
     }
 
     /**
@@ -1558,7 +1562,7 @@ class c
     /**
      * @param null|string $name
      *
-     * @return CStorage_Adapter
+     * @return \Illuminate\Filesystem\FilesystemAdapter
      */
     public static function disk($name = null)
     {
@@ -1681,11 +1685,11 @@ class c
     /**
      * Get CApp Formatter Instance.
      *
-     * @return CApp_Formatter
+     * @return \Cresenity\Laravel\CApp\Formatter
      */
     public static function formatter()
     {
-        return CApp_Formatter::instance();
+        return Formatter::instance();
     }
 
     /**
@@ -2044,7 +2048,7 @@ class c
         return CAuth::gate();
     }
 
-    public static function resolveUserTimezone(CHTTP_Request $request)
+    public static function resolveUserTimezone(Request $request)
     {
         return $request->timezone;
     }

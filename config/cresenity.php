@@ -2,6 +2,18 @@
 
 
 return [
+    'app' => [
+        'format' => [
+            'date' => c::env('FORMAT_DATE', 'Y-m-d'),
+            'datetime' => c::env('FORMAT_DATETIME', 'Y-m-d H:i:s'),
+            'thousand_separator' => c::env('FORMAT_THOUSAND_SEPARATOR', ','),
+            'decimal_separator' => c::env('FORMAT_DECIMAL_SEPARATOR', '.'),
+            'decimal_digit' => c::env('FORMAT_DECIMAL_DIGIT', 0),
+            'currency_decimal_digit' => c::env('FORMAT_CURRENCY_DECIMAL_DIGIT', 0),
+            'currency_prefix' => c::env('FORMAT_CURRENCY_PREFIX', ''),
+            'currency_suffix' => c::env('FORMAT_CURRENCY_SUFFIX', ''),
+        ],
+    ],
     'ajax'=>[
         'expiration' => 60,
     ],
