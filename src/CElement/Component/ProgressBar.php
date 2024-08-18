@@ -1,6 +1,10 @@
 <?php
+namespace Cresenity\Laravel\CElement\Component;
 
-class CElement_Component_ProgressBar extends CElement_Component {
+use Cresenity\Laravel\CElement\Component;
+
+class ProgressBar extends Component
+{
     protected $minValue;
 
     protected $maxValue;
@@ -17,7 +21,8 @@ class CElement_Component_ProgressBar extends CElement_Component {
      */
     protected $process;
 
-    public function __construct($id = null) {
+    public function __construct($id = null)
+    {
         parent::__construct($id);
         $this->minValue = 0;
         $this->maxValue = 100;
@@ -27,13 +32,15 @@ class CElement_Component_ProgressBar extends CElement_Component {
         $this->process = null;
     }
 
-    public function setValue($value) {
+    public function setValue($value)
+    {
         $this->value = $value;
 
         return $this;
     }
 
-    public function withProcess($process) {
+    public function withProcess($process)
+    {
         if (!$process instanceof CElement_Component_ProgressBar_Process) {
             $process = new CElement_Component_ProgressBar_Process($process);
         }
@@ -42,7 +49,8 @@ class CElement_Component_ProgressBar extends CElement_Component {
         return $this;
     }
 
-    public function build() {
+    public function build()
+    {
         $this->addClass('cres:element:component:ProgressBar');
         $this->addClass('progress');
         $this->addClass('cres-progress');

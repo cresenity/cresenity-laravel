@@ -1,26 +1,33 @@
 <?php
+namespace Cresenity\Laravel\CElement\Component;
 
-class CElement_Component_TableRow extends CElement_Component {
-    use CTrait_Compat_Element_TableRow;
+use Cresenity\Laravel\CElement\Component;
+use Cresenity\Laravel\CStringBuilder;
 
+class TableRow extends Component
+{
     protected $columns = [];
 
-    public function __construct($id = '') {
+    public function __construct($id = '')
+    {
         parent::__construct($id);
     }
 
-    public static function factory($id = null) {
+    public static function factory($id = null)
+    {
         // @phpstan-ignore-next-line
         return new static($id);
     }
 
-    public function addColumn($content) {
+    public function addColumn($content)
+    {
         $this->columns[] = $content;
 
         return $this;
     }
 
-    public function html($indent = 0) {
+    public function html($indent = 0)
+    {
         $html = new CStringBuilder();
         $html->setIndent($indent);
         $html->appendln('<tr>');
@@ -43,7 +50,8 @@ class CElement_Component_TableRow extends CElement_Component {
         return $html->text();
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         $js = new CStringBuilder();
         $js->setIndent($indent);
         $js->append(parent::js($indent))->br();

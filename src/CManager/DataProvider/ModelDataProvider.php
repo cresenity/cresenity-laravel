@@ -1,8 +1,10 @@
 <?php
+namespace Cresenity\Laravel\CManager\DataProvider;
 
 use Opis\Closure\SerializableClosure;
 
-class CManager_DataProvider_ModelDataProvider extends CManager_DataProviderAbstract implements CManager_Contract_DataProviderInterface {
+class ModelDataProvider extends CManager_DataProviderAbstract implements CManager_Contract_DataProviderInterface
+{
     protected $modelClass;
 
     /**
@@ -10,7 +12,8 @@ class CManager_DataProvider_ModelDataProvider extends CManager_DataProviderAbstr
      */
     protected $queryCallback;
 
-    public function __construct($modelClass, $queryCallback = null) {
+    public function __construct($modelClass, $queryCallback = null)
+    {
         $this->modelClass = $modelClass;
         $this->queryCallback = $queryCallback != null ? new SerializableClosure($queryCallback) : null;
     }
@@ -20,7 +23,8 @@ class CManager_DataProvider_ModelDataProvider extends CManager_DataProviderAbstr
      *
      * @return array
      */
-    protected function getAggregateFieldFromQuery(CModel_Query $query) {
+    protected function getAggregateFieldFromQuery(CModel_Query $query)
+    {
         $columns = $query->toBase()->columns;
         $fields = [];
         if ($columns !== null) {
@@ -48,7 +52,8 @@ class CManager_DataProvider_ModelDataProvider extends CManager_DataProviderAbstr
      *
      * @return CModel_Query
      */
-    public function getModelQuery($callback = null) {
+    public function getModelQuery($callback = null)
+    {
         $modelClass = $this->modelClass;
         $query = $modelClass::query();
         /** @var CModel_Query $query */
@@ -174,7 +179,8 @@ class CManager_DataProvider_ModelDataProvider extends CManager_DataProviderAbstr
         return $query;
     }
 
-    protected function withSelectRelationColumn($query, $relationPath, $column, $index) {
+    protected function withSelectRelationColumn($query, $relationPath, $column, $index)
+    {
         $alias = 'mdp_sort_' . $index;
 
         $relations = explode('.', $relationPath);
@@ -200,7 +206,8 @@ class CManager_DataProvider_ModelDataProvider extends CManager_DataProviderAbstr
      *
      * @return string
      */
-    public static function randomStringAlpha($length) {
+    public static function randomStringAlpha($length)
+    {
         $pool = array_merge(range('a', 'z'), range('A', 'Z'));
         $key = '';
         for ($i = 0; $i < $length; $i++) {
@@ -210,7 +217,8 @@ class CManager_DataProvider_ModelDataProvider extends CManager_DataProviderAbstr
         return $key;
     }
 
-    protected function createSelectJoinQuery(CModel_Query $query, CModel_Relation $relation, array $joinRelations, $column) {
+    protected function createSelectJoinQuery(CModel_Query $query, CModel_Relation $relation, array $joinRelations, $column)
+    {
         $tableAlias = 'mdp_join_main';
         $relatedModel = $relation->getRelated();
         $relatedTable = $relatedModel->getTable();
@@ -281,7 +289,8 @@ class CManager_DataProvider_ModelDataProvider extends CManager_DataProviderAbstr
         return $newQuery;
     }
 
-    protected function isRelationField($query, $fieldName) {
+    protected function isRelationField($query, $fieldName)
+    {
         if (method_exists($query->getModel(), $fieldName)) {
             try {
                 $query->getModel()->load($fieldName);
@@ -299,7 +308,8 @@ class CManager_DataProvider_ModelDataProvider extends CManager_DataProviderAbstr
         return false;
     }
 
-    public function paginate($perPage = null, $columns = ['*'], $pageName = 'page', $page = null, $callback = null) {
+    public function paginate($perPage = null, $columns = ['*'], $pageName = 'page', $page = null, $callback = null)
+    {
         //do nothing
         $query = $this->getModelQuery($callback);
         //c::db()->enableBenchmark();
@@ -312,7 +322,8 @@ class CManager_DataProvider_ModelDataProvider extends CManager_DataProviderAbstr
         return $query->paginate($perPage, $columns, $pageName, $page);
     }
 
-    public function first($callback = null) {
+    public function first($callback = null)
+    {
         //do nothing
         $query = $this->getModelQuery($callback);
         //c::db()->enableBenchmark();
@@ -326,17 +337,20 @@ class CManager_DataProvider_ModelDataProvider extends CManager_DataProviderAbstr
      *
      * @return bool
      */
-    public function hasSoftDeletes(CModel $model) {
+    public function hasSoftDeletes(CModel $model)
+    {
         return in_array(CModel_SoftDelete_SoftDeleteTrait::class, c::classUsesRecursive($model));
     }
 
-    public function queryCallback($callback) {
+    public function queryCallback($callback)
+    {
         $this->queryCallback = $callback;
 
         return $this;
     }
 
-    public function toEnumerable() {
+    public function toEnumerable()
+    {
         $query = $this->getModelQuery();
 
         return $query->get();
@@ -348,9 +362,10 @@ class CManager_DataProvider_ModelDataProvider extends CManager_DataProviderAbstr
      *
      * @return mixed
      */
-    public function aggregate($method, $column) {
+    public function aggregate($method, $column)
+    {
         if (!$this->isValidAggregateMethod($method)) {
-            throw new Exception($method . ': is not valid aggregate method');
+            throw new \Exception($method . ': is not valid aggregate method');
         }
         $query = $this->getModelQuery();
 

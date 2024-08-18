@@ -1,6 +1,19 @@
 <?php
+namespace Cresenity\Laravel\CManager;
 
-class CManager_EditorJs {
+use c;
+use carr;
+use Closure;
+use Cresenity\Laravel\CElement\Element\FormInput\EditorJs\DefaultConfig;
+use Cresenity\Laravel\CElement\Element\FormInput\EditorJs\EditorHandler;
+use Cresenity\Laravel\CElement\Element\FormInput\EditorJs\EditorJsException;
+use Cresenity\Laravel\CManager\EditorJs\ImageUploadHandler;
+use Illuminate\Support\HtmlString;
+use JsonException;
+use stdClass;
+
+class EditorJs
+{
     /**
      * List of callbacks that can render blocks.
      *
@@ -10,7 +23,8 @@ class CManager_EditorJs {
 
     private static $instance;
 
-    public static function instance() {
+    public static function instance()
+    {
         if (static::$instance == null) {
             static::$instance = new static();
         }
@@ -18,11 +32,13 @@ class CManager_EditorJs {
         return static::$instance;
     }
 
-    public static function createImageUploadHandler($options = []) {
-        return new CManager_EditorJs_ImageUploadHandler($options);
+    public static function createImageUploadHandler($options = [])
+    {
+        return new ImageUploadHandler($options);
     }
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->registerDefaultRenderer();
     }
 
@@ -34,7 +50,8 @@ class CManager_EditorJs {
      *
      * @return void
      */
-    public function addRenderer(string $block, callable $callback): void {
+    public function addRenderer(string $block, callable $callback): void
+    {
         $this->rendererCallbacks[$block] = $callback;
     }
 
@@ -45,9 +62,10 @@ class CManager_EditorJs {
      *
      * @return \CBase_HtmlString safe, directly returnable string
      */
-    public function generateHtmlOutput($data) {
+    public function generateHtmlOutput($data)
+    {
         if (empty($data) || $data == new stdClass()) {
-            return new CBase_HtmlString('');
+            return new HtmlString('');
         }
 
         // Clean non-string data
@@ -59,11 +77,11 @@ class CManager_EditorJs {
             }
         }
 
-        $config = CElement_FormInput_EditorJs_DefaultConfig::get('validationSettings');
+        $config = DefaultConfig::get('validationSettings');
 
         try {
             // Initialize Editor backend and validate structure
-            $editor = new CElement_FormInput_EditorJs_EditorHandler($data, json_encode($config));
+            $editor = new EditorHandler($data, json_encode($config));
 
             // Get sanitized blocks (according to the rules from configuration)
             $blocks = $editor->getBlocks();
@@ -75,18 +93,19 @@ class CManager_EditorJs {
                 }
             }
 
-            return new CBase_HtmlString(
+            return new HtmlString(
                 c::view('cresenity.element.editorjs.content', ['content' => $htmlOutput])->render()
             );
-        } catch (CElement_FormInput_EditorJs_EditorJSException $exception) {
+        } catch (EditorJsException $exception) {
             // process exception
-            return new CBase_HtmlString(
+            return new HtmlString(
                 "Something went wrong: {$exception->getMessage()}"
             );
         }
     }
 
-    protected function getBlockData($block) {
+    protected function getBlockData($block)
+    {
         $data = $block['data'];
         if (isset($block['tunes'])) {
             $alignment = carr::get($block, 'tunes.alignment.alignment');
@@ -101,7 +120,8 @@ class CManager_EditorJs {
     /**
      * Registers all default render helpers.
      */
-    protected function registerDefaultRenderer() {
+    protected function registerDefaultRenderer()
+    {
         $this->addRenderer(
             'header',
             function ($block) {
@@ -187,7 +207,8 @@ class CManager_EditorJs {
      *
      * @return string
      */
-    protected function calculateImageClasses($blockData) {
+    protected function calculateImageClasses($blockData)
+    {
         $classes = [];
         foreach ($blockData as $key => $data) {
             if (is_bool($data) && $data === true) {

@@ -1,6 +1,10 @@
 <?php
+namespace Cresenity\Laravel\CElement\Component;
 
-class CElement_Component_Repeater extends CElement_Component {
+use Cresenity\Laravel\CElement\Component;
+
+class Repeater extends Component
+{
     protected $itemBuilder;
 
     protected $canDelete;
@@ -13,7 +17,8 @@ class CElement_Component_Repeater extends CElement_Component {
 
     protected $minItem;
 
-    public function __construct($id = null) {
+    public function __construct($id = null)
+    {
         parent::__construct($id);
         $this->canDelete = true;
         $this->canAdd = true;
@@ -22,24 +27,28 @@ class CElement_Component_Repeater extends CElement_Component {
         $this->minItem = 1;
     }
 
-    public static function factory($id = null) {
+    public static function factory($id = null)
+    {
         // @phpstan-ignore-next-line
         return new static($id);
     }
 
-    public function setItemBuilder($itemBuilder) {
+    public function setItemBuilder($itemBuilder)
+    {
         $this->itemBuilder = $itemBuilder;
 
         return $this;
     }
 
-    public function setMinItem($minItem) {
+    public function setMinItem($minItem)
+    {
         $this->minItem = (int) $minItem;
 
         return $this;
     }
 
-    protected function build() {
+    protected function build()
+    {
         $config = [
             'minItem' => $this->minItem,
         ];

@@ -1,14 +1,23 @@
 <?php
+namespace Cresenity\Laravel\CManager\EditorJs;
 
-class CManager_EditorJs_ImageUploadHandler {
+use c;
+use carr;
+use Cresenity\Laravel\CElement\Element\FormInput\EditorJs\DefaultConfig;
+use Cresenity\Laravel\CValidation;
+use Illuminate\Http\Request;
+
+class ImageUploadHandler
+{
     protected $path;
 
     protected $disk;
 
     protected $options;
 
-    public function __construct($options = []) {
-        $this->options = array_merge(CElement_FormInput_EditorJs_DefaultConfig::get('toolSettings.image'), $options);
+    public function __construct($options = [])
+    {
+        $this->options = array_merge(DefaultConfig::get('toolSettings.image'), $options);
         $this->path = $this->getOption('path', 'editorjs/image');
         $this->disk = $this->getOption('disk', 'local-temp');
     }
@@ -16,11 +25,12 @@ class CManager_EditorJs_ImageUploadHandler {
     /**
      * Upload file.
      *
-     * @param CHTTP_Request $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return array
      */
-    public function byFile(CHTTP_Request $request) {
+    public function byFile(Request $request)
+    {
         $validator = CValidation::createValidator($request->all(), [
             'image' => 'required|image',
         ]);
@@ -59,11 +69,12 @@ class CManager_EditorJs_ImageUploadHandler {
     }
 
     /**
-     * @param NovaRequest $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return array
      */
-    public function byUrl(CHTTP_Request $request) {
+    public function byUrl(Request $request)
+    {
         $validator = CValidation::createValidator($request->all(), [
             'url' => [
                 'required',
@@ -106,7 +117,8 @@ class CManager_EditorJs_ImageUploadHandler {
         ];
     }
 
-    protected function getOption($key, $default = null) {
+    protected function getOption($key, $default = null)
+    {
         return carr::get($this->options, $key, $default);
     }
 
@@ -114,7 +126,8 @@ class CManager_EditorJs_ImageUploadHandler {
      * @param $path
      * @param array $alterations
      */
-    private function applyAlterations($path, $alterations = []) {
+    private function applyAlterations($path, $alterations = [])
+    {
         try {
             $image = CImage_Image::load($path);
 
@@ -182,7 +195,8 @@ class CManager_EditorJs_ImageUploadHandler {
      *
      * @return array
      */
-    private function applyThumbnails($path) {
+    private function applyThumbnails($path)
+    {
         $thumbnailSettings = $this->getOption('thumbnails');
 
         $generatedThumbnails = [];
@@ -216,7 +230,8 @@ class CManager_EditorJs_ImageUploadHandler {
     /**
      * @param $path
      */
-    private function deleteThumbnails($path) {
+    private function deleteThumbnails($path)
+    {
         $thumbnailSettings = $this->getOption('thumbnails');
 
         if (!empty($thumbnailSettings)) {

@@ -1,26 +1,26 @@
 <?php
+namespace Cresenity\Laravel\CElement\Component;
 
-defined('SYSPATH') or die('No direct access allowed.');
+use Cresenity\Laravel\CElement\Component;
+use Cresenity\Laravel\CElement\Traits\Property\HeightPropertyTrait;
+use Cresenity\Laravel\CElement\Traits\Property\WidthPropertyTrait;
 
-/**
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Jun 29, 2019, 6:43:28 PM
- */
-class CElement_Component_PdfViewer extends CElement_Component {
-    use CTrait_Element_Property_Width,
-        CTrait_Element_Property_Height;
+class PdfViewer extends Component
+{
+    use WidthPropertyTrait,
+        HeightPropertyTrait;
     protected $pdfUrl;
 
-    public function __construct($id = '') {
+    public function __construct($id = '')
+    {
         parent::__construct($id);
         $this->tag = 'iframe';
         $this->width = '100%';
         $this->height = '500px';
     }
 
-    public function build() {
+    public function build()
+    {
         $url = curl::base() . 'cresenity/pdf?file=' . $this->pdfUrl;
         $this->setAttr('src', $url);
 
@@ -29,7 +29,8 @@ class CElement_Component_PdfViewer extends CElement_Component {
         $this->setAttr('height', $this->height);
     }
 
-    public function setPdfUrl($url) {
+    public function setPdfUrl($url)
+    {
         $this->pdfUrl = $url;
 
         return $this;

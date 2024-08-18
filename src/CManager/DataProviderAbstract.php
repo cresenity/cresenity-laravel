@@ -1,6 +1,10 @@
 <?php
+namespace Cresenity\Laravel\CManager;
 
-abstract class CManager_DataProviderAbstract {
+use Cresenity\Laravel\CElement\Element\Depends\DependsOn;
+
+abstract class DataProviderAbstract
+{
     protected $searchAnd = [];
 
     protected $searchOr = [];
@@ -8,29 +12,34 @@ abstract class CManager_DataProviderAbstract {
     protected $sort = [];
 
     /**
-     * @var CElement_Depends_DependsOn[]
+     * @var \Cresenity\Laravel\CElement\Element\Depends\DependsOn[]
      */
     protected $callbacks = [];
 
     abstract public function paginate($perPage = null, $columns = ['*'], $pageName = 'page', $page = null, $callback = null);
 
-    public function searchAnd(array $search) {
+    public function searchAnd(array $search)
+    {
         $this->searchAnd = $search;
     }
 
-    public function searchOr(array $search) {
+    public function searchOr(array $search)
+    {
         $this->searchOr = $search;
     }
 
-    public function sort(array $sort) {
+    public function sort(array $sort)
+    {
         $this->sort = $sort;
     }
 
-    public function createParameter() {
-        return new CManager_DataProviderParameter($this->searchAnd, $this->searchOr, $this->sort);
+    public function createParameter()
+    {
+        return new DataProviderParameter($this->searchAnd, $this->searchOr, $this->sort);
     }
 
-    protected function isCallable($callable) {
+    protected function isCallable($callable)
+    {
         if (is_string($callable)) {
             return false;
         }
@@ -38,7 +47,8 @@ abstract class CManager_DataProviderAbstract {
         return is_callable($callable) || ($callable instanceof \Opis\Closure\SerializableClosure);
     }
 
-    protected function callCallable($callable, array $args = []) {
+    protected function callCallable($callable, array $args = [])
+    {
         if (is_callable($callable)) {
             return call_user_func_array($callable, $args);
         }
@@ -46,10 +56,11 @@ abstract class CManager_DataProviderAbstract {
             return $callable->__invoke(...$args);
         }
 
-        throw new Exception('Cannot call callable on Data Provider');
+        throw new \Exception('Cannot call callable on Data Provider');
     }
 
-    protected function isValidAggregateMethod($method) {
+    protected function isValidAggregateMethod($method)
+    {
         $validAggregate = ['sum', 'avg', 'min', 'max', 'count'];
 
         return in_array($method, $validAggregate);

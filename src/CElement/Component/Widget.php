@@ -1,16 +1,10 @@
 <?php
+namespace Cresenity\Laravel\CElement\Component;
 
-defined('SYSPATH') or die('No direct access allowed.');
+use Cresenity\Laravel\CElement\Component;
 
-/**
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Feb 17, 2018, 1:56:50 AM
- */
-class CElement_Component_Widget extends CElement_Component {
-    use CTrait_Compat_Element_Widget;
-
+class Widget extends Component
+{
     public $scroll;
 
     public $nopadding;
@@ -39,7 +33,8 @@ class CElement_Component_Widget extends CElement_Component {
 
     private $bodyClass;
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         parent::__construct($id);
         $this->wrapperClass = c::theme('widget.class.wrapper', 'widget-box');
         $this->bodyClass = c::theme('widget.class.body', 'widget-content');
@@ -57,7 +52,8 @@ class CElement_Component_Widget extends CElement_Component {
         $this->js_collapse = true;
     }
 
-    public static function factory($id = null) {
+    public static function factory($id = null)
+    {
         /** @phpstan-ignore-next-line */
         return new static($id);
     }
@@ -65,14 +61,16 @@ class CElement_Component_Widget extends CElement_Component {
     /**
      * @return CElement_Component_Widget_Header
      */
-    public function header() {
+    public function header()
+    {
         return $this->header;
     }
 
     /**
      * @return CElement_Element_Div
      */
-    public function content() {
+    public function content()
+    {
         return $this->content;
     }
 
@@ -81,11 +79,13 @@ class CElement_Component_Widget extends CElement_Component {
      *
      * @return CElement_Component_Action
      */
-    public function addHeaderAction($id = '') {
+    public function addHeaderAction($id = '')
+    {
         return $this->header()->addAction($id);
     }
 
-    public function setHeaderActionStyle($style) {
+    public function setHeaderActionStyle($style)
+    {
         $this->header()->actions()->setStyle($style);
 
         return $this;
@@ -96,17 +96,20 @@ class CElement_Component_Widget extends CElement_Component {
      *
      * @return CElement_FormInput_Checkbox_Switcher
      */
-    public function addSwitcher($id = '') {
+    public function addSwitcher($id = '')
+    {
         return $this->header->addSwitcher($id);
     }
 
-    public function setSwitcherBehaviour($behaviour = 'hide') {
+    public function setSwitcherBehaviour($behaviour = 'hide')
+    {
         $this->header->setSwitcherBehaviour($behaviour);
 
         return $this;
     }
 
-    public function setSwitcherBlockMessage($blockMessage = '') {
+    public function setSwitcherBlockMessage($blockMessage = '')
+    {
         $this->header->setSwitcherBlockMessage($blockMessage);
 
         return $this;
@@ -120,7 +123,8 @@ class CElement_Component_Widget extends CElement_Component {
      *
      * @return $this
      */
-    public function setTitle($title, $lang = true) {
+    public function setTitle($title, $lang = true)
+    {
         $this->header()->setTitle($title, $lang);
 
         return $this;
@@ -133,19 +137,22 @@ class CElement_Component_Widget extends CElement_Component {
      *
      * @return $this
      */
-    public function setIcon($icon) {
+    public function setIcon($icon)
+    {
         $this->header()->setIcon($icon);
 
         return $this;
     }
 
-    public function setNoPadding($bool = true) {
+    public function setNoPadding($bool = true)
+    {
         $this->nopadding = $bool;
 
         return $this;
     }
 
-    public function build() {
+    public function build()
+    {
         $this->addClass($this->wrapperClass);
 
         if ($this->nopadding) {

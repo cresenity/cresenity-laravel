@@ -1,6 +1,10 @@
 <?php
+namespace Cresenity\Laravel\CElement\Component;
 
-class CElement_Component_ShowMore extends CElement_Component {
+use Cresenity\Laravel\CElement\Component;
+
+class ShowMore extends Component
+{
     /**
      * @var string
      */
@@ -21,7 +25,8 @@ class CElement_Component_ShowMore extends CElement_Component {
      */
     protected $type;
 
-    public function __construct($id = null) {
+    public function __construct($id = null)
+    {
         parent::__construct($id);
         $this->showMoreLabel = '→ show more';
         $this->showLessLabel = '← show less';
@@ -29,7 +34,8 @@ class CElement_Component_ShowMore extends CElement_Component {
         $this->type = 'text';
     }
 
-    public static function factory($id = null) {
+    public static function factory($id = null)
+    {
         // @phpstan-ignore-next-line
         return new static($id);
     }
@@ -39,13 +45,15 @@ class CElement_Component_ShowMore extends CElement_Component {
      *
      * @return $this
      */
-    public function setLimit($limit) {
+    public function setLimit($limit)
+    {
         $this->limit = $limit;
 
         return $this;
     }
 
-    protected function build() {
+    protected function build()
+    {
         $this->addClass('cres:element:component:ShowMore');
         $config = [
             'type' => $this->type,

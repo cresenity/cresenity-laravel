@@ -1,14 +1,10 @@
 <?php
+namespace Cresenity\Laravel\CElement\Component;
 
-defined('SYSPATH') or die('No direct access allowed.');
+use Cresenity\Laravel\CElement\Component;
 
-/**
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Sep 7, 2018, 7:50:27 PM
- */
-class CElement_Component_PrismCode extends CElement_Component {
+class PrismCode extends Component
+{
     protected $prismLanguage = 'php';
 
     protected $prismTheme = 'okaidia';
@@ -21,7 +17,8 @@ class CElement_Component_PrismCode extends CElement_Component {
 
     protected $isWrap;
 
-    public function __construct($id = '', $tag = 'div') {
+    public function __construct($id = '', $tag = 'div')
+    {
         parent::__construct($id, $tag);
         $this->tag = 'pre';
         $this->codeElement = $this->addCode();
@@ -30,19 +27,22 @@ class CElement_Component_PrismCode extends CElement_Component {
         $this->isWrap = false;
     }
 
-    public function setLanguage($lang) {
+    public function setLanguage($lang)
+    {
         $this->prismLanguage = $lang;
 
         return $this;
     }
 
-    public function setTheme($theme) {
+    public function setTheme($theme)
+    {
         $this->prismTheme = $theme;
 
         return $this;
     }
 
-    protected function build() {
+    protected function build()
+    {
         c::manager()->registerJs('plugins/prism/prism.min.js');
         c::manager()->registerJs('plugins/prism/prism.min.js');
         c::manager()->registerJs('plugins/prism/plugins/prism-toolbar.js');
@@ -55,25 +55,29 @@ class CElement_Component_PrismCode extends CElement_Component {
         }
     }
 
-    public function setHaveCopyToClipboard($bool = true) {
+    public function setHaveCopyToClipboard($bool = true)
+    {
         $this->haveCopyToClipboard = $bool;
 
         return $this;
     }
 
-    public function setHaveSelectCode($bool = true) {
+    public function setHaveSelectCode($bool = true)
+    {
         $this->haveSelectCode = $bool;
 
         return $this;
     }
 
-    public function setWrap($bool = true) {
+    public function setWrap($bool = true)
+    {
         $this->isWrap = $bool;
 
         return $this;
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         $js = '';
 
         if ($this->haveSelectCode) {
