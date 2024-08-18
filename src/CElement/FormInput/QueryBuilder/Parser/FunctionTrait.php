@@ -1,11 +1,11 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Parser;
+namespace Cresenity\Laravel\CElement\FormInput\QueryBuilder\Parser;
 
 use Carbon\Carbon;
 use Cresenity\Laravel\CCarbon;
-use Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\ParseException;
-use Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\RuleException;
+use Cresenity\Laravel\CElement\FormInput\QueryBuilder\Exception\ParseException;
+use Cresenity\Laravel\CElement\FormInput\QueryBuilder\Exception\RuleException;
 use Illuminate\Database\Eloquent\Builder;
 use stdClass;
 
@@ -95,7 +95,7 @@ trait FunctionTrait
      *
      * @param $condition
      *
-     * @throws \Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\ParseException
+     * @throws \Cresenity\Laravel\CElement\FormInput\QueryBuilder\Exception\ParseException
      *
      * @return string
      */
@@ -117,7 +117,7 @@ trait FunctionTrait
      * @param mixed  $value        the value we are checking against
      * @param string $field        the field that we are enforcing
      *
-     * @throws \Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\ParseException if value is not a correct type
+     * @throws \Cresenity\Laravel\CElement\FormInput\QueryBuilder\Exception\ParseException if value is not a correct type
      *
      * @return mixed value after enforcement
      */
@@ -141,7 +141,7 @@ trait FunctionTrait
      *
      * @see enforceArrayOrString
      *
-     * @throws \Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\ParseException
+     * @throws \Cresenity\Laravel\CElement\FormInput\QueryBuilder\Exception\ParseException
      */
     protected function checkFieldIsAnArray($requireArray, $value, $field)
     {
@@ -160,7 +160,7 @@ trait FunctionTrait
      *
      * @see enforceArrayOrString
      *
-     * @throws \Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\ParseException
+     * @throws \Cresenity\Laravel\CElement\FormInput\QueryBuilder\Exception\ParseException
      *
      * @return mixed
      */
@@ -178,7 +178,7 @@ trait FunctionTrait
      *
      * @param $value
      *
-     * @throws \Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\ParseException
+     * @throws \Cresenity\Laravel\CElement\FormInput\QueryBuilder\Exception\ParseException
      *
      * @return \CCarbon|\CCarbon[]
      */
@@ -222,7 +222,7 @@ trait FunctionTrait
      *
      * @param string|array $json
      *
-     * @throws \Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\ParseException
+     * @throws \Cresenity\Laravel\CElement\FormInput\QueryBuilder\Exception\ParseException
      *
      * @return stdClass
      */
@@ -251,7 +251,7 @@ trait FunctionTrait
      *
      * @param \stdClass $rule
      *
-     * @throws \Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\RuleException
+     * @throws \Cresenity\Laravel\CElement\FormInput\QueryBuilder\Exception\RuleException
      */
     private function getRuleValue(\stdClass $rule)
     {
@@ -268,7 +268,7 @@ trait FunctionTrait
      * @param $fields
      * @param $field
      *
-     * @throws \Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\ParseException
+     * @throws \Cresenity\Laravel\CElement\FormInput\QueryBuilder\Exception\ParseException
      */
     private function ensureFieldIsAllowed($fields, $field)
     {
@@ -288,7 +288,7 @@ trait FunctionTrait
      * @param array        $value
      * @param string       $condition
      *
-     * @throws \Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\ParseException
+     * @throws \Cresenity\Laravel\CElement\FormInput\QueryBuilder\Exception\ParseException
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */

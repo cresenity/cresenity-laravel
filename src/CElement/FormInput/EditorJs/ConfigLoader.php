@@ -1,6 +1,6 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\FormInput\EditorJs;
+namespace Cresenity\Laravel\CElement\FormInput\EditorJs;
 
 /**
  * Class ConfigLoader.
@@ -14,7 +14,7 @@ class ConfigLoader
      *
      * @param string $configuration – configuration data
      *
-     * @throws \Cresenity\Laravel\CElement\Element\FormInput\EditorJs\EditorJsException
+     * @throws \Cresenity\Laravel\CElement\FormInput\EditorJs\EditorJsException
      */
     public function __construct($configuration)
     {
@@ -31,7 +31,7 @@ class ConfigLoader
      *
      * @param array $config
      *
-     * @throws \Cresenity\Laravel\CElement\Element\FormInput\EditorJs\EditorJsException
+     * @throws \Cresenity\Laravel\CElement\FormInput\EditorJs\EditorJsException
      */
     private function loadTools($config)
     {

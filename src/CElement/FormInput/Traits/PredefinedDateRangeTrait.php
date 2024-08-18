@@ -1,6 +1,6 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\FormInput\Traits;
+namespace Cresenity\Laravel\CElement\FormInput\Traits;
 
 use Carbon\Carbon;
 

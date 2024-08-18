@@ -1,7 +1,7 @@
 <?php
 namespace Cresenity\Laravel\CElement\FormInput\Checkbox;
 
-use Cresenity\Laravel\CElement\Element\FormInput\Checkbox;
+use Cresenity\Laravel\CElement\FormInput\Checkbox;
 
 class Switcher extends Checkbox
 {

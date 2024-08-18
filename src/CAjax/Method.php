@@ -1,6 +1,7 @@
 <?php
 namespace Cresenity\Laravel\CAjax;
 
+use c;
 use Cresenity\Laravel\CAjax;
 use Cresenity\Laravel\CAjax\Exception\AuthAjaxException;
 use Cresenity\Laravel\CAjax\Exception\ExpiredAjaxException;
@@ -168,14 +169,14 @@ class Method implements Jsonable
 
         //save this object to file.
 
-        $ajaxMethod = date('Ymd') . cutils::randmd5();
+        $ajaxMethod = date('Ymd') . c::randmd5();
         $disk = CTemporary::disk();
         $filename = $ajaxMethod . '.tmp';
 
         $file = CTemporary::getPath('ajax', $filename);
         $disk->put($file, $json);
 
-        $base_url = curl::httpbase();
+        $base_url = c::url('');
 
         return $base_url . 'cresenity/ajax/' . $ajaxMethod;
     }

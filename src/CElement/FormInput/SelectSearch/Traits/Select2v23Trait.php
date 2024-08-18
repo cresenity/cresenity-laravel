@@ -1,6 +1,6 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\FormInput\SelectSearch\Traits;
+namespace Cresenity\Laravel\CElement\FormInput\SelectSearch\Traits;
 
 use Cresenity\Laravel\CRenderable;
 use Cresenity\Laravel\CStringBuilder;

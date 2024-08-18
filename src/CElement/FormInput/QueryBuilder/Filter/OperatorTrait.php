@@ -1,8 +1,8 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Filter;
+namespace Cresenity\Laravel\CElement\FormInput\QueryBuilder\Filter;
 
-use Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Constant;
+use Cresenity\Laravel\CElement\FormInput\QueryBuilder\Constant;
 
 trait OperatorTrait
 {

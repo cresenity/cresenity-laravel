@@ -48,7 +48,8 @@ final class CF
         return app()->getLocale();
     }
 
-    public static function version() {
+    public static function version()
+    {
         return '1.0';
     }
 
@@ -57,7 +58,26 @@ final class CF
      *
      * @return string
      */
-    public static function getCharset() {
+    public static function getCharset()
+    {
         return static::$charset;
+    }
+
+    /**
+     * @param string $directory
+     * @param string $filename
+     *
+     * @return string
+     */
+    public static function getFile($directory, $filename)
+    {
+        if ($directory=='themes') {
+            $path = \resource_path();
+            $path.=DS.$directory.DS.$filename.'.php';
+            if (CFile::exists($path)) {
+                return $path;
+            }
+        }
+        return null;
     }
 }

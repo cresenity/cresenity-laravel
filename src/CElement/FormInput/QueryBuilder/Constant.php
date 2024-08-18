@@ -1,6 +1,6 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder;
+namespace Cresenity\Laravel\CElement\FormInput\QueryBuilder;
 
 final class Constant
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\FormInput;
+namespace Cresenity\Laravel\CElement\FormInput;
 
 use Cresenity\Laravel\CElement\FormInput;
 
-class CElement_FormInput_QueryBuilder extends CElement_FormInput
+class QueryBuilder extends FormInput
 {
     protected $filters;
 

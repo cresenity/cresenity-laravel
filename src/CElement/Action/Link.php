@@ -1,9 +1,9 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\Action;
+namespace Cresenity\Laravel\CElement\Action;
 
 use Cresenity\Laravel\CElement\Element\A;
-use Cresenity\Laravel\CElement\Element\Contract\ActionableInterface;
+use Cresenity\Laravel\CElement\Contract\ActionableInterface;
 
 class Link extends A implements ActionableInterface
 {

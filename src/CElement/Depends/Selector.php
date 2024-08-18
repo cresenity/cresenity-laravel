@@ -1,6 +1,6 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\Depends;
+namespace Cresenity\Laravel\CElement\Depends;
 
 use Cresenity\Laravel\CRenderable;
 

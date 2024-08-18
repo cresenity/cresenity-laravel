@@ -1,13 +1,15 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\FormInput;
+namespace Cresenity\Laravel\CElement\FormInput;
 
 use Cresenity\Laravel\CElement\FormInput;
+use Cresenity\Laravel\CElement\Traits\Property\ApplyJsPropertyTrait;
+use Cresenity\Laravel\CElement\Traits\Property\PlaceholderPropertyTrait;
 
-class CElement_FormInput_Range extends CElement_FormInput
+class Range extends FormInput
 {
-    use CTrait_Element_Property_Placeholder;
-    use CTrait_Element_Property_ApplyJs;
+    use PlaceholderPropertyTrait;
+    use ApplyJsPropertyTrait;
 
     protected $min;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\FormInput;
+namespace Cresenity\Laravel\CElement\FormInput;
 
 use Cresenity\Laravel\CElement\FormInput;
 use Cresenity\Laravel\CElement\Traits\Property\PlaceholderPropertyTrait;
@@ -37,7 +37,7 @@ class Text extends FormInput
     /**
      * @param null|string $id
      *
-     * @return \Cresenity\Laravel\CElement\Element\FormInput\Text
+     * @return \Cresenity\Laravel\CElement\FormInput\Text
      */
     public static function factory($id = null)
     {

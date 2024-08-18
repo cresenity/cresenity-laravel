@@ -1,6 +1,6 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\FormInput;
+namespace Cresenity\Laravel\CElement\FormInput;
 
 use Cresenity\Laravel\CElement\FormInput;
 use Cresenity\Laravel\CElement\Traits\Property\DependsOnPropertyTrait;

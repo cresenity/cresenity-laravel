@@ -59,7 +59,7 @@ final class CManager
     }
 
     /**
-     * @return CManager_Theme
+     * @return \Cresenity\Laravel\CManager\Theme
      */
     public static function theme()
     {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\FormInput\DateTime;
+namespace Cresenity\Laravel\CElement\FormInput\DateTime;
 
-use Cresenity\Laravel\CElement\Element\FormInput\DateTime;
+use Cresenity\Laravel\CElement\FormInput\DateTime;
 use Cresenity\Laravel\CManager;
 use Cresenity\Laravel\CStringBuilder;
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\FormInput;
+namespace Cresenity\Laravel\CElement\FormInput;
 
 use Cresenity\Laravel\CElement\FormInput;
+use Cresenity\Laravel\CElement\Traits\Property\LabelPropertyTrait;
 
-class CElement_FormInput_Radio extends CElement_FormInput
+class Radio extends FormInput
 {
-    use CTrait_Compat_Element_FormInput_Radio,
-        CTrait_Element_Property_Label;
+    use LabelPropertyTrait;
 
     protected $checked;
 

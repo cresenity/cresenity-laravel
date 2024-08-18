@@ -1,6 +1,6 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\FormInput\EditorJs;
+namespace Cresenity\Laravel\CElement\FormInput\EditorJs;
 
 abstract class ToolAbstract
 {

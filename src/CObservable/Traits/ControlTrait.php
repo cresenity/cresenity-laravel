@@ -2,6 +2,8 @@
 
 namespace Cresenity\Laravel\CObservable\Traits;
 
+use Cresenity\Laravel\CElement\FormInput\SelectSearch;
+
 trait ControlTrait
 {
     /**
@@ -9,11 +11,11 @@ trait ControlTrait
      *
      * @param null|string $id
      *
-     * @return CElement_FormInput_SelectSearch
+     * @return \Cresenity\Laravel\CElement\FormInput\SelectSearch
      */
     public function addSelectSearchControl($id = null)
     {
-        $control = new CElement_FormInput_SelectSearch($id);
+        $control = new SelectSearch($id);
         $this->wrapper->add($control);
 
         return $control;

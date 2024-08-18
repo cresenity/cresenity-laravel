@@ -1,17 +1,22 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\FormInput;
+namespace Cresenity\Laravel\CElement\FormInput;
 
 use c;
 use carr;
 use Closure;
-use Cresenity\Laravel\CElement\Element\FormInput\SelectSearch\Traits\Select2v23Trait;
+use Cresenity\Laravel\CAjax;
+use Cresenity\Laravel\CElement\FormInput\SelectSearch\Traits\Select2v23Trait;
 use Cresenity\Laravel\CElement\FormInput;
 use Cresenity\Laravel\CElement\Traits\Property\ApplyJsPropertyTrait;
 use Cresenity\Laravel\CElement\Traits\Property\DependsOnPropertyTrait;
 use Cresenity\Laravel\CElement\Traits\Property\PlaceholderPropertyTrait;
 use Cresenity\Laravel\CF;
 use Cresenity\Laravel\CFunction;
+use Cresenity\Laravel\CManager;
+use Cresenity\Laravel\CRenderable;
+use Cresenity\Laravel\CStringBuilder;
+use Laravel\SerializableClosure\SerializableClosure;
 
 class SelectSearch extends FormInput
 {
@@ -69,7 +74,7 @@ class SelectSearch extends FormInput
         $this->formatResult = null;
         $this->keyField = '';
         $this->searchField = [];
-        $this->placeholder = \c::__('element/selectsearch.placeholder');
+        $this->placeholder = \c::__('cresenity::element/selectsearch.placeholder');
         $this->multiple = false;
         $this->autoSelect = false;
         $this->minInputLength = 0;
@@ -503,7 +508,7 @@ class SelectSearch extends FormInput
                         $strSelection = '{' . carr::first($this->searchField) . '}';
                     }
 
-                    if ($strSelection instanceof CFunction_SerializableClosure) {
+                    if ($strSelection instanceof SerializableClosure) {
                         $strSelection = $strSelection->__invoke($model ?: $row);
                     }
                     if ($strSelection instanceof CRenderable) {

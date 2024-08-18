@@ -1,6 +1,6 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder;
+namespace Cresenity\Laravel\CElement\FormInput\QueryBuilder;
 
 use Illuminate\Contracts\Support\Arrayable;
 
@@ -16,7 +16,7 @@ class FilterBuilder implements Arrayable
     /**
      * @param null|string $id
      *
-     * @return \Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Filter
+     * @return \Cresenity\Laravel\CElement\FormInput\QueryBuilder\Filter
      */
     public function addFilter($id = null)
     {

@@ -1,13 +1,14 @@
 <?php
 namespace Cresenity\Laravel\CApp\Traits;
 
+use c;
 use Cresenity\Laravel\CApp;
 use Cresenity\Laravel\CBase;
 use Cresenity\Laravel\CCarbon;
 use Cresenity\Laravel\CF;
 use Cresenity\Laravel\CHTTP;
 
-trait CApp_Trait_BaseTrait
+trait BaseTrait
 {
     private static $org = null;
 

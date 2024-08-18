@@ -1,15 +1,17 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\FormInput;
+namespace Cresenity\Laravel\CElement\FormInput;
 
 use Cresenity\Laravel\CElement\FormInput;
+use Cresenity\Laravel\CElement\Traits\Property\ApplyJsPropertyTrait;
+use Cresenity\Laravel\CElement\Traits\Property\DependsOnPropertyTrait;
+use Cresenity\Laravel\CElement\Traits\Property\PlaceholderPropertyTrait;
 
-class CElement_FormInput_Select extends CElement_FormInput
+class Select extends FormInput
 {
-    use CTrait_Compat_Element_FormInput_Select;
-    use CTrait_Element_Property_ApplyJs;
-    use CTrait_Element_Property_DependsOn;
-    use CTrait_Element_Property_Placeholder;
+    use ApplyJsPropertyTrait;
+    use DependsOnPropertyTrait;
+    use PlaceholderPropertyTrait;
 
     protected $group_list = [];
 

@@ -1,14 +1,15 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\FormInput;
+namespace Cresenity\Laravel\CElement\FormInput;
 
 use Cresenity\Laravel\CElement\FormInput;
+use Cresenity\Laravel\CElement\Traits\Property\AutoCompletePropertyTrait;
 use Cresenity\Laravel\CElement\Traits\Property\PlaceholderPropertyTrait;
 
-class CElement_FormInput_Password extends CElement_FormInput
+class Password extends FormInput
 {
     use PlaceholderPropertyTrait,
-        CTrait_Element_Property_AutoComplete;
+        AutoCompletePropertyTrait;
 
     private $showPassword = false;
 

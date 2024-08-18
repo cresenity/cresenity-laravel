@@ -1,9 +1,9 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder;
+namespace Cresenity\Laravel\CElement\FormInput\QueryBuilder;
 
-use Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\RuleException;
-use Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Parser\FunctionTrait;
+use Cresenity\Laravel\CElement\FormInput\QueryBuilder\Exception\RuleException;
+use Cresenity\Laravel\CElement\FormInput\QueryBuilder\Parser\FunctionTrait;
 use Illuminate\Database\Eloquent\Builder;
 use stdClass;
 
@@ -47,7 +47,7 @@ class Parser
      * @param \Illuminate\Database\Eloquent\Builder $querybuilder
      * @param string       $queryCondition
      *
-     * @throws \Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\ParseException
+     * @throws \Cresenity\Laravel\CElement\FormInput\QueryBuilder\Exception\ParseException
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
@@ -195,7 +195,7 @@ class Parser
      * @param stdClass     $rule
      * @param string       $queryCondition and/or...
      *
-     * @throws \Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\ParseException
+     * @throws \Cresenity\Laravel\CElement\FormInput\QueryBuilder\Exception\ParseException
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
@@ -250,8 +250,8 @@ class Parser
      *
      * @param stdClass $rule
      *
-     * @throws \Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\RuleException
-     * @throws \Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Exception\ParseException
+     * @throws \Cresenity\Laravel\CElement\FormInput\QueryBuilder\Exception\RuleException
+     * @throws \Cresenity\Laravel\CElement\FormInput\QueryBuilder\Exception\ParseException
      *
      * @return mixed
      */

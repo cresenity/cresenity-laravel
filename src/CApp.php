@@ -1,6 +1,7 @@
 <?php
 namespace Cresenity\Laravel;
 
+use Cresenity\Laravel\CApp\Concern\AuthTrait;
 use Cresenity\Laravel\CApp\Concern\BootstrapTrait;
 use Cresenity\Laravel\CApp\Concern\BreadcrumbTrait;
 use Cresenity\Laravel\CApp\Concern\ManageStackTrait;
@@ -16,6 +17,48 @@ use Illuminate\Contracts\Support\Renderable as IlluminateRenderable;
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Support\Arr;
 
+/**
+ * @mixin CElement
+ *
+ * @see CRenderable
+ * @see CElement
+ *
+ * @method \Cresenity\Laravel\CElement\Component\Action             addAction($id=null)
+ * @method \Cresenity\Laravel\CElement\Component\Alert              addAlert($id=null)
+ * @method \Cresenity\Laravel\CElement\Component\FileManager        addFileManager($id=null)
+ * @method \Cresenity\Laravel\CElement\Component\Form               addForm($id=null)
+ * @method \Cresenity\Laravel\CElement\Component\DataTable          addTable($id=null)
+ * @method \Cresenity\Laravel\CElement\Component\ListGroup          addListGroup($id=null)
+ * @method \Cresenity\Laravel\CElement\Component\Form_Field         addField($id=null)
+ * @method \Cresenity\Laravel\CElement\Element\Div                  addDiv($id=null)
+ * @method \Cresenity\Laravel\CElement\Element\Iframe               addIframe($id=null)
+ * @method \Cresenity\Laravel\CElement\Element\A                    addA($id=null)
+ * @method \Cresenity\Laravel\CElement\Element\H1                   addH1($id=null)
+ * @method \Cresenity\Laravel\CElement\Element\H2                   addH2($id=null)
+ * @method \Cresenity\Laravel\CElement\Element\H3                   addH3($id=null)
+ * @method \Cresenity\Laravel\CElement\Element\H4                   addH4($id=null)
+ * @method \Cresenity\Laravel\CElement\Element\H5                   addH5($id=null)
+ * @method \Cresenity\Laravel\CElement\Element\H6                   addH6($id=null)
+ * @method \Cresenity\Laravel\CElement\Element\H6                   addP($id=null)
+ * @method \Cresenity\Laravel\CElement\Element\Span                 addSpan($id=null)
+ * @method \Cresenity\Laravel\CElement\Element\Pre                  addPre($id=null)
+ * @method \Cresenity\Laravel\CElement\ElementList\ActionList       addActionList($id=null)
+ * @method \Cresenity\Laravel\CElement\ElementList\TabList          addTabList($id=null)
+ * @method \Cresenity\Laravel\CElement\FormInput\Select             addSelectControl($id=null)
+ * @method \Cresenity\Laravel\CElement\FormInput\SelectSearch       addSelectSearchControl($id=null)
+ * @method \Cresenity\Laravel\CElement\Template                     addTemplate($id=null)
+ * @method \Cresenity\Laravel\CElement\View                         addView($view = null, $data = null, $id = null)
+ * @method \Cresenity\Laravel\CElement\Component\Widget             addWidget($id=null)
+ * @method \Cresenity\Laravel\CElement\Component\Gallery            addGallery($id=null)
+ * @method \Cresenity\Laravel\CElement\Element\Img                  addImg($id=null)
+ * @method \Cresenity\Laravel\CElement\Component\Image              addImage($id=null)
+ * @method \Cresenity\Laravel\CElement\Component\Chart              addChart($id=null)
+ * @method \Cresenity\Laravel\CElement\Component\Metric_ValueMetric addValueMetric($id=null)
+ * @method \Cresenity\Laravel\CApp                                  addBr()
+ * @method \Cresenity\Laravel\CApp                                  addHr()
+ * @method \Cresenity\Laravel\CApp                                  add(mixed $renderable)
+ * @method \Cresenity\Laravel\CApp                                  addJs($js)
+ */
 final class CApp implements Responsable, IlluminateRenderable, Jsonable
 {
     use RendererTrait
@@ -23,7 +66,8 @@ final class CApp implements Responsable, IlluminateRenderable, Jsonable
         ,TitleTrait
         ,ViewTrait
         ,BootstrapTrait
-        ,ManageStackTrait;
+        ,ManageStackTrait
+        ,AuthTrait;
 
 
     private static $instance;

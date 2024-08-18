@@ -12,16 +12,20 @@ use Symfony\Component\Debug\Exception\FatalThrowableError;
 use Symfony\Component\PropertyAccess\Exception\NoSuchIndexException;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Cresenity\Laravel\CApp;
+use Cresenity\Laravel\CAuth;
+use Cresenity\Laravel\CCarbon;
 use Cresenity\Laravel\CConfig;
 use Cresenity\Laravel\CEvent;
 use Cresenity\Laravel\CF;
 use Cresenity\Laravel\CHTTP;
+use Cresenity\Laravel\CManager;
 use Cresenity\Laravel\CRouting;
 use Cresenity\Laravel\CTranslation;
 use Illuminate\Container\Container;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HigherOrderTapProxy;
+use Illuminate\Support\HtmlString;
 use Illuminate\Translation\Translator;
 
 //@codingStandardsIgnoreStart
@@ -556,7 +560,6 @@ class c
         if ($replace === null) {
             $replace = [];
         }
-
         return CTranslation::translator()->get($key, $replace, $locale);
     }
 
@@ -1137,7 +1140,7 @@ class c
     /**
      * Get the CApp instance.
      *
-     * @return \CManager
+     * @return \Cresenity\Laravel\CManager
      */
     public static function manager()
     {
@@ -1777,10 +1780,10 @@ class c
     {
         $difference = [];
         foreach ($arrayOne as $key => $value) {
-            if (is_array($value) || $value instanceof CCollection) {
+            if (is_array($value) || $value instanceof Collection) {
                 if (!isset($arrayTwo[$key])) {
                     $difference[$key] = $value;
-                } elseif (!(is_array($arrayTwo[$key]) || $arrayTwo[$key] instanceof CCollection)) {
+                } elseif (!(is_array($arrayTwo[$key]) || $arrayTwo[$key] instanceof Collection)) {
                     $difference[$key] = $value;
                 } else {
                     $new_diff = c::arrayDiffAssocRecursive($value, $arrayTwo[$key]);
@@ -1881,11 +1884,11 @@ class c
      *
      * @param string $method
      *
-     * @return \CBase_HtmlString
+     * @return \Illuminate\Support\HtmlString
      */
     public static function methodField($method)
     {
-        return new CBase_HtmlString('<input type="hidden" name="_method" value="' . $method . '">');
+        return new HtmlString('<input type="hidden" name="_method" value="' . $method . '">');
     }
 
     public static function faker($property = null)
@@ -2034,11 +2037,11 @@ class c
     }
 
     /**
-     * @return CAuth_Access_Gate
+     * @return \Illuminate\Contracts\Auth\Access\Gate
      */
     public static function gate()
     {
-        return CAuth_Access_Gate::instance();
+        return CAuth::gate();
     }
 
     public static function resolveUserTimezone(CHTTP_Request $request)
@@ -2205,6 +2208,14 @@ class c
     public static function visitor()
     {
         return c::app()->visitor();
+    }
+
+    public static function randmd5()
+    {
+        $rand = rand(0, 9999);
+        $base = date('YmdHis') . $rand;
+
+        return md5($rand);
     }
 }
 

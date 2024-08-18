@@ -1,8 +1,8 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\FormInput\TextArea;
+namespace Cresenity\Laravel\CElement\FormInput\Textarea;
 
-use Cresenity\Laravel\CElement\Element\FormInput\Textarea;
+use Cresenity\Laravel\CElement\FormInput\Textarea;
 use Cresenity\Laravel\CManager;
 
 class Summernote extends Textarea

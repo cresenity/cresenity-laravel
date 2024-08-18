@@ -1,9 +1,9 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\FormInput\DateRange;
+namespace Cresenity\Laravel\CElement\FormInput\DateRange;
 
 use Carbon\Carbon;
-use Cresenity\Laravel\CElement\Element\FormInput\Traits\PredefinedDateRangeTrait;
+use Cresenity\Laravel\CElement\FormInput\Traits\PredefinedDateRangeTrait;
 
 class DropdownButton extends Dropdown
 {

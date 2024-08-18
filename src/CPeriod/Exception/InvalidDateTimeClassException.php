@@ -3,7 +3,7 @@ namespace Cresenity\Laravel\CPeriod\Exception;
 
 use Cresenity\Laravel\CPeriod\Exception as CPeriodException;
 
-class InvalidDateTimeClass extends CPeriodException
+class InvalidDateTimeClassException extends CPeriodException
 {
     public static function forString($string)
     {

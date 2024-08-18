@@ -1,6 +1,6 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\Depends;
+namespace Cresenity\Laravel\CElement\Depends;
 
 use Cresenity\Laravel\Traits\HasOptions;
 use Illuminate\Support\Arr;
@@ -16,7 +16,7 @@ class DependsOn
     use HasOptions;
 
     /**
-     * @var \Cresenity\Laravel\CElement\Element\Depends\Selector
+     * @var \Cresenity\Laravel\CElement\Depends\Selector
      */
     protected $selector;
 

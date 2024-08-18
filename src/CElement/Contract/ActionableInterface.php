@@ -1,6 +1,6 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\Contract;
+namespace Cresenity\Laravel\CElement\Contract;
 
 interface ActionableInterface
 {

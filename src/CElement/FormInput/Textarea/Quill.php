@@ -1,6 +1,6 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\FormInput\TextArea;
+namespace Cresenity\Laravel\CElement\FormInput\Textarea;
 
 use Cresenity\Laravel\CElement\Element\Div;
 use Cresenity\Laravel\CElement\Traits\Property\ValuePropertyTrait;

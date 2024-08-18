@@ -13,7 +13,6 @@ class CTranslation
             static::$translator = [];
         }
 
-        return new Translator(self::getFileLoader(), $locale);
         if ($locale == null) {
             $locale = app()->getLocale();
             if (!isset(static::$translator[$locale])) {

@@ -20,6 +20,7 @@ class CresenityServiceProvider extends ServiceProvider
         }
         require_once dirname(__FILE__).'/../helpers/c.php';
         require_once dirname(__FILE__).'/../helpers/carr.php';
+        require_once dirname(__FILE__).'/../helpers/cstr.php';
         $this->registerCommands();
         $this->registerPublishing();
         $this->registerRoutes();
@@ -53,6 +54,11 @@ class CresenityServiceProvider extends ServiceProvider
      */
     protected function registerPublishing()
     {
+        $langPath = 'vendor/' . 'cresenity';
+
+        $langPath = (function_exists('lang_path'))
+            ? lang_path($langPath)
+            : resource_path('lang/' . $langPath);
         if ($this->app->runningInConsole()) {
             $publishesMigrationsMethod = method_exists($this, 'publishesMigrations')
                 ? 'publishesMigrations'
@@ -70,10 +76,24 @@ class CresenityServiceProvider extends ServiceProvider
                 __DIR__.'/../config/cresenity.php' => config_path('cresenity.php'),
             ], 'cresenity-config');
 
+
+            $this->publishes([
+                __DIR__.'/../resources/lang' => $langPath,
+            ], "cresenity-translations");
+
+
+            // Publikasikan file lang dari package
+            // $this->publishes([
+            //     __DIR__.'/../resources/lang' => resource_path('lang/cresenity'),
+            // ], 'lang');
             // $this->publishes([
             //     __DIR__.'/../stubs/TelescopeServiceProvider.stub' => app_path('Providers/TelescopeServiceProvider.php'),
             // ], 'telescope-provider');
         }
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang/', 'cresenity');
+        $this->loadJsonTranslationsFrom(__DIR__.'/../resources/lang/');
+
+        $this->loadJsonTranslationsFrom($langPath);
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\FormInput\EditorJs\Traits;
+namespace Cresenity\Laravel\CElement\FormInput\EditorJs\Traits;
 
 /**
  * Class BlockHandler.

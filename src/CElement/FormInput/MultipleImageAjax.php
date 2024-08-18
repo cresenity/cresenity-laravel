@@ -1,12 +1,13 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\FormInput;
+namespace Cresenity\Laravel\CElement\FormInput;
 
 use Cresenity\Laravel\CElement\FormInput;
+use Cresenity\Laravel\CElement\Traits\UseViewTrait;
 
-class CElement_FormInput_MultipleImageAjax extends CElement_FormInput
+class MultipleImageAjax extends FormInput
 {
-    use CElement_Trait_UseViewTrait;
+    use UseViewTrait;
 
     protected $imgSrc;
 

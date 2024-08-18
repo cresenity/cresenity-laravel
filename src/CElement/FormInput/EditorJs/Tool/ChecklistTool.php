@@ -1,9 +1,9 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\FormInput\EditorJs\Tool;
+namespace Cresenity\Laravel\CElement\FormInput\EditorJs\Tool;
 
-use Cresenity\Laravel\CElement\Element\FormInput\EditorJs\DefaultConfig;
-use Cresenity\Laravel\CElement\Element\FormInput\EditorJs\ToolAbstract;
+use Cresenity\Laravel\CElement\FormInput\EditorJs\DefaultConfig;
+use Cresenity\Laravel\CElement\FormInput\EditorJs\ToolAbstract;
 use Cresenity\Laravel\CElement\Traits\Property\ShortcutPropertyTrait;
 
 /**

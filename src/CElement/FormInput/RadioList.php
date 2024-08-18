@@ -1,10 +1,10 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\FormInput;
+namespace Cresenity\Laravel\CElement\FormInput;
 
 use Cresenity\Laravel\CElement\FormInput;
 
-class CElement_FormInput_RadioList extends CElement_FormInput
+class RadioList extends FormInput
 {
     public function __construct($id)
     {

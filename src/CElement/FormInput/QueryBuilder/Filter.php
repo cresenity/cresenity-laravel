@@ -1,9 +1,9 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder;
+namespace Cresenity\Laravel\CElement\FormInput\QueryBuilder;
 
-use Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Filter\InputTrait;
-use Cresenity\Laravel\CElement\Element\FormInput\QueryBuilder\Filter\OperatorTrait;
+use Cresenity\Laravel\CElement\FormInput\QueryBuilder\Filter\InputTrait;
+use Cresenity\Laravel\CElement\FormInput\QueryBuilder\Filter\OperatorTrait;
 use Illuminate\Contracts\Support\Arrayable;
 
 class Filter implements Arrayable

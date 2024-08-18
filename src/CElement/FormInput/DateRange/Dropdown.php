@@ -1,6 +1,6 @@
 <?php
 
-namespace Cresenity\Laravel\CElement\Element\FormInput\DateRange;
+namespace Cresenity\Laravel\CElement\FormInput\DateRange;
 
 use Cresenity\Laravel\CElement\FormInput;
 use Cresenity\Laravel\CElement\Traits\MomentJsTrait;
