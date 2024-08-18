@@ -4,6 +4,7 @@ namespace Cresenity\Laravel\CManager\Transform;
 use c;
 use Cresenity\Laravel\CCarbon;
 use Cresenity\Laravel\CManager\Transform\Contract\TransformMethodInterface;
+use Illuminate\Support\Str;
 
 class MethodExecutor
 {
@@ -84,7 +85,7 @@ class MethodExecutor
      */
     public function transformUppercase($value)
     {
-        return cstr::upper($value);
+        return Str::upper($value);
     }
 
     /**
@@ -94,7 +95,7 @@ class MethodExecutor
      */
     public function transformLowercase($value)
     {
-        return cstr::lower($value);
+        return Str::lower($value);
     }
 
     /**
@@ -104,7 +105,7 @@ class MethodExecutor
      */
     public function transformUcfirst($value)
     {
-        return cstr::ucfirst($value);
+        return Str::ucfirst($value);
     }
 
     public function transformYesNo($value)
@@ -119,7 +120,7 @@ class MethodExecutor
 
     public function transformAscii($value)
     {
-        return cstr::ascii($value);
+        return Str::ascii($value);
     }
 
     public function transformJson($value)

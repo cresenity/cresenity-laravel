@@ -1,9 +1,10 @@
 <?php
 namespace Cresenity\Laravel\CManager\DataProvider;
 
+use Cresenity\Laravel\CManager\DataProviderAbstract;
 use Opis\Closure\SerializableClosure;
 
-class ModelDataProvider extends CManager_DataProviderAbstract implements CManager_Contract_DataProviderInterface
+class ModelDataProvider extends DataProviderAbstract implements CManager_Contract_DataProviderInterface
 {
     protected $modelClass;
 

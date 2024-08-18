@@ -1,16 +1,11 @@
 <?php
+namespace Cresenity\Laravel\CElement\Component;
 
-defined('SYSPATH') or die('No direct access allowed.');
+use Cresenity\Laravel\CElement\Component;
 
-/**
- * @author Hery Kurniawan
- * @license Ittron Global Teknologi <ittron.co.id>
- *
- * @since Oct 12, 2018, 1:48:18 PM
- */
-class CElement_Component_Nestable extends CElement_Component {
-    use CTrait_Compat_Element_Nestable,
-        CTrait_Element_ActionList_Row;
+class Nestable extends Component
+{
+    use CTrait_Element_ActionList_Row;
 
     protected $data;
 
@@ -38,7 +33,8 @@ class CElement_Component_Nestable extends CElement_Component {
 
     protected $query;
 
-    public function __construct($id) {
+    public function __construct($id)
+    {
         parent::__construct($id);
         CManager::registerModule('jquery.nestable');
         $this->data = [];
@@ -58,12 +54,14 @@ class CElement_Component_Nestable extends CElement_Component {
      *
      * @return CElement_Component_Nestable
      */
-    public static function factory($id) {
+    public static function factory($id)
+    {
         /** @phpstan-ignore-next-line */
         return new static($id);
     }
 
-    public function setDisplayCallback($func, $require = '') {
+    public function setDisplayCallback($func, $require = '')
+    {
         $this->displayCallback = $func;
         if (strlen($require) > 0) {
             $this->requires[] = $require;
@@ -72,7 +70,8 @@ class CElement_Component_Nestable extends CElement_Component {
         return $this;
     }
 
-    public function filterActionCallbackFunc($func, $require = '') {
+    public function filterActionCallbackFunc($func, $require = '')
+    {
         $this->filterActionCallbackFunc = $func;
         if (strlen($require) > 0) {
             $this->requires[] = $require;
@@ -81,7 +80,8 @@ class CElement_Component_Nestable extends CElement_Component {
         return $this;
     }
 
-    public function setDataFromTreeDb(CTreeDB $treedb, $parentId = null) {
+    public function setDataFromTreeDb(CTreeDB $treedb, $parentId = null)
+    {
         $this->data = $treedb->getChildrenData($parentId);
 
         return $this;
@@ -92,13 +92,15 @@ class CElement_Component_Nestable extends CElement_Component {
      *
      * @return $this
      */
-    public function setCollapsed($bool = true) {
+    public function setCollapsed($bool = true)
+    {
         $this->isCollapsed = $bool;
 
         return $this;
     }
 
-    public function setDataFromModel($model, $queryCallback = null) {
+    public function setDataFromModel($model, $queryCallback = null)
+    {
         if (is_string($model)) {
             $this->query = CManager::createModelDataProvider($model, $queryCallback);
 
@@ -136,61 +138,71 @@ class CElement_Component_Nestable extends CElement_Component {
         return $this;
     }
 
-    public function setDataFromArray($array = []) {
+    public function setDataFromArray($array = [])
+    {
         $this->data = $array;
 
         return $this;
     }
 
-    public function setIdKey($idKey) {
+    public function setIdKey($idKey)
+    {
         $this->idKey = $idKey;
 
         return $this;
     }
 
-    public function setDisableDnd($disableDnd) {
+    public function setDisableDnd($disableDnd)
+    {
         $this->disable_dnd = $disableDnd;
 
         return $this;
     }
 
-    public function disableDnd() {
+    public function disableDnd()
+    {
         $this->disable_dnd = true;
 
         return $this;
     }
 
-    public function enableDnd() {
+    public function enableDnd()
+    {
         $this->disable_dnd = false;
 
         return $this;
     }
 
-    public function setHaveCheckbox($checkbox) {
+    public function setHaveCheckbox($checkbox)
+    {
         $this->checkbox = $checkbox;
 
         return $this;
     }
 
-    public function setInput($input) {
+    public function setInput($input)
+    {
         $this->input = $input;
 
         return $this;
     }
 
-    public function setValueKey($valueKey) {
+    public function setValueKey($valueKey)
+    {
         $this->valueKey = $valueKey;
 
         return $this;
     }
 
-    public function setApplyJs($boolean) {
+    public function setApplyJs($boolean)
+    {
         $this->applyjs = $boolean;
 
         return $this;
     }
 
-    protected function getDataFromQuery() {
+    protected function getDataFromQuery()
+    {
         $models = $this->query->toEnumerable();
         $childArray = [];
         if ($models instanceof CModel_Nested_Collection) {
@@ -212,7 +224,8 @@ class CElement_Component_Nestable extends CElement_Component {
         $this->data = $childArray;
     }
 
-    public function html($indent = 0) {
+    public function html($indent = 0)
+    {
         if ($this->query != null) {
             $this->getDataFromQuery();
         }
@@ -280,7 +293,8 @@ class CElement_Component_Nestable extends CElement_Component {
         return $html->text();
     }
 
-    public function js($indent = 0) {
+    public function js($indent = 0)
+    {
         $js = new CStringBuilder();
         $js->setIndent($indent);
         if ($this->applyjs) {
@@ -332,7 +346,8 @@ class CElement_Component_Nestable extends CElement_Component {
         return $js->text();
     }
 
-    protected function drawActionAndGetJs(CStringBuilder $html, array $row, $key) {
+    protected function drawActionAndGetJs(CStringBuilder $html, array $row, $key)
+    {
         $js = '';
         if ($this->haveRowAction()) {
             $html->appendln('<td class="low-padding align-center cell-action td-action">')->incIndent()->br();

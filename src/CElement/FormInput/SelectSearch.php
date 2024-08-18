@@ -2,6 +2,7 @@
 
 namespace Cresenity\Laravel\CElement\Element\FormInput;
 
+use c;
 use carr;
 use Closure;
 use Cresenity\Laravel\CElement\Element\FormInput\SelectSearch\Traits\Select2v23Trait;
